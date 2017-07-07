@@ -357,17 +357,19 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.getSessionDataResponse = function (this0, go_request, res, data_val) {
-        var session = this0.getSessionObject(go_request);
-        if (!session) {
+        var link = this.linkMgrObject().getLinkById(go_request.link_id);
+        if (!link) {
+            this.logit("getSessionDataResponse", "link not found: link_id=" + go_request.link_id);
             return null;
         }
+        link.resetKeepAliveTimer();
 
         var link_id_index = data_val.slice(0, 8);
         var session_id_index = data_val.slice(8, 16);
         var c_data = data_val.slice(16);
 
         var output = JSON.stringify({
-                    link_id: session.linkObject().linkId(),
+                    link_id: link.linkId(),
                     link_id_index: link_id_index,
                     session_id_index: session_id_index,
                     c_data: c_data,
@@ -384,17 +386,19 @@ function FabricAjaxParserClass(root_object_val) {
     this.putSessionDataResponse = function (this0, go_request, res, data_val) {
         this0.debug(true, "putSessionDataResponse", "data_val=" + data_val);
 
-        var session = this0.getSessionObject(go_request);
-        if (!session) {
+        var link = this.linkMgrObject().getLinkById(go_request.link_id);
+        if (!link) {
+            this.logit("putSessionDataResponse", "link not found: link_id=" + go_request.link_id);
             return null;
         }
+        link.resetKeepAliveTimer();
 
         var link_id_index = data_val.slice(0, 8);
         var session_id_index = data_val.slice(8, 16);
         var c_data = data_val.slice(16);
 
         var output = JSON.stringify({
-                    link_id: session.linkObject().linkId(),
+                    link_id: link.linkId(),
                     link_id_index: link_id_index,
                     session_id_index: session_id_index,
                     c_data: c_data,
