@@ -376,7 +376,6 @@ function FabricAjaxParserClass(root_object_val) {
         var output = JSON.stringify({
                     link_id: session.linkObject().linkId(),
                     session_id: session.sessionId(),
-                    res_data: res_data,
                     link_id_index: link_id_index,
                     session_id_index: session_id_index,
                     c_data: c_data,
