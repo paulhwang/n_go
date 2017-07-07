@@ -432,7 +432,6 @@ function FabricAjaxParserClass(root_object_val) {
                     session_id: session.sessionId(),
                     link_id_index: link_id_index,
                     session_id_index: session_id_index,
-                    res_data: res_data,
                     c_data: c_data,
                     });
         this0.debug_(true, this0.debugOutput(), "getSessionData", "output=" + output);
