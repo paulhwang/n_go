@@ -362,13 +362,6 @@ function FabricAjaxParserClass(root_object_val) {
             return null;
         }
 
-        var res_data = session.dequeueTransmitData();
-        if (!res_data) {
-            this0.debug(true, "getSessionDataResponse", "no data");
-            ///////return null;
-        }
-        this0.debug(false, "getSessionDataResponse", "res_data=" + res_data);
-
         var link_id_index = data_val.slice(0, 8);
         var session_id_index = data_val.slice(8, 16);
         var c_data = data_val.slice(16);
@@ -395,32 +388,6 @@ function FabricAjaxParserClass(root_object_val) {
         if (!session) {
             return null;
         }
-
-        if (go_request.xmt_seq === session.up_seq) {
-            session.clusterObject().TransmitData(go_request.data);
-            session.up_seq += 1;
-        } else if (go_request.xmt_seq < session.up_seq) {
-            if (go_request.xmt_seq === 0) {
-                session.clusterObject().TransmitData(go_request.data);
-                session.up_seq = 1;
-                this0.logit("putSessionData", go_request.data + " xmt_seq=" + go_request.xmt_seq + " reset");
-            } else {
-                this0.logit("putSessionData", "(" + link_id + "," + session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + " dropped");
-            }
-        } else {
-            this0.abend("putSessionData", go_request.data + " xmt_seq=" + go_request.xmt_seq + " up_seq=" + session.up_seq + "IS FIXED!!!");
-            if (go_request.xmt_seq === session.up_seq + 1) {
-                session.clusterObject().TransmitData(go_request.data);
-                session.up_seq += 2;
-            }
-        }
-
-        var res_data = session.dequeueTransmitData();
-        if (!res_data) {
-            this0.debug(false, "putSessionData", "no data");
-            return null;
-        }
-
 
         var link_id_index = data_val.slice(0, 8);
         var session_id_index = data_val.slice(8, 16);
