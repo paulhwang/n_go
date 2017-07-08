@@ -52,10 +52,6 @@ function FabricAjaxParserClass(root_object_val) {
         return this.rootObject().linkMgrServiceObject();
     };
 
-    this.linkListObject = function () {
-        return this.linkMgrObject().linkListObject();
-    };
-
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
     };
