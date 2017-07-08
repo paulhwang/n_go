@@ -1,39 +1,4 @@
 var net = require("net");
-
-/*
-var client = new net.Socket();
-client.setEncoding('utf8');
-client.connect('8006', 'localhost', function() {
-	console.log*('connect to server');
-	client.write("Lphwang");
-});
-client.on('error', function() {
-	console.log("errorrr");
-});
-client.on('data', function(data) {
-	console.log('client receive: ' + data + ' from ' + client.remoteAddress + ':' + client.remotePort);
-});
-
-const TESTING_PORT = 8010;
-
-var server = net.createServer(function(conn) {
-	console.log('connected from ' + conn.remoteAddress + ":" + conn.remotePort);
-
-	conn.on('data', function(data) {
-		console.log('server receive: ' + data + ' from ' + conn.remoteAddress + ':' + conn.remotePort);
-		conn.write("HELLO");
-	});
-}).listen(TESTING_PORT);
-
-server.on('listening', function() {
-	console.log('listening on ' + TESTING_PORT);
-})
-
-server.on('error', function(err) {
-	console.log('error');
-})
-*/
-
 var express = require('express');
 var bodyParser = require('body-parser');
 require('./phwang_modules/fabric_modules/fabric_root.js').malloc();
