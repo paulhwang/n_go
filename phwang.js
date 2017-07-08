@@ -36,8 +36,6 @@ server.on('error', function(err) {
 
 var express = require('express');
 var bodyParser = require('body-parser');
-require('./phwang_modules/go_modules/go_root.js').malloc();
-require('./phwang_modules/matrix_modules/matrix_root.js').malloc();
 require('./phwang_modules/fabric_modules/fabric_root.js').malloc();
 var ajax = require('./phwang_modules/fabric_modules/fabric_ajax.js');
 var app = express();
