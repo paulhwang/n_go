@@ -28,10 +28,6 @@ function FabricAjaxParserClass(root_object_val) {
         return 3000;
     };
 
-    this.useLinkMgrService = function () {
-        return false;
-    };
-
     this.debugInput = function () {
         return true;
     };

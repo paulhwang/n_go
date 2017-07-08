@@ -83,17 +83,6 @@ function FabricAjaxClass(root_object_val) {
         }
 
         var data = this.ajaxParserObject().parseGetRequest(req.headers.gorequest, command_index_val, res);
-
-        if (!this.ajaxParserObject().useLinkMgrService() 
-            && (go_request.command !== "setup_link")
-            && (go_request.command !== "get_link_data")
-            && (go_request.command !== "get_name_list")
-            && (go_request.command !== "setup_session")
-            && (go_request.command !== "setup_session_reply")
-            && (go_request.command !== "get_session_data")
-            && (go_request.command !== "put_session_data")) {
-            this.sendHttpResponse(go_request, res, data);
-        }
     };
 
     this.sendHttpResponse = function (request_val, res, data_val) {
