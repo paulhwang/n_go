@@ -56,16 +56,8 @@ function FabricAjaxParserClass(root_object_val) {
         return this.rootObject().linkMgrServiceObject();
     };
 
-    this.clusterMgrObject = function () {
-        return this.rootObject().clusterMgrObject();
-    };
-
     this.linkListObject = function () {
         return this.linkMgrObject().linkListObject();
-    };
-
-    this.clusterMgrObject = function () {
-        return this.rootObject().clusterMgrObject();
     };
 
     this.ajaxObject = function () {
@@ -173,7 +165,6 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.getNameListResponse = function (this0, go_request, res, data_val) {
         var output = JSON.stringify({
-                        name_list: this0.linkMgrObject().getNameList(),
                         link_id_index: go_request.link_id_index,
                         c_name_list: data_val,
                         });
