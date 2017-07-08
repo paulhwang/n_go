@@ -148,24 +148,6 @@ function FabricAjaxParserClass(root_object_val) {
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 
-    this.getLinkObject = function (go_request) {
-        this.debug(false, "getLinkObject", "link_id=" + go_request.link_id + " link_id_index=" + go_request.link_id_index + " my_name=" + go_request.my_name);
-
-        //var link0 = this.linkMgrServiceObject().getLinkByIdIndexName(go_request.link_id_index, go_request.my_name);
-
-        var link = this.linkMgrObject().getLinkByIdName(go_request.link_id, go_request.my_name);
-        if (!link) {
-            this.debug(true, "getLinkObject", "null link: link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
-            return null;
-        }
-        if (link.linkId() === 0) {
-            this.abend("getLinkObject", "link_id = 0");
-            return null;
-        }
-        link.resetKeepAliveTimer();
-        return link;
-    };
-
     this.getLinkDataResponse = function (this0, go_request, res, data_val) {
         this0.debug(false, "getLinkDataResponse", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " ajax_id=" + go_request.ajax_id);
 
@@ -190,9 +172,6 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.getNameListResponse = function (this0, go_request, res, data_val) {
-        //link.resetKeepAliveTimer();
-        //link.clearNameListChanged();
-
         var output = JSON.stringify({
                         name_list: this0.linkMgrObject().getNameList(),
                         link_id_index: go_request.link_id_index,
@@ -234,39 +213,15 @@ function FabricAjaxParserClass(root_object_val) {
         this.linkMgrServiceObject().mallocSession(go_request.link_id_index, go_request.his_name, go_request.theme_data, this.setupSessionResponse, go_request, res);
     };
 
-    this.getSessionObject = function (go_request) {
-        var link = this.linkMgrObject().getLinkById(go_request.link_id);
-        if (!link) {
-            this.logit("getSessionObject", "link not found: link_id=" + go_request.link_id);
-            return null;
-        }
-        link.resetKeepAliveTimer();
-
-        var session = link.getSession(go_request.session_id);
-        if (!session) {
-            this.logit("getSessionObject", "session not found" + " session_id=" + go_request.session_id);
-            return null;
-        }
-
-        return session;
-    };
-
     this.setupSessionReplyResponse = function (this0, go_request, res, data_val) {
-
-        var session = this0.getSessionObject(go_request);
-        if (!session) {
-            return null;
-        }
         var output = JSON.stringify({
-                    link_id: session.linkObject().linkId(),
-                    session_id: session.sessionId(),
-                    confirm: "yes",
-                    session_id_index: data_val,
-                    topic_data: go_request.topic_data,
-                    his_name: "tbd",
-                    });
+                        link_id_index: go_request.link_id_index,
+                        confirm: "yes",
+                        session_id_index: data_val,
+                        topic_data: go_request.topic_data,
+                        his_name: "tbd",
+                        });
         this0.debug_(true, this0.debugOutput(), "setupSessionReply", "output=" + output);
-        //return output;
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 
