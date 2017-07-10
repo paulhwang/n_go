@@ -186,7 +186,7 @@ function FabricAjaxParserClass(root_object_val) {
                         link_id: go_request.link_id,
                         session_id: data_val,
                         his_name: go_request.his_name,
-                        topic_data: go_request.topic_data,
+                        theme_data: go_request.theme_data,
                         });
         this0.debug_(true, this0.debugOutput(), "setupSession", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
