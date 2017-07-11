@@ -223,6 +223,7 @@ function FabricAjaxParserClass(root_object_val) {
                         c_data: c_data,
                         });
         this0.debug_(true, this0.debugOutput(), "getSessionDataResponse", "output=" + output);
+        this0.debug(true, "getSessionDataResponse", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 

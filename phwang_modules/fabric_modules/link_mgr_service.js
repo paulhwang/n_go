@@ -57,7 +57,6 @@ function LinkMgrServiceClass(root_object_val) {
         });
 
         this.netClientOjbect().onData(function (data_val) {
-        this0.debug(true, "onData==================================", data_val);
             this0.receiveDataFromLinkMgr(data_val);
         });
 
@@ -67,7 +66,9 @@ function LinkMgrServiceClass(root_object_val) {
     };
 
     this.receiveDataFromLinkMgr = function (data_val) {
-        this.debug(true, "receiveDataFromLinkMgr", data_val);
+        if (data_val.charAt(0) != 'd') {
+            this.debug(true, "receiveDataFromLinkMgr", data_val);
+        }
         this.callbackFunc.bind(this.ajaxParserObject())(this.ajaxParserObject(), this.theGoRequest, this.theRes, data_val.slice(1));
     };
 
