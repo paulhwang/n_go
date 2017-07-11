@@ -99,16 +99,16 @@ function FabricAjaxParserClass(root_object_val) {
         var go_request = JSON.parse(go_request_json_val);
 
         if (go_request.command === "get_link_data") {
-            this.debug_(false, this.debugInput(), "switchRequest", "go_request_json_val=" + go_request_json_val);
+            this.debug_(false, this.debugInput(), "parseGetRequest", "go_request_json_val=" + go_request_json_val);
         } else {
-            this.debug_(true, this.debugInput(), "switchRequest", "go_request_json_val=" + go_request_json_val);
+            this.debug_(true, this.debugInput(), "parseGetRequest", "go_request_json_val=" + go_request_json_val);
         }
 
         var func = this.httpSwitchTableArray(command_index_val)[go_request.command];
         if (func) {
             return func.bind(this)(go_request, res);
         } else {
-            this.abend("switchRequest", "bad command=" + go_request.command);
+            this.abend("parseGetRequest", "bad command=" + go_request.command);
             return null;
         }
     };
