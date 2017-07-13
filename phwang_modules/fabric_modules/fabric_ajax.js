@@ -70,15 +70,15 @@ function FabricAjaxClass(root_object_val) {
 
     this.processHttp = function (req, res, command_index_val) {
         if (!req.headers.phwangajaxrequest) {
-            this.abend("processGet", "null phwangajaxrequest");
+            this.abend("processHttp", "null phwangajaxrequest");
             return;
         }
 
-        this.debug(false, "processGet", "phwangajaxrequest=" + req.headers.phwangajaxrequest);
+        this.debug(false, "processHttp", "phwangajaxrequest=" + req.headers.phwangajaxrequest);
 
         var go_request = JSON.parse(req.headers.phwangajaxrequest);
         if (!go_request) {
-            this.abend("processGet", "null go_request");
+            this.abend("processHttp", "null go_request");
             return;
         }
 
