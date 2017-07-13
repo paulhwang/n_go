@@ -135,13 +135,13 @@ function FabricAjaxParserClass(root_object_val) {
     this.getLinkDataResponse = function (this0, go_request, res, data_val) {
         this0.debug(false, "getLinkDataResponse", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " ajax_id=" + go_request.ajax_id);
 
-        var c_pending_session_setup = data_val.slice(3);
+        var pending_session_setup = data_val.slice(3);
 
         var output = JSON.stringify({
                         link_id: go_request.link_id,
                         interval: this0.linkUpdateInterval(),
-                        c_data: data_val,
-                        c_pending_session_setup: c_pending_session_setup, 
+                        data: data_val,
+                        pending_session_setup: pending_session_setup, 
                         });
         this0.debug_(false, this0.debugOutput(), "getLinkDataResponse", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
