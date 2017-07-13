@@ -69,20 +69,20 @@ function FabricAjaxClass(root_object_val) {
     };
 
     this.processHttp = function (req, res, command_index_val) {
-        if (!req.headers.gorequest) {
-            this.abend("processGet", "null gorequest");
+        if (!req.headers.phwangajaxrequest) {
+            this.abend("processGet", "null phwangajaxrequest");
             return;
         }
 
-        this.debug(false, "processGet", "gorequest=" + req.headers.gorequest);
+        this.debug(false, "processGet", "phwangajaxrequest=" + req.headers.phwangajaxrequest);
 
-        var go_request = JSON.parse(req.headers.gorequest);
+        var go_request = JSON.parse(req.headers.phwangajaxrequest);
         if (!go_request) {
             this.abend("processGet", "null go_request");
             return;
         }
 
-        var data = this.ajaxParserObject().parseGetRequest(req.headers.gorequest, command_index_val, res);
+        var data = this.ajaxParserObject().parseGetRequest(req.headers.phwangajaxrequest, command_index_val, res);
     };
 
     this.sendHttpResponse = function (request_val, res, data_val) {
