@@ -135,7 +135,7 @@ function FabricAjaxParserClass(root_object_val) {
     this.getLinkDataResponse = function (this0, go_request, res, data_val) {
         this0.debug(false, "getLinkDataResponse", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " ajax_id=" + go_request.ajax_id);
 
-        var pending_session_setup = data_val.slice(3);
+        var pending_session_setup = data_val.slice(4);
 
         var output = JSON.stringify({
                         link_id: go_request.link_id,
