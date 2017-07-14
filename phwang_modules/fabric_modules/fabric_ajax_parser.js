@@ -28,30 +28,6 @@ function FabricAjaxParserClass(root_object_val) {
         return 3000;
     };
 
-    this.debugInput = function () {
-        return true;
-    };
-
-    this.debugOutput = function () {
-        return false;
-    };
-
-    this.objectName = function () {
-        return "FabricAjaxParserClass";
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.linkMgrServiceObject = function () {
-        return this.rootObject().linkMgrServiceObject();
-    };
-
-    this.ajaxObject = function () {
-        return this.rootObject().ajaxObject();
-    };
-
     this.linkUpdateInterval = function () {
         return this.theLinkUpdateInterval;
     };
@@ -99,9 +75,9 @@ function FabricAjaxParserClass(root_object_val) {
         var go_request = JSON.parse(go_request_json_val);
 
         if (go_request.command === "get_link_data") {
-            this.debug_(false, this.debugInput(), "parseGetRequest", "go_request_json_val=" + go_request_json_val);
+            this.debug(false, "parseGetRequest", "go_request_json_val=" + go_request_json_val);
         } else {
-            this.debug_(true, this.debugInput(), "parseGetRequest", "go_request_json_val=" + go_request_json_val);
+            this.debug(true, "parseGetRequest", "go_request_json_val=" + go_request_json_val);
         }
 
         var func = this.httpSwitchTableArray(command_index_val)[go_request.command];
@@ -124,7 +100,7 @@ function FabricAjaxParserClass(root_object_val) {
                         my_name: go_request.my_name,
                         link_id: data_val,
                         });
-        this0.debug_(true, this0.debugOutput(), "setupLinkResponse", "output=" + output);
+        this0.debug(true, "setupLinkResponse", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 
@@ -143,7 +119,7 @@ function FabricAjaxParserClass(root_object_val) {
                         data: data_val,
                         pending_session_setup: pending_session_setup, 
                         });
-        this0.debug_(false, this0.debugOutput(), "getLinkDataResponse", "output=" + output);
+        this0.debug(false, "getLinkDataResponse", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 
@@ -171,7 +147,7 @@ function FabricAjaxParserClass(root_object_val) {
                         link_id: go_request.link_id,
                         c_name_list: data_val,
                         });
-        this0.debug_(true, this0.debugOutput(), "getNameList", "output=" + output);
+        this0.debug(true, "getNameList", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 
@@ -188,7 +164,7 @@ function FabricAjaxParserClass(root_object_val) {
                         his_name: go_request.his_name,
                         theme_data: go_request.theme_data,
                         });
-        this0.debug_(true, this0.debugOutput(), "setupSession", "output=" + output);
+        this0.debug(true, "setupSession", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 
@@ -204,7 +180,7 @@ function FabricAjaxParserClass(root_object_val) {
                         topic_data: go_request.topic_data,
                         his_name: "tbd",
                         });
-        this0.debug_(true, this0.debugOutput(), "setupSessionReply", "output=" + output);
+        this0.debug(true, "setupSessionReply", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 
@@ -222,7 +198,6 @@ function FabricAjaxParserClass(root_object_val) {
                         session_id: session_id,
                         c_data: c_data,
                         });
-        this0.debug_(true, this0.debugOutput(), "getSessionDataResponse", "output=" + output);
         this0.debug(true, "getSessionDataResponse", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
@@ -243,7 +218,7 @@ function FabricAjaxParserClass(root_object_val) {
                         session_id: session_id,
                         c_data: c_data,
                         });
-        this0.debug_(true, this0.debugOutput(), "getSessionData", "output=" + output);
+        this0.debug(true, "getSessionData", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 
@@ -260,25 +235,12 @@ function FabricAjaxParserClass(root_object_val) {
         return null;
     };
 
-    this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {
-        if (debug_val && debug_val_) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
-    };
-
+    this.objectName = function () {return "FabricAjaxParserClass";};
+    this.rootObject = function () {return this.theRootObject;};
+    this.linkMgrServiceObject = function () {return this.rootObject().linkMgrServiceObject();};
+    this.ajaxObject = function () {return this.rootObject().ajaxObject();};
+    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function (str1_val, str2_val) {        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function (str1_val, str2_val) {this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
