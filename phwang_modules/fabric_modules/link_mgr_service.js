@@ -82,12 +82,21 @@ function LinkMgrServiceClass(root_object_val) {
         this.netClientOjbect().write("N" +  link_id_index_val + name_list_tag_val);
     };
 
-    this.mallocSession = function (link_id_index_val, his_name_val, theme_data_val, callback_func_val, go_request_val, res_val) {
+    this.mallocSession = function (link_id_index_val, his_name_val, theme_data_val, play_color_val, callback_func_val, go_request_val, res_val) {
         this.debug(true, "mallocSession", "link_id_index_val=" + link_id_index_val + " his_name_val=" + his_name_val);
         this.callbackFunc = callback_func_val;
         this.theGoRequest = go_request_val;
         this.theRes = res_val;
-        this.netClientOjbect().write("S" + link_id_index_val + theme_data_val + his_name_val);
+
+        var play_color;
+        if (play_color_val === "black") {
+            play_color = "1";
+        }
+        else {
+            play_color = "2";
+        }
+
+        this.netClientOjbect().write("S" + link_id_index_val + theme_data_val + play_color + his_name_val);
     };
 
     this.setupSessionReply = function (link_id_index_val, session_id_index_val, callback_func_val, go_request_val, res_val) {
