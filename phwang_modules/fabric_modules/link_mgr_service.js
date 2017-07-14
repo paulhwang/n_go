@@ -16,7 +16,6 @@ module.exports = {
         }
         return the_link_mgr_service_object;
     },
-
 };
 
 function LinkMgrServiceClass(root_object_val) {
@@ -28,26 +27,6 @@ function LinkMgrServiceClass(root_object_val) {
         this.setupConnectionToLinkMgr();
 
         this.debug(true, "init__", "");
-    };
-
-    this.objectName = function () {
-        return "LinkMgrServiceClass";
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.netClientOjbect = function () {
-        return this.theNetClientObject;
-    };
-
-    this.ajaxParserObject = function () {
-        return this.rootObject().ajaxParserObject();
-    };
-
-    this.importObject = function () {
-        return this.rootObject().importObject();
     };
 
     this.setupConnectionToLinkMgr = function () {
@@ -135,19 +114,13 @@ function LinkMgrServiceClass(root_object_val) {
         this.netClientOjbect().write("P" + link_id_index_val + session_id_index_val + data_val);
     };
 
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
-    };
-
+    this.objectName = function () {return "LinkMgrServiceClass";};
+    this.rootObject = function () {return this.theRootObject;};
+    this.netClientOjbect = function () {return this.theNetClientObject;};
+    this.ajaxParserObject = function () {return this.rootObject().ajaxParserObject();};
+    this.importObject = function () {return this.rootObject().importObject();};
+    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function (str1_val, str2_val) {this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }

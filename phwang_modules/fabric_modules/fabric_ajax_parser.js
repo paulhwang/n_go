@@ -24,22 +24,6 @@ function FabricAjaxParserClass(root_object_val) {
         this.debug(true, "init__", "");
     };
 
-    this.defaultLinkUpdateInterval = function () {
-        return 3000;
-    };
-
-    this.linkUpdateInterval = function () {
-        return this.theLinkUpdateInterval;
-    };
-
-    this.setLinkUpdateInterval = function (val) {
-        this.theLinkUpdateInterval = val;
-    };
-
-    this.httpSwitchTableArray = function (index_val) {
-        return this.theHttpSwitchTableArray[index_val];
-    };
-
     this.initSwitchTableArray = function () {
         var post_switch_table = {
             "setup_link": this.setupLink,
@@ -235,6 +219,10 @@ function FabricAjaxParserClass(root_object_val) {
         return null;
     };
 
+    this.httpSwitchTableArray = function (index_val) {return this.theHttpSwitchTableArray[index_val];};
+    this.defaultLinkUpdateInterval = function () {return 3000;};
+    this.linkUpdateInterval = function () {return this.theLinkUpdateInterval;};
+    this.setLinkUpdateInterval = function (val) {this.theLinkUpdateInterval = val;};
     this.objectName = function () {return "FabricAjaxParserClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.linkMgrServiceObject = function () {return this.rootObject().linkMgrServiceObject();};
