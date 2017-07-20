@@ -67,7 +67,7 @@ function LinkMgrServiceClass (root_object_val) {
             this.abend("receiveDataFromLinkMgr", this.theGoRequest.command + ": null callbackFunction");
             return;
         }
-        this.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), this.theGoRequest, this.theRes, data_val.slice(1), this.theFabricRequestObject);
+        this.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), data_val.slice(1), this.theFabricRequestObject);
         this.clearCallbackFunction();
     };
 
