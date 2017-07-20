@@ -49,7 +49,7 @@ function LinkMgrServiceClass(root_object_val) {
             this.debug(true, "receiveDataFromLinkMgr", data_val);
         }
         if (this.callbackFunction() === 0) {
-            this.abend("receiveDataFromLinkMgr", "null callbackFunc");
+            this.abend("receiveDataFromLinkMgr", this.theGoRequest.command + ": null callbackFunction");
             return;
         }
         this.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), this.theGoRequest, this.theRes, data_val.slice(1));
