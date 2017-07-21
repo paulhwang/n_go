@@ -110,12 +110,6 @@ function LinkMgrServiceClass (root_object_val) {
         this.netClientOjbect().write("G" + link_id_index_val + session_id_index_val);
     };
 
-    this.putSessionData = function (link_id_index_val, session_id_index_val, data_val, callback_func_val, ajax_entry_object_val) {
-        this.debug(true, "putSessionData", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val + " data_val=" + data_val);
-        this.theAjaxEntryObject = ajax_entry_object_val;
-        this.netClientOjbect().write("P" + link_id_index_val + session_id_index_val + data_val);
-    };
-
     this.ajaxEntryObject = function () {return this.theAjaxEntryObject;};
     this.setAjaxEntryObject = function (val) {this.theAjaxEntryObject = val;};
     this.objectName = function () {return "LinkMgrServiceClass";};
