@@ -18,15 +18,17 @@ module.exports = {
     },
 };
 
-function AjaxEntryClass (callback_func_val, go_request_val, res_val) {
+function AjaxEntryClass (ajax_id_val, callback_func_val, go_request_val, res_val) {
     "use strict";
 
-    this.init__ = function (callback_func_val, go_request_val, res_val) {
+    this.init__ = function (ajax_id_val, callback_func_val, go_request_val, res_val) {
+        this.theAjaxId = ajax_id_val;
         this.theCallbackFunction = callback_func_val;
         this.theAjaxRequest = go_request_val;
         this.theAjaxResponse = res_val;
     }
 
+    this.ajaxId = function () {return this.theAjaxId;};
     this.callbackFunction = function () {return this.theCallbackFunction;};
     this.clearCallbackFunction = function () {this.theCallbackFunction = 0;};
     this.setCallbackFunction = function (val)
@@ -38,7 +40,7 @@ function AjaxEntryClass (callback_func_val, go_request_val, res_val) {
     };
     this.ajaxRequest = function () {return this.theAjaxRequest;}
     this.ajaxResponse = function () {return this.theAjaxResponse;}
-    this.init__(callback_func_val, go_request_val, res_val);
+    this.init__(ajax_id_val, callback_func_val, go_request_val, res_val);
 }
 
 function LinkMgrServiceClass (root_object_val) {
@@ -48,12 +50,13 @@ function LinkMgrServiceClass (root_object_val) {
         this.theRootObject = root_object_val;
         this.theNetClientObject = this.importObject().importNetClient().malloc(this.rootObject());
         this.setupConnectionToLinkMgr();
-        this.theCallbackFunction = 0;
+        this.theGlobalAjaxId = 0;
         this.debug(true, "init__", "");
     };
 
     this.mallocAjaxEntryObject = function (callback_func_val, go_request_val, res_val) {
-       var ajax_entry_object = new AjaxEntryClass(callback_func_val, go_request_val, res_val);
+       var ajax_entry_object = new AjaxEntryClass(this.globalAjaxId(), callback_func_val, go_request_val, res_val);
+       this.incrementGlobalAjaxId();
        return ajax_entry_object;
     };
 
@@ -101,6 +104,8 @@ function LinkMgrServiceClass (root_object_val) {
         this.debug(true, "receiveCloseFromLinkMgr", "");
     };
 
+    this.globalAjaxId = function () {return this.theGlobalAjaxId;};
+    this.incrementGlobalAjaxId = function () {this.theGlobalAjaxId++;};
     this.ajaxEntryObject = function () {return this.theAjaxEntryObject;};
     this.setAjaxEntryObject = function (val) {this.theAjaxEntryObject = val;};
     this.objectName = function () {return "LinkMgrServiceClass";};
