@@ -104,6 +104,11 @@ function LinkMgrServiceClass (root_object_val) {
         this.debug(true, "receiveCloseFromLinkMgr", "");
     };
 
+    this.transmitData = function (ajax_entry_object_val, data_val) {
+        this.setAjaxEntryObject(ajax_entry_object_val);
+        this.netClientOjbect().write(data_val);
+    };
+
     this.globalAjaxId = function () {return this.theGlobalAjaxId;};
     this.incrementGlobalAjaxId = function () {this.theGlobalAjaxId++;};
     this.ajaxEntryObject = function () {return this.theAjaxEntryObject;};

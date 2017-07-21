@@ -75,8 +75,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.setupLink = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupLinkResponse, go_request, res);
-        this.linkMgrServiceObject().setAjaxEntryObject(ajax_entry_object);
-        this.linkMgrServiceObject().netClientOjbect().write("L" + go_request.my_name);
+        this.linkMgrServiceObject().transmitData(ajax_entry_object, "L" + go_request.my_name);
     };
 
     this.setupLinkResponse = function (this0, data_val, ajax_entry_object_val) {
