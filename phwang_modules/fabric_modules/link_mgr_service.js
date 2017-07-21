@@ -61,6 +61,10 @@ function LinkMgrServiceClass (root_object_val) {
        return this.theAjaxEntryObject;
     };
 
+    this.freeAjaxEntryObject = function (ajax_entry_object_val) {
+        ajax_entry_object_val.clearCallbackFunction();
+    };
+
     this.setupConnectionToLinkMgr = function () {
         var this0 = this;
         this.netClientOjbect().connect(LINK_MGR_SERVICE_IP_PORT, LINK_MGR_SERVICE_IP_ADDRESS, function () {
@@ -85,8 +89,12 @@ function LinkMgrServiceClass (root_object_val) {
             return;
         }
         var ajax_entry_object = this.searchAjaxEntryObject();
+        if (!ajax_entry_object) {
+            this.abend("receiveDataFromLinkMgr", "null ajax_entry_object");
+            return;
+        }
         ajax_entry_object.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), data_val.slice(1), this.ajaxEntryObject());
-        this.ajaxEntryObject().clearCallbackFunction();
+        this.freeAjaxEntryObject(ajax_entry_object);
     };
 
     this.receiveCloseFromLinkMgr = function () {
