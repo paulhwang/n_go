@@ -92,22 +92,10 @@ function LinkMgrServiceClass (root_object_val) {
         this.debug(true, "getLinkByIdIndexName", "link_id_index_val=" + link_id_index_val);
     };
 
-    this.getNameList = function (link_id_index_val, name_list_tag_val, callback_func_val, ajax_entry_object_val) {
-        this.debug(false, "getNameList", "link_id_index_val=" + link_id_index_val);
-        this.theAjaxEntryObject = ajax_entry_object_val;
-        this.netClientOjbect().write("N" +  link_id_index_val + name_list_tag_val);
-    };
-
     this.setupSessionReply = function (link_id_index_val, session_id_index_val, callback_func_val, ajax_entry_object_val) {
         this.debug(true, "setupSessionReply", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
         this.theAjaxEntryObject = ajax_entry_object_val;
         this.netClientOjbect().write("R" + link_id_index_val + session_id_index_val);
-    };
-
-    this.getSessionData = function (link_id_index_val, session_id_index_val, callback_func_val, ajax_entry_object_val) {
-        this.debug(true, "getSessionData", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
-        this.theAjaxEntryObject = ajax_entry_object_val;
-        this.netClientOjbect().write("G" + link_id_index_val + session_id_index_val);
     };
 
     this.ajaxEntryObject = function () {return this.theAjaxEntryObject;};

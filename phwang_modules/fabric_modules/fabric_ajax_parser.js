@@ -129,7 +129,9 @@ function FabricAjaxParserClass(root_object_val) {
         buf = buf + name_list_tag;
 
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.getNameListResponse, go_request, res);
-        this.linkMgrServiceObject().getNameList(go_request.link_id, buf, this.getNameListResponse, ajax_entry_object);
+        this.linkMgrServiceObject().setAjaxEntryObject(ajax_entry_object);
+        this.debug(false, "getNameList", "link_id=" + go_request.link_id);
+        this.linkMgrServiceObject().netClientOjbect().write("N" +  go_request.link_id + buf);
     };
 
     this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
