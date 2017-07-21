@@ -78,15 +78,15 @@ function FabricAjaxParserClass(root_object_val) {
         this.linkMgrServiceObject().setupLink(go_request.my_name, this.setupLinkResponse, go_request, res, ajax_entry_object);
     };
 
-    this.setupLinkResponse = function (this0, data_val, fabric_request_object_val) {
+    this.setupLinkResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var output = JSON.stringify({
-                        my_name: fabric_request_object_val.my_name,
+                        my_name: ajax_entry_object_val.my_name,
                         link_id: data_val,
                         });
         this0.debug(true, "setupLinkResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(fabric_request_object_val.ajaxRequest(), fabric_request_object_val.ajaxResponse(), output);
+        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.getLinkData = function (go_request, res) {
@@ -94,8 +94,8 @@ function FabricAjaxParserClass(root_object_val) {
         this.linkMgrServiceObject().getLinkData(go_request.link_id, this.getLinkDataResponse, go_request, res, ajax_entry_object);
     };
 
-    this.getLinkDataResponse = function (this0, data_val, fabric_request_object_val) {
-        var go_request = fabric_request_object_val.ajaxRequest();
+    this.getLinkDataResponse = function (this0, data_val, ajax_entry_object_val) {
+        var go_request = ajax_entry_object_val.ajaxRequest();
         this0.debug(false, "getLinkDataResponse", "link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
 
         var pending_session_setup = data_val.slice(4);
@@ -107,7 +107,7 @@ function FabricAjaxParserClass(root_object_val) {
                         pending_session_setup: pending_session_setup, 
                         });
         this0.debug(false, "getLinkDataResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(fabric_request_object_val.ajaxRequest(), fabric_request_object_val.ajaxResponse(), output);
+        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.putLinkData = function (go_request) {
@@ -130,14 +130,14 @@ function FabricAjaxParserClass(root_object_val) {
         this.linkMgrServiceObject().getNameList(go_request.link_id, buf, this.getNameListResponse, go_request, res, ajax_entry_object);
     };
 
-    this.getNameListResponse = function (this0, data_val, fabric_request_object_val) {
-        var go_request = fabric_request_object_val.ajaxRequest();
+    this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
+        var go_request = ajax_entry_object_val.ajaxRequest();
         var output = JSON.stringify({
                         link_id: go_request.link_id,
                         c_name_list: data_val,
                         });
         this0.debug(true, "getNameListResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(fabric_request_object_val.ajaxRequest(), fabric_request_object_val.ajaxResponse(), output);
+        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.setupSession = function (go_request, res) {
@@ -145,10 +145,10 @@ function FabricAjaxParserClass(root_object_val) {
         this.linkMgrServiceObject().setupSession(go_request.link_id, go_request.his_name, go_request.theme_data, this.setupSessionResponse, go_request, res, ajax_entry_object);
     };
 
-    this.setupSessionResponse = function (this0, data_val, fabric_request_object_val) {
+    this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "setupSessionResponse", "data_val=" + data_val);
 
-        var go_request = fabric_request_object_val.ajaxRequest();
+        var go_request = ajax_entry_object_val.ajaxRequest();
         var output = JSON.stringify({
                         link_id: go_request.link_id,
                         session_id: data_val,
@@ -156,7 +156,7 @@ function FabricAjaxParserClass(root_object_val) {
                         theme_data: go_request.theme_data,
                         });
         this0.debug(true, "setupSessionResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(fabric_request_object_val.ajaxRequest(), fabric_request_object_val.ajaxResponse(), output);
+        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.setupSession2 = function (go_request, res) {
@@ -164,8 +164,8 @@ function FabricAjaxParserClass(root_object_val) {
         this.linkMgrServiceObject().setupSessionReply(go_request.link_id, go_request.session_id , this.setupSession2Response, go_request, res, ajax_entry_object);
     };
 
-    this.setupSession2Response = function (this0, data_val, fabric_request_object_val) {
-        var go_request = fabric_request_object_val.ajaxRequest();
+    this.setupSession2Response = function (this0, data_val, ajax_entry_object_val) {
+        var go_request = ajax_entry_object_val.ajaxRequest();
         var output = JSON.stringify({
                         link_id: go_request.link_id,
                         confirm: "yes",
@@ -174,7 +174,7 @@ function FabricAjaxParserClass(root_object_val) {
                         his_name: "tbd",
                         });
         this0.debug(true, "setupSession2Response", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(fabric_request_object_val.ajaxRequest(), fabric_request_object_val.ajaxResponse(), output);
+        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.getSessionData = function (go_request, res) {
@@ -182,8 +182,8 @@ function FabricAjaxParserClass(root_object_val) {
         this.linkMgrServiceObject().getSessionData(go_request.link_id, go_request.session_id, this.getSessionDataResponse, go_request, res, ajax_entry_object);
     };
 
-    this.getSessionDataResponse = function (this0, data_val, fabric_request_object_val) {
-        var go_request = fabric_request_object_val.ajaxRequest();
+    this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
+        var go_request = ajax_entry_object_val.ajaxRequest();
         var link_id = data_val.slice(0, 8);
         var session_id = data_val.slice(8, 16);
         var c_data = data_val.slice(16);
@@ -194,7 +194,7 @@ function FabricAjaxParserClass(root_object_val) {
                         c_data: c_data,
                         });
         this0.debug(true, "getSessionDataResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(fabric_request_object_val.ajaxRequest(), fabric_request_object_val.ajaxResponse(), output);
+        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.putSessionData = function (go_request, res) {
@@ -202,10 +202,10 @@ function FabricAjaxParserClass(root_object_val) {
         this.linkMgrServiceObject().putSessionData(go_request.link_id, go_request.session_id, go_request.data, this.putSessionDataResponse, go_request, res, ajax_entry_object);
     };
 
-    this.putSessionDataResponse = function (this0, data_val, fabric_request_object_val) {
+    this.putSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "putSessionDataResponse", "data_val=" + data_val);
 
-        var go_request = fabric_request_object_val.ajaxRequest();
+        var go_request = ajax_entry_object_val.ajaxRequest();
         var link_id = data_val.slice(0, 8);
         var session_id = data_val.slice(8, 16);
         var c_data = data_val.slice(16);
@@ -216,7 +216,7 @@ function FabricAjaxParserClass(root_object_val) {
                         c_data: c_data,
                         });
         this0.debug(true, "putSessionDataResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(fabric_request_object_val.ajaxRequest(), fabric_request_object_val.ajaxResponse(), output);
+        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.keepAlive = function (go_request, res) {
