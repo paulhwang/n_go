@@ -88,31 +88,14 @@ function LinkMgrServiceClass (root_object_val) {
         this.debug(true, "receiveCloseFromLinkMgr", "");
     };
 
-    this.setupLink = function (my_name_val, callback_func_val, ajax_entry_object_val) {
-        this.theAjaxEntryObject = ajax_entry_object_val;
-        this.netClientOjbect().write("L" + my_name_val);
-    };
-
     this.getLinkByIdIndexName = function (link_id_index_val, link_name_val) {
         this.debug(true, "getLinkByIdIndexName", "link_id_index_val=" + link_id_index_val);
-    };
-
-    this.getLinkData = function (link_id_index_val, callback_func_val, ajax_entry_object_val) {
-        this.debug(false, "getLinkData", "link_id_index_val=" + link_id_index_val);
-        this.theAjaxEntryObject = ajax_entry_object_val;
-        this.netClientOjbect().write("D" +  link_id_index_val);
     };
 
     this.getNameList = function (link_id_index_val, name_list_tag_val, callback_func_val, ajax_entry_object_val) {
         this.debug(false, "getNameList", "link_id_index_val=" + link_id_index_val);
         this.theAjaxEntryObject = ajax_entry_object_val;
         this.netClientOjbect().write("N" +  link_id_index_val + name_list_tag_val);
-    };
-
-    this.setupSession = function (link_id_index_val, his_name_val, theme_data_val, callback_func_val, ajax_entry_object_val) {
-        this.debug(true, "setupSession", "link_id_index_val=" + link_id_index_val + " his_name_val=" + his_name_val);
-        this.theAjaxEntryObject = ajax_entry_object_val;
-        this.netClientOjbect().write("S" + link_id_index_val + theme_data_val + his_name_val);
     };
 
     this.setupSessionReply = function (link_id_index_val, session_id_index_val, callback_func_val, ajax_entry_object_val) {
@@ -134,6 +117,7 @@ function LinkMgrServiceClass (root_object_val) {
     };
 
     this.ajaxEntryObject = function () {return this.theAjaxEntryObject;};
+    this.setAjaxEntryObject = function (val) {this.theAjaxEntryObject = val;};
     this.objectName = function () {return "LinkMgrServiceClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.netClientOjbect = function () {return this.theNetClientObject;};

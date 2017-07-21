@@ -75,7 +75,8 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.setupLink = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupLinkResponse, go_request, res);
-        this.linkMgrServiceObject().setupLink(go_request.my_name, this.setupLinkResponse, ajax_entry_object);
+        this.linkMgrServiceObject().setAjaxEntryObject(ajax_entry_object);
+        this.linkMgrServiceObject().netClientOjbect().write("L" + go_request.my_name);
     };
 
     this.setupLinkResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -91,7 +92,8 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.getLinkData = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.getLinkDataResponse, go_request, res);
-        this.linkMgrServiceObject().getLinkData(go_request.link_id, this.getLinkDataResponse, ajax_entry_object);
+        this.linkMgrServiceObject().setAjaxEntryObject(ajax_entry_object);
+        this.linkMgrServiceObject().netClientOjbect().write("D" +  go_request.link_id);
     };
 
     this.getLinkDataResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -142,7 +144,9 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.setupSession = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupSessionResponse, go_request, res);
-        this.linkMgrServiceObject().setupSession(go_request.link_id, go_request.his_name, go_request.theme_data, this.setupSessionResponse, ajax_entry_object);
+        this.linkMgrServiceObject().setAjaxEntryObject(ajax_entry_object);
+        this.debug(true, "setupSession", "link_id=" + go_request.link_id + " his_name=" + go_request.his_name);
+        this.linkMgrServiceObject().netClientOjbect().write("S" + go_request.link_id + go_request.theme_data + go_request.his_name);
     };
 
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
