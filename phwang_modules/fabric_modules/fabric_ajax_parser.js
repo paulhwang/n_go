@@ -75,7 +75,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.setupLink = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupLinkResponse, go_request, res);
-        this.linkMgrServiceObject().setupLink(go_request.my_name, this.setupLinkResponse, go_request, res, ajax_entry_object);
+        this.linkMgrServiceObject().setupLink(go_request.my_name, this.setupLinkResponse, ajax_entry_object);
     };
 
     this.setupLinkResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -91,7 +91,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.getLinkData = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.getLinkDataResponse, go_request, res);
-        this.linkMgrServiceObject().getLinkData(go_request.link_id, this.getLinkDataResponse, go_request, res, ajax_entry_object);
+        this.linkMgrServiceObject().getLinkData(go_request.link_id, this.getLinkDataResponse, ajax_entry_object);
     };
 
     this.getLinkDataResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -127,7 +127,7 @@ function FabricAjaxParserClass(root_object_val) {
         buf = buf + name_list_tag;
 
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.getNameListResponse, go_request, res);
-        this.linkMgrServiceObject().getNameList(go_request.link_id, buf, this.getNameListResponse, go_request, res, ajax_entry_object);
+        this.linkMgrServiceObject().getNameList(go_request.link_id, buf, this.getNameListResponse, ajax_entry_object);
     };
 
     this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -142,7 +142,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.setupSession = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupSessionResponse, go_request, res);
-        this.linkMgrServiceObject().setupSession(go_request.link_id, go_request.his_name, go_request.theme_data, this.setupSessionResponse, go_request, res, ajax_entry_object);
+        this.linkMgrServiceObject().setupSession(go_request.link_id, go_request.his_name, go_request.theme_data, this.setupSessionResponse, ajax_entry_object);
     };
 
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -161,7 +161,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.setupSession2 = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupSession2Response, go_request, res);
-        this.linkMgrServiceObject().setupSessionReply(go_request.link_id, go_request.session_id , this.setupSession2Response, go_request, res, ajax_entry_object);
+        this.linkMgrServiceObject().setupSessionReply(go_request.link_id, go_request.session_id , this.setupSession2Response, ajax_entry_object);
     };
 
     this.setupSession2Response = function (this0, data_val, ajax_entry_object_val) {
@@ -179,7 +179,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.getSessionData = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.getSessionDataResponse, go_request, res);
-        this.linkMgrServiceObject().getSessionData(go_request.link_id, go_request.session_id, this.getSessionDataResponse, go_request, res, ajax_entry_object);
+        this.linkMgrServiceObject().getSessionData(go_request.link_id, go_request.session_id, this.getSessionDataResponse, ajax_entry_object);
     };
 
     this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -199,7 +199,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.putSessionData = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.putSessionDataResponse, go_request, res);
-        this.linkMgrServiceObject().putSessionData(go_request.link_id, go_request.session_id, go_request.data, this.putSessionDataResponse, go_request, res, ajax_entry_object);
+        this.linkMgrServiceObject().putSessionData(go_request.link_id, go_request.session_id, go_request.data, this.putSessionDataResponse, ajax_entry_object);
     };
 
     this.putSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
