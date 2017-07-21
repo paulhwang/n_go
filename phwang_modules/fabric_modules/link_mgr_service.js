@@ -27,7 +27,15 @@ function AjaxEntryClass (callback_func_val, go_request_val, res_val) {
         this.theAjaxResponse = res_val;
     }
 
-    this.callbackFunction = function () {return this.theCallbackFunction;}
+    this.callbackFunction = function () {return this.theCallbackFunction;};
+    this.clearCallbackFunction = function () {this.theCallbackFunction = 0;};
+    this.setCallbackFunction = function (val)
+    {
+        if (this.theCallbackFunction !== 0) {
+            this.abend("setCallbackFunction", this.theCallbackFunction);
+        }
+        this.theCallbackFunction = val;
+    };
     this.ajaxRequest = function () {return this.theAjaxRequest;}
     this.ajaxResponse = function () {return this.theAjaxResponse;}
     this.init__(callback_func_val, go_request_val, res_val);
@@ -68,12 +76,12 @@ function LinkMgrServiceClass (root_object_val) {
         if (data_val.charAt(0) != 'd') {
             this.debug(true, "receiveDataFromLinkMgr", data_val);
         }
-        if (this.callbackFunction() === 0) {
+        if (this.ajaxEntryObject().callbackFunction() === 0) {
             this.abend("receiveDataFromLinkMgr", this.theGoRequest.command + ": null callbackFunction");
             return;
         }
-        this.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), data_val.slice(1), this.ajaxEntryObject());
-        this.clearCallbackFunction();
+        this.ajaxEntryObject().callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), data_val.slice(1), this.ajaxEntryObject());
+        this.ajaxEntryObject().clearCallbackFunction();
     };
 
     this.receiveCloseFromLinkMgr = function () {
@@ -82,7 +90,6 @@ function LinkMgrServiceClass (root_object_val) {
 
     this.setupLink = function (my_name_val, callback_func_val, ajax_entry_object_val) {
         this.theAjaxEntryObject = ajax_entry_object_val;
-        this.setCallbackFunction(callback_func_val);
         this.netClientOjbect().write("L" + my_name_val);
     };
 
@@ -93,53 +100,37 @@ function LinkMgrServiceClass (root_object_val) {
     this.getLinkData = function (link_id_index_val, callback_func_val, ajax_entry_object_val) {
         this.debug(false, "getLinkData", "link_id_index_val=" + link_id_index_val);
         this.theAjaxEntryObject = ajax_entry_object_val;
-        this.setCallbackFunction(callback_func_val);
         this.netClientOjbect().write("D" +  link_id_index_val);
     };
 
     this.getNameList = function (link_id_index_val, name_list_tag_val, callback_func_val, ajax_entry_object_val) {
         this.debug(false, "getNameList", "link_id_index_val=" + link_id_index_val);
         this.theAjaxEntryObject = ajax_entry_object_val;
-        this.setCallbackFunction(callback_func_val);
         this.netClientOjbect().write("N" +  link_id_index_val + name_list_tag_val);
     };
 
     this.setupSession = function (link_id_index_val, his_name_val, theme_data_val, callback_func_val, ajax_entry_object_val) {
         this.debug(true, "setupSession", "link_id_index_val=" + link_id_index_val + " his_name_val=" + his_name_val);
         this.theAjaxEntryObject = ajax_entry_object_val;
-        this.setCallbackFunction(callback_func_val);
         this.netClientOjbect().write("S" + link_id_index_val + theme_data_val + his_name_val);
     };
 
     this.setupSessionReply = function (link_id_index_val, session_id_index_val, callback_func_val, ajax_entry_object_val) {
         this.debug(true, "setupSessionReply", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
         this.theAjaxEntryObject = ajax_entry_object_val;
-        this.setCallbackFunction(callback_func_val);
         this.netClientOjbect().write("R" + link_id_index_val + session_id_index_val);
     };
 
     this.getSessionData = function (link_id_index_val, session_id_index_val, callback_func_val, ajax_entry_object_val) {
         this.debug(true, "getSessionData", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
         this.theAjaxEntryObject = ajax_entry_object_val;
-        this.setCallbackFunction(callback_func_val);
         this.netClientOjbect().write("G" + link_id_index_val + session_id_index_val);
     };
 
     this.putSessionData = function (link_id_index_val, session_id_index_val, data_val, callback_func_val, ajax_entry_object_val) {
         this.debug(true, "putSessionData", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val + " data_val=" + data_val);
         this.theAjaxEntryObject = ajax_entry_object_val;
-        this.setCallbackFunction(callback_func_val);
         this.netClientOjbect().write("P" + link_id_index_val + session_id_index_val + data_val);
-    };
-
-    this.callbackFunction = function () {return this.theCallbackFunction;};
-    this.clearCallbackFunction = function () {this.theCallbackFunction = 0;};
-    this.setCallbackFunction = function (val)
-    {
-        if (this.theCallbackFunction !== 0) {
-            this.abend("setCallbackFunction", this.theCallbackFunction);
-        }
-        this.theCallbackFunction = val;
     };
 
     this.ajaxEntryObject = function () {return this.theAjaxEntryObject;};
