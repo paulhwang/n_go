@@ -167,7 +167,9 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.setupSession2 = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupSession2Response, go_request, res);
-        this.linkMgrServiceObject().setupSessionReply(go_request.link_id, go_request.session_id , this.setupSession2Response, ajax_entry_object);
+        this.linkMgrServiceObject().setAjaxEntryObject(ajax_entry_object);
+        this.debug(true, "setupSession2", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
+        this.linkMgrServiceObject().netClientOjbect().write("R" + go_request.link_id + go_request.session_id);
     };
 
     this.setupSession2Response = function (this0, data_val, ajax_entry_object_val) {

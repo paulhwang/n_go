@@ -88,16 +88,6 @@ function LinkMgrServiceClass (root_object_val) {
         this.debug(true, "receiveCloseFromLinkMgr", "");
     };
 
-    this.getLinkByIdIndexName = function (link_id_index_val, link_name_val) {
-        this.debug(true, "getLinkByIdIndexName", "link_id_index_val=" + link_id_index_val);
-    };
-
-    this.setupSessionReply = function (link_id_index_val, session_id_index_val, callback_func_val, ajax_entry_object_val) {
-        this.debug(true, "setupSessionReply", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
-        this.theAjaxEntryObject = ajax_entry_object_val;
-        this.netClientOjbect().write("R" + link_id_index_val + session_id_index_val);
-    };
-
     this.ajaxEntryObject = function () {return this.theAjaxEntryObject;};
     this.setAjaxEntryObject = function (val) {this.theAjaxEntryObject = val;};
     this.objectName = function () {return "LinkMgrServiceClass";};
