@@ -75,7 +75,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.setupLink = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupLinkResponse, go_request, res);
-        this.linkMgrServiceObject().transmitData(ajax_entry_object, "L" + go_request.my_name);
+        this.linkMgrServiceObject().transmitData(ajax_entry_object, "L" + ajax_entry_object.ajaxId() + go_request.my_name);
     };
 
     this.setupLinkResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -91,7 +91,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.getLinkData = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.getLinkDataResponse, go_request, res);
-        this.linkMgrServiceObject().transmitData(ajax_entry_object, "D" +  go_request.link_id);
+        this.linkMgrServiceObject().transmitData(ajax_entry_object, "D" + ajax_entry_object.ajaxId() + go_request.link_id);
     };
 
     this.getLinkDataResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -128,7 +128,7 @@ function FabricAjaxParserClass(root_object_val) {
 
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.getNameListResponse, go_request, res);
         this.debug(false, "getNameList", "link_id=" + go_request.link_id);
-        this.linkMgrServiceObject().transmitData(ajax_entry_object, "N" +  go_request.link_id + buf);
+        this.linkMgrServiceObject().transmitData(ajax_entry_object, "N" + ajax_entry_object.ajaxId() + go_request.link_id + buf);
     };
 
     this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -144,7 +144,7 @@ function FabricAjaxParserClass(root_object_val) {
     this.setupSession = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupSessionResponse, go_request, res);
         this.debug(true, "setupSession", "link_id=" + go_request.link_id + " his_name=" + go_request.his_name);
-        this.linkMgrServiceObject().transmitData(ajax_entry_object, "S" + go_request.link_id + go_request.theme_data + go_request.his_name);
+        this.linkMgrServiceObject().transmitData(ajax_entry_object, "S" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.theme_data + go_request.his_name);
     };
 
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -164,7 +164,7 @@ function FabricAjaxParserClass(root_object_val) {
     this.setupSession2 = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.setupSession2Response, go_request, res);
         this.debug(true, "setupSession2", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
-        this.linkMgrServiceObject().transmitData(ajax_entry_object, "R" + go_request.link_id + go_request.session_id);
+        this.linkMgrServiceObject().transmitData(ajax_entry_object, "R" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id);
     };
 
     this.setupSession2Response = function (this0, data_val, ajax_entry_object_val) {
@@ -183,7 +183,7 @@ function FabricAjaxParserClass(root_object_val) {
     this.getSessionData = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.getSessionDataResponse, go_request, res);
         this.debug(true, "getSessionData", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
-        this.linkMgrServiceObject().transmitData(ajax_entry_object, "G" + go_request.link_id + go_request.session_id);
+        this.linkMgrServiceObject().transmitData(ajax_entry_object, "G" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id);
     };
 
     this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -204,7 +204,7 @@ function FabricAjaxParserClass(root_object_val) {
     this.putSessionData = function (go_request, res) {
         var ajax_entry_object = this.linkMgrServiceObject().mallocAjaxEntryObject(this.putSessionDataResponse, go_request, res);
         this.debug(true, "putSessionData", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id + " data=" + go_request.data);
-        this.linkMgrServiceObject().transmitData(ajax_entry_object, "P" + go_request.link_id + go_request.session_id + go_request.data);
+        this.linkMgrServiceObject().transmitData(ajax_entry_object, "P" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id + go_request.data);
     };
 
     this.putSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {

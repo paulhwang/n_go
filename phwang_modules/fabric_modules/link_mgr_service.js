@@ -97,7 +97,7 @@ function LinkMgrServiceClass (root_object_val) {
             this.abend("receiveDataFromLinkMgr", "null ajax_entry_object");
             return;
         }
-        ajax_entry_object.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), data_val.slice(1), this.ajaxEntryObject());
+        ajax_entry_object.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), data_val.slice(1 + this.ajaxIdSize()), this.ajaxEntryObject());
         this.freeAjaxEntryObject(ajax_entry_object);
     };
 
