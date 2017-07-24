@@ -22,7 +22,7 @@ function FabricRootClass () {
         this.theImportObject = require("./fabric_import.js").malloc(this);
         this.theAjaxFabricServiceObject = this.importObject().importLinkMgrService().malloc(this);
         this.theAjaxObject = this.importObject().importAjax().malloc(this);
-        this.theAjaxParserObject = this.importObject().importAjaxParser().malloc(this);
+        this.theAjaxWebServiceObject = this.importObject().importAjaxParser().malloc(this);
         this.debug(true, "init__", "");
     };
 
@@ -30,7 +30,7 @@ function FabricRootClass () {
     this.importObject = function () {return this.theImportObject;};
     this.ajaxFabricServiceObject = function () {return this.theAjaxFabricServiceObject;};
     this.ajaxObject = function () {return this.theAjaxObject;};
-    this.ajaxParserObject = function () {return this.theAjaxParserObject;};
+    this.ajaxWebServiceObject = function () {return this.theAjaxWebServiceObject;};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {this.ABEND(this.objectName() + "." + str1_val, str2_val);};

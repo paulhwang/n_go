@@ -55,8 +55,8 @@ function FabricAjaxClass(root_object_val) {
         return this.theRootObject;
     };
 
-    this.ajaxParserObject = function () {
-        return this.rootObject().ajaxParserObject();
+    this.ajaxWebServiceObject = function () {
+        return this.rootObject().ajaxWebServiceObject();
     };
 
     this.importObject = function () {
@@ -81,7 +81,7 @@ function FabricAjaxClass(root_object_val) {
             return;
         }
 
-        var data = this.ajaxParserObject().parseGetRequest(req.headers.phwangajaxrequest, command_index_val, res);
+        var data = this.ajaxWebServiceObject().parseGetRequest(req.headers.phwangajaxrequest, command_index_val, res);
     };
 
     this.sendHttpResponse = function (request_val, res, data_val) {
