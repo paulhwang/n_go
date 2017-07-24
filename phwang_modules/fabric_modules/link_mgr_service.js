@@ -51,6 +51,8 @@ function LinkMgrServiceClass (root_object_val) {
         this.theNetClientObject = this.importObject().importNetClient().malloc(this.rootObject());
         this.setupConnectionToLinkMgr();
         this.theGlobalAjaxId = 0;
+        this.theMaxAjaxId = 0;
+        this.theAjaxIdArray = [];
         this.debug(true, "init__", "");
     };
 
@@ -121,8 +123,12 @@ function LinkMgrServiceClass (root_object_val) {
     };
 
     this.ajaxIdSize = function () {return 3;};
+    this.theMaxAjaxId = function () {return this.theMaxAjaxId;};
+    this.setMaxAjaxId = function (val) {this.theMaxAjaxId = val;};
     this.globalAjaxId = function () {return this.theGlobalAjaxId;};
     this.incrementGlobalAjaxId = function () {this.theGlobalAjaxId++;};
+    this.ajaxIdArrayElement = function (index) {return this.theAjaxIdArray[index];};
+    this.setAjaxIdArrayElement = function (index, val) {this.theAjaxIdArray[index] = val;};
     this.ajaxEntryObject = function () {return this.theAjaxEntryObject;};
     this.setAjaxEntryObject = function (val) {this.theAjaxEntryObject = val;};
     this.objectName = function () {return "LinkMgrServiceClass";};
