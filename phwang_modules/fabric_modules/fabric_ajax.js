@@ -44,7 +44,6 @@ function FabricAjaxClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theAjaxParserObject = this.importObject().importAjaxParser().malloc(this.rootObject());
         this.debug(true, "init__", "");
     };
 
@@ -57,7 +56,7 @@ function FabricAjaxClass(root_object_val) {
     };
 
     this.ajaxParserObject = function () {
-        return this.theAjaxParserObject;
+        return this.rootObject().ajaxParserObject();
     };
 
     this.importObject = function () {
