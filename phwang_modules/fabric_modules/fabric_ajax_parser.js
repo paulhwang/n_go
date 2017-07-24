@@ -4,18 +4,18 @@
  * File name: switch_module.js
  */
 
-var the_fabric_ajax_parser_object = null;
+var the_ajax_web_service_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {
-        if (!the_fabric_ajax_parser_object) {
-            the_fabric_ajax_parser_object = new FabricAjaxParserClass(root_object_val);
+        if (!the_ajax_web_service_object) {
+            the_ajax_web_service_object = new AjaxWebServiceClass(root_object_val);
         }
-        return the_fabric_ajax_parser_object;
+        return the_ajax_web_service_object;
     },
 };
 
-function FabricAjaxParserClass(root_object_val) {
+function AjaxWebServiceClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
