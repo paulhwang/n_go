@@ -45,6 +45,7 @@ function AjaxFabricServiceClass (root_object_val) {
         this.theGlobalAjaxId = 0;
         this.theMaxAjaxIdIndex = 0;
         this.theAjaxIdArray = [];
+        this.setMaxGlobalAjaxId(this.ajaxIdSize());
         this.debug(true, "init__", "");
     };
 
@@ -138,11 +139,26 @@ function AjaxFabricServiceClass (root_object_val) {
         this.incrementMaxAjaxIdIndex();
     };
 
+    this.incrementGlobalAjaxId = function () {
+        this.theGlobalAjaxId++;
+        if (this.theGlobalAjaxId > this.maxGolbalAjaxId()) {
+            this.theGlobalAjaxId = 1;
+        }
+    };
+
+    this.setMaxGlobalAjaxId = function (ajax_id_size_val) {
+        this.theMaxGolbalAjaxId = 1;
+        for (var i = 0; i < ajax_id_size_val; i++) {
+            this.theMaxGolbalAjaxId *= 10;
+        }
+        this.theMaxGolbalAjaxId -= 1;
+    };
+
     this.ajaxIdSize = function () {return 3;};
     this.maxAjaxIdIndex = function () {return this.theMaxAjaxIdIndex;};
     this.incrementMaxAjaxIdIndex = function () {this.theMaxAjaxIdIndex++;};
     this.globalAjaxId = function () {return this.theGlobalAjaxId;};
-    this.incrementGlobalAjaxId = function () {this.theGlobalAjaxId++;};
+    this.maxGolbalAjaxId = function () {return this.theMaxGolbalAjaxId;};
     this.ajaxIdArrayElement = function (index) {return this.theAjaxIdArray[index];};
     this.setAjaxIdArrayElement = function (index, val) {this.theAjaxIdArray[index] = val;};
     this.clearAjaxIdArrayElement = function (index) {this.theAjaxIdArray[index] = 0;};
