@@ -51,7 +51,7 @@ function LinkMgrServiceClass (root_object_val) {
         this.theNetClientObject = this.importObject().importNetClient().malloc(this.rootObject());
         this.setupConnectionToLinkMgr();
         this.theGlobalAjaxId = 0;
-        this.theMaxAjaxId = 0;
+        this.theMaxAjaxIdIndex = 0;
         this.theAjaxIdArray = [];
         this.debug(true, "init__", "");
     };
@@ -61,14 +61,6 @@ function LinkMgrServiceClass (root_object_val) {
         var ajax_id_str = this.encodeNumber(this.globalAjaxId(), this.ajaxIdSize());
         var ajax_entry_object = new AjaxEntryClass(ajax_id_str, callback_func_val, go_request_val, res_val);
         return ajax_entry_object;
-    };
-
-    this.searchAjaxEntryObject = function (ajax_id_val) {
-       return this.theAjaxEntryObject;
-    };
-
-    this.freeAjaxEntryObject = function (ajax_entry_object_val) {
-        ajax_entry_object_val.clearCallbackFunction();
     };
 
     this.setupConnectionToLinkMgr = function () {
@@ -90,17 +82,14 @@ function LinkMgrServiceClass (root_object_val) {
         if (data_val.charAt(0) != 'd') {
             this.debug(true, "receiveDataFromLinkMgr", data_val);
         }
-        if (this.ajaxEntryObject().callbackFunction() === 0) {
-            this.abend("receiveDataFromLinkMgr", this.theGoRequest.command + ": null callbackFunction");
-            return;
-        }
-        var ajax_entry_object = this.searchAjaxEntryObject();
+
+        var ajax_entry_object = this.getAjaxEntryObject();
         if (!ajax_entry_object) {
             this.abend("receiveDataFromLinkMgr", "null ajax_entry_object");
             return;
         }
-        ajax_entry_object.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), data_val.slice(1 + this.ajaxIdSize()), this.ajaxEntryObject());
-        this.freeAjaxEntryObject(ajax_entry_object);
+
+        ajax_entry_object.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), data_val.slice(1 + this.ajaxIdSize()), ajax_entry_object);
     };
 
     this.receiveCloseFromLinkMgr = function () {
@@ -118,19 +107,36 @@ function LinkMgrServiceClass (root_object_val) {
     };
 
     this.transmitData = function (ajax_entry_object_val, data_val) {
-        this.setAjaxEntryObject(ajax_entry_object_val);
+        this.putAjaxEntryObject(ajax_entry_object_val);
         this.netClientOjbect().write(data_val);
     };
 
+    this.getAjaxEntryObject = function () {
+        var i = 0;
+        var element = this.ajaxIdArrayElement(i);
+        this.clearAjaxIdArrayElement(i)
+        return element;
+    };
+
+    this.putAjaxEntryObject = function (val) {
+        for (var i = 0; i < this.maxAjaxIdIndex(); i++) {
+            if (!this.ajaxIdArrayElement(i)) {
+                this.setAjaxIdArrayElement(i, val);
+                return;
+            }
+        }
+        this.setAjaxIdArrayElement(this.maxAjaxIdIndex(), val);
+        this.incrementMaxAjaxIdIndex();
+    };
+
     this.ajaxIdSize = function () {return 3;};
-    this.theMaxAjaxId = function () {return this.theMaxAjaxId;};
-    this.setMaxAjaxId = function (val) {this.theMaxAjaxId = val;};
+    this.maxAjaxIdIndex = function () {return this.theMaxAjaxIdIndex;};
+    this.incrementMaxAjaxIdIndex = function () {this.theMaxAjaxIdIndex++;};
     this.globalAjaxId = function () {return this.theGlobalAjaxId;};
     this.incrementGlobalAjaxId = function () {this.theGlobalAjaxId++;};
     this.ajaxIdArrayElement = function (index) {return this.theAjaxIdArray[index];};
     this.setAjaxIdArrayElement = function (index, val) {this.theAjaxIdArray[index] = val;};
-    this.ajaxEntryObject = function () {return this.theAjaxEntryObject;};
-    this.setAjaxEntryObject = function (val) {this.theAjaxEntryObject = val;};
+    this.clearAjaxIdArrayElement = function (index) {this.theAjaxIdArray[index] = 0;};
     this.objectName = function () {return "LinkMgrServiceClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.netClientOjbect = function () {return this.theNetClientObject;};
