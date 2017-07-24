@@ -41,30 +41,9 @@ module.exports = {
 
 function FabricAjaxClass(root_object_val) {
     "use strict";
-
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.debug(true, "init__", "");
-    };
-
-    this.objectName = function () {
-        return "FabricAjaxClass";
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.ajaxWebServiceObject = function () {
-        return this.rootObject().ajaxWebServiceObject();
-    };
-
-    this.importObject = function () {
-        return this.rootObject().importObject();
-    };
-
-    this.utilObject = function () {
-        return this.utilObject().utilObject();
     };
 
     this.processHttp = function (req, res, command_index_val) {
@@ -106,19 +85,13 @@ function FabricAjaxClass(root_object_val) {
         this.logit("processFailure", state);
     };
 
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
-    };
-
+    this.objectName = function () {return "FabricAjaxClass";};
+    this.rootObject = function () {return this.theRootObject;};
+    this.ajaxWebServiceObject = function () {return this.rootObject().ajaxWebServiceObject();};
+    this.importObject = function () {return this.rootObject().importObject();};
+    this.utilObject = function () {return this.utilObject().utilObject();};
+    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
+    this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
+    this.abend = function (str1_val, str2_val) {this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
