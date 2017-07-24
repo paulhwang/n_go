@@ -49,7 +49,7 @@ function LinkMgrServiceClass (root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.theNetClientObject = this.importObject().importNetClient().malloc(this.rootObject());
-        this.setupConnectionToLinkMgr();
+        this.setupConnectionToFabric();
         this.theGlobalAjaxId = 0;
         this.theMaxAjaxIdIndex = 0;
         this.theAjaxIdArray = [];
@@ -63,37 +63,40 @@ function LinkMgrServiceClass (root_object_val) {
         return ajax_entry_object;
     };
 
-    this.setupConnectionToLinkMgr = function () {
+    this.setupConnectionToFabric = function () {
         var this0 = this;
         this.netClientOjbect().connect(LINK_MGR_SERVICE_IP_PORT, LINK_MGR_SERVICE_IP_ADDRESS, function () {
-            this0.debug(true, "init__", "LinkMgrService is connected");
+            this0.debug(true, "init__", "fabric is connected");
         });
 
         this.netClientOjbect().onData(function (data_val) {
-            this0.receiveDataFromLinkMgr(data_val);
+            this0.receiveDataFromFabric(data_val);
         });
 
         this.netClientOjbect().onClose(function () {
-            this0.receiveCloseFromLinkMgr();
+            this0.receiveCloseFromFabric();
         });
     };
 
-    this.receiveDataFromLinkMgr = function (data_val) {
+    this.receiveDataFromFabric = function (data_val) {
         if (data_val.charAt(0) != 'd') {
-            this.debug(true, "receiveDataFromLinkMgr", data_val);
+            this.debug(true, "receiveDataFromFabric", data_val);
         }
 
-        var ajax_entry_object = this.getAjaxEntryObject();
+        var ajax_id_val = data_val.slice(1, 1 + this.ajaxIdSize());
+        var rest_data_val = data_val.slice(1 + this.ajaxIdSize());
+
+        var ajax_entry_object = this.getAjaxEntryObject(ajax_id_val);
         if (!ajax_entry_object) {
-            this.abend("receiveDataFromLinkMgr", "null ajax_entry_object");
+            this.abend("receiveDataFromFabric", "null ajax_entry_object");
             return;
         }
 
-        ajax_entry_object.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), data_val.slice(1 + this.ajaxIdSize()), ajax_entry_object);
+        ajax_entry_object.callbackFunction().bind(this.ajaxParserObject())(this.ajaxParserObject(), rest_data_val, ajax_entry_object);
     };
 
-    this.receiveCloseFromLinkMgr = function () {
-        this.debug(true, "receiveCloseFromLinkMgr", "");
+    this.receiveCloseFromFabric = function () {
+        this.debug(true, "receiveCloseFromFabric", "");
     };
 
     this.encodeNumber = function(number_val, size_val) {
@@ -111,8 +114,22 @@ function LinkMgrServiceClass (root_object_val) {
         this.netClientOjbect().write(data_val);
     };
 
-    this.getAjaxEntryObject = function () {
-        var i = 0;
+    this.getAjaxEntryObject = function (ajax_id_val) {
+        var found = false;
+        for (var i = 0; i < this.maxAjaxIdIndex(); i++) {
+            if (this.ajaxIdArrayElement(i)) {
+                if (this.ajaxIdArrayElement(i).ajaxId() === ajax_id_val) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (!found) {
+            this.abend("getAjaxEntryObject", "not found");
+            return;
+        }
+
         var element = this.ajaxIdArrayElement(i);
         this.clearAjaxIdArrayElement(i)
         return element;
