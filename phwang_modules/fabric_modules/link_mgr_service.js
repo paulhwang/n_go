@@ -30,14 +30,6 @@ function AjaxEntryClass (ajax_id_val, callback_func_val, go_request_val, res_val
 
     this.ajaxId = function () {return this.theAjaxId;};
     this.callbackFunction = function () {return this.theCallbackFunction;};
-    this.clearCallbackFunction = function () {this.theCallbackFunction = 0;};
-    this.setCallbackFunction = function (val)
-    {
-        if (this.theCallbackFunction !== 0) {
-            this.abend("setCallbackFunction", this.theCallbackFunction);
-        }
-        this.theCallbackFunction = val;
-    };
     this.ajaxRequest = function () {return this.theAjaxRequest;}
     this.ajaxResponse = function () {return this.theAjaxResponse;}
     this.init__(ajax_id_val, callback_func_val, go_request_val, res_val);
