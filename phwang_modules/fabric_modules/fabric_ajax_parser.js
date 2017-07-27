@@ -36,6 +36,7 @@ function AjaxWebServiceClass(root_object_val) {
             "get_name_list": this.getNameList,
             "setup_session": this.setupSession,
             "setup_session2": this.setupSession2,
+            "setup_session3": this.setupSession3,
             "get_session_data": this.getSessionData,
             "put_session_data": this.putSessionData,
             "keep_alive": this.keepAlive,
@@ -177,6 +178,25 @@ function AjaxWebServiceClass(root_object_val) {
                         his_name: "tbd",
                         });
         this0.debug(true, "setupSession2Response", "output=" + output);
+        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+    };
+
+    this.setupSession3 = function (go_request, res) {
+        var ajax_entry_object = this.ajaxFabricServiceObject().mallocAjaxEntryObject(this.setupSession3Response, go_request, res);
+        this.debug(true, "setupSession3", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
+        this.ajaxFabricServiceObject().transmitData(ajax_entry_object, "T" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id);
+    };
+
+    this.setupSession3Response = function (this0, data_val, ajax_entry_object_val) {
+        var go_request = ajax_entry_object_val.ajaxRequest();
+        var output = JSON.stringify({
+                        link_id: go_request.link_id,
+                        confirm: "yes",
+                        session_id: data_val,
+                        topic_data: go_request.topic_data,
+                        his_name: "tbd",
+                        });
+        this0.debug(true, "setupSession3Response", "output=" + output);
         this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
