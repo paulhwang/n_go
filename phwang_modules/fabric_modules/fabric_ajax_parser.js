@@ -154,9 +154,7 @@ function AjaxWebServiceClass(root_object_val) {
         var go_request = ajax_entry_object_val.ajaxRequest();
         var output = JSON.stringify({
                         link_id: go_request.link_id,
-                        session_id: data_val,
-                        his_name: go_request.his_name,
-                        theme_data: go_request.theme_data,
+                        result: 0,
                         });
         this0.debug(true, "setupSessionResponse", "output=" + output);
         this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
@@ -191,6 +189,7 @@ function AjaxWebServiceClass(root_object_val) {
         var go_request = ajax_entry_object_val.ajaxRequest();
         var output = JSON.stringify({
                         link_id: go_request.link_id,
+                        session_id1: go_request.session_id,
                         confirm: "yes",
                         session_id: data_val,
                         topic_data: go_request.topic_data,
