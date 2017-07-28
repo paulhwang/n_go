@@ -190,7 +190,6 @@ function AjaxWebServiceClass(root_object_val) {
         var output = JSON.stringify({
                         link_id: go_request.link_id,
                         session_id1: go_request.session_id,
-                        confirm: "yes",
                         session_id: data_val,
                         topic_data: go_request.topic_data,
                         his_name: "tbd",
