@@ -71,7 +71,21 @@ function AjaxFabricServiceClass (root_object_val) {
         });
     };
 
-    this.receiveDataFromFabric = function (data_val) {
+    this.receiveDataFromFabric = function (raw_data_val) {
+        var raw_length = raw_data_val.length;
+        var data_val;
+
+        if (raw_data_val.charAt(0) === '{') {
+            data_val = raw_data_val.slice(1 + 3, raw_length - 1);
+        }
+        else if (raw_data_val.charAt(0) === '[') {
+            data_val = raw_data_val.slice(1 + 5, raw_length - 1);
+        }
+        else {
+            this.abend("receiveDataFromFabric", "wrong header: " + raw_data_val);
+            return;
+        }
+
         if (data_val.charAt(0) != 'd') {
             this.debug(true, "receiveDataFromFabric", data_val);
         }
@@ -104,7 +118,12 @@ function AjaxFabricServiceClass (root_object_val) {
 
     this.transmitData = function (ajax_entry_object_val, data_val) {
         this.putAjaxEntryObject(ajax_entry_object_val);
-        this.netClientOjbect().write(data_val);
+        if (data_val.length < 1000) {
+            this.netClientOjbect().write("{" + this.encodeNumber(data_val.length, 3) + data_val + "}");
+        }
+        else {
+            this.netClientOjbect().write("[" + this.encodeNumber(data_val.length, 5) + data_val + "]");
+        }
     };
 
     this.getAjaxEntryObject = function (ajax_id_val) {
@@ -119,7 +138,7 @@ function AjaxFabricServiceClass (root_object_val) {
         }
 
         if (!found) {
-            this.abend("getAjaxEntryObject", "not found");
+            this.abend("getAjaxEntryObject", "not found" + ajax_id_val);
             return;
         }
 
