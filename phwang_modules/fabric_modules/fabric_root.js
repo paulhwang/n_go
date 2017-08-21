@@ -19,10 +19,9 @@ function FabricRootClass () {
     "use strict";
 
     this.init__ = function () {
-        this.theImportObject = require("./fabric_import.js").malloc(this);
-        this.theAjaxFabricServiceObject = this.importObject().importLinkMgrService().malloc(this);
-        this.theAjaxObject = this.importObject().importAjax().malloc(this);
-        this.theAjaxWebServiceObject = this.importObject().importAjaxParser().malloc(this);
+        this.theAjaxFabricServiceObject = require("./link_mgr_service.js").malloc(this);
+        this.theAjaxObject = require("./fabric_ajax.js").malloc(this);
+        this.theAjaxWebServiceObject = require("./fabric_ajax_parser.js").malloc(this);
         this.debug(true, "init__", "");
     };
 
@@ -34,7 +33,7 @@ function FabricRootClass () {
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {this.ABEND(this.objectName() + "." + str1_val, str2_val);};
-    this.LOG_IT = function(str1_val, str2_val) {this.importObject().importLogit().LOG_IT(str1_val, str2_val);};
-    this.ABEND = function(str1_val, str2_val) {this.importObject().importLogit().ABEND(str1_val, str2_val);};
+    this.LOG_IT = function(str1_val, str2_val) {require("../util_modules/logit.js").LOG_IT(str1_val, str2_val);};
+    this.ABEND = function(str1_val, str2_val) {require("../util_modules/logit.js").ABEND(str1_val, str2_val);};
     this.init__();
 };

@@ -40,7 +40,7 @@ function AjaxFabricServiceClass (root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theNetClientObject = this.importObject().importNetClient().malloc(this.rootObject());
+        this.theNetClientObject =  require("../util_modules/net_client.js").malloc(this.rootObject());
         this.setupConnectionToFabric();
         this.theGlobalAjaxId = 0;
         this.theMaxAjaxIdIndex = 0;
