@@ -4,7 +4,7 @@
  * File name: link_mgr_serveric.js
  */
 
-var LINK_MGR_SERVICE_IP_ADDRESS = "52.24.162.133";
+var LINK_MGR_SERVICE_IP_ADDRESS = "127.0.0.1";
 var LINK_MGR_SERVICE_IP_PORT = 8006;
 
 var the_ajax_fabric_service_object = null;
