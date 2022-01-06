@@ -6,17 +6,17 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        var net_client = new NetClientClass(root_object_val)
-        return net_client;
+        var net_socket_object = new NetSocketClass(root_object_val)
+        return net_socket_object;
     },
 
-    connect: function (net_client_object_val, port_val, host_name_val, func_val) {
-        net_client_object_val.connect(port_val, host_name_val, func_val);
+    connect: function (net_socket_object_val, port_val, host_name_val, func_val) {
+        net_socket_object_val.connect(port_val, host_name_val, func_val);
     },
 
 };
 
-function NetClientClass(root_object_val) {
+function NetSocketClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -29,7 +29,7 @@ function NetClientClass(root_object_val) {
         this.debug(true, "init__", "");
     };
 
-    this.objectName = function () {return "NetClientClass";};
+    this.objectName = function () {return "NetSocketClass";};
     this.rootObject = function () {return this.theRootObject;};
 
     //this.net123 = function () {return this.theNetModule;};

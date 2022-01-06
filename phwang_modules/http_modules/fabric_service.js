@@ -40,7 +40,7 @@ function FabricServiceClass (root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theNetClientObject =  require("../util_modules/net_client.js").malloc(this.rootObject());
+        this.theNetSocketObject =  require("../util_modules/net_client.js").malloc(this.rootObject());
         this.setupConnectionToFabric();
         this.theGlobalAjaxId = 0;
         this.theMaxAjaxIdIndex = 0;
@@ -58,15 +58,15 @@ function FabricServiceClass (root_object_val) {
 
     this.setupConnectionToFabric = function () {
         var this0 = this;
-        this.netClientOjbect().connect(LINK_MGR_SERVICE_IP_PORT, LINK_MGR_SERVICE_IP_ADDRESS, function () {
+        this.netSocketOjbect().connect(LINK_MGR_SERVICE_IP_PORT, LINK_MGR_SERVICE_IP_ADDRESS, function () {
             this0.debug(true, "init__", "fabric is connected");
         });
 
-        this.netClientOjbect().onData(function (data_val) {
+        this.netSocketOjbect().onData(function (data_val) {
             this0.receiveDataFromFabric(data_val);
         });
 
-        this.netClientOjbect().onClose(function () {
+        this.netSocketOjbect().onClose(function () {
             this0.receiveCloseFromFabric();
         });
     };
@@ -119,10 +119,10 @@ function FabricServiceClass (root_object_val) {
     this.transmitData = function (ajax_entry_object_val, data_val) {
         this.putAjaxEntryObject(ajax_entry_object_val);
         if (data_val.length < 1000) {
-            this.netClientOjbect().write("{" + this.encodeNumber(data_val.length, 3) + data_val + "}");
+            this.netSocketOjbect().write("{" + this.encodeNumber(data_val.length, 3) + data_val + "}");
         }
         else {
-            this.netClientOjbect().write("[" + this.encodeNumber(data_val.length, 5) + data_val + "]");
+            this.netSocketOjbect().write("[" + this.encodeNumber(data_val.length, 5) + data_val + "]");
         }
     };
 
@@ -183,7 +183,7 @@ function FabricServiceClass (root_object_val) {
     this.clearAjaxIdArrayElement = function (index) {this.theAjaxIdArray[index] = 0;};
     this.objectName = function () {return "LinkMgrServiceClass";};
     this.rootObject = function () {return this.theRootObject;};
-    this.netClientOjbect = function () {return this.theNetClientObject;};
+    this.netSocketOjbect = function () {return this.theNetSocketObject;};
     this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
     this.importObject = function () {return this.rootObject().importObject();};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
