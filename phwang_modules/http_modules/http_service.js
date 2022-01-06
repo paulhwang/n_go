@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: switch_module.js
+ * File name: http_service.js
  */
 
 var the_http_service_object = null;

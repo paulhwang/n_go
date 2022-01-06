@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: fibre_ajax.js
+ * File name: http_input.js
  */
 
 var the_http_input_object = null;

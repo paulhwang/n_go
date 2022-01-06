@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: fabric_root.js
+ * File name: http_root.js
  */
 
 var the_http_root_object = null;

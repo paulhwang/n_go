@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: link_mgr_serveric.js
+ * File name: fabric_serveric.js
  */
 
 var LINK_MGR_SERVICE_IP_ADDRESS = "127.0.0.1";
