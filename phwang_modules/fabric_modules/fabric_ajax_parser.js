@@ -87,7 +87,7 @@ function AjaxWebServiceClass(root_object_val) {
                         link_id: data_val,
                         });
         this0.debug(true, "setupLinkResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.getLinkData = function (go_request, res) {
@@ -108,7 +108,7 @@ function AjaxWebServiceClass(root_object_val) {
                         pending_session_setup: pending_session_setup, 
                         });
         this0.debug(false, "getLinkDataResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.putLinkData = function (go_request) {
@@ -139,7 +139,7 @@ function AjaxWebServiceClass(root_object_val) {
                         c_name_list: data_val,
                         });
         this0.debug(true, "getNameListResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.setupSession = function (go_request, res) {
@@ -158,7 +158,7 @@ function AjaxWebServiceClass(root_object_val) {
                         result: 0,
                         });
         this0.debug(true, "setupSessionResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.setupSession2 = function (go_request, res) {
@@ -177,7 +177,7 @@ function AjaxWebServiceClass(root_object_val) {
                         his_name: "tbd",
                         });
         this0.debug(true, "setupSession2Response", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.setupSession3 = function (go_request, res) {
@@ -196,7 +196,7 @@ function AjaxWebServiceClass(root_object_val) {
                         his_name: "tbd",
                         });
         this0.debug(true, "setupSession3Response", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.getSessionData = function (go_request, res) {
@@ -217,7 +217,7 @@ function AjaxWebServiceClass(root_object_val) {
                         c_data: c_data,
                         });
         this0.debug(true, "getSessionDataResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.putSessionData = function (go_request, res) {
@@ -240,7 +240,7 @@ function AjaxWebServiceClass(root_object_val) {
                         c_data: c_data,
                         });
         this0.debug(true, "putSessionDataResponse", "output=" + output);
-        this0.ajaxObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.keepAlive = function (go_request, res) {
@@ -263,7 +263,7 @@ function AjaxWebServiceClass(root_object_val) {
     this.objectName = function () {return "FabricAjaxParserClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.ajaxFabricServiceObject = function () {return this.rootObject().ajaxFabricServiceObject();};
-    this.ajaxObject = function () {return this.rootObject().ajaxObject();};
+    this.httpInputObject = function () {return this.rootObject().httpInputObject();};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);};

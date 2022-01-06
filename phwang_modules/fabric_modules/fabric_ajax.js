@@ -4,42 +4,42 @@
  * File name: fibre_ajax.js
  */
 
-var the_fabric_ajax_object = null;
+var the_http_input_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {
-        if (!the_fabric_ajax_object) {
-            the_fabric_ajax_object = new FabricAjaxClass(root_object_val);
+        if (!the_http_input_object) {
+            the_http_input_object = new HttpInputClass(root_object_val);
         }
-        return the_fabric_ajax_object;
+        return the_http_input_object;
     },
 
     post: function (req, res) {
-        the_fabric_ajax_object.processHttp(req, res, 0);
+        the_http_input_object.processHttp(req, res, 0);
     },
 
     get: function (req, res) {
-        the_fabric_ajax_object.processHttp(req, res, 1);
+        the_http_input_object.processHttp(req, res, 1);
     },
 
     put: function (req, res) {
-        the_fabric_ajax_object.processHttp(req, res, 2);
+        the_http_input_object.processHttp(req, res, 2);
     },
 
     delete: function (req, res) {
-        the_fabric_ajax_object.processHttp(req, res, 3);
+        the_http_input_object.processHttp(req, res, 3);
     },
 
     not_found: function (req, res) {
-        the_fabric_ajax_object.processNotFound(req, res);
+        the_http_input_object.processNotFound(req, res);
     },
 
     failure: function (req, res) {
-        the_fabric_ajax_object.processFailure(err, req, res, next);
+        the_http_input_object.processFailure(err, req, res, next);
     },
 };
 
-function FabricAjaxClass(root_object_val) {
+function HttpInputClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
@@ -85,7 +85,7 @@ function FabricAjaxClass(root_object_val) {
         this.logit("processFailure", state);
     };
 
-    this.objectName = function () {return "FabricAjaxClass";};
+    this.objectName = function () {return "HttpInputClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.ajaxWebServiceObject = function () {return this.rootObject().ajaxWebServiceObject();};
     this.importObject = function () {return this.rootObject().importObject();};
