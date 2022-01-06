@@ -19,7 +19,7 @@ function FabricRootClass () {
     "use strict";
 
     this.init__ = function () {
-        this.theFabricServiceObject = require("./link_mgr_service.js").malloc(this);
+        this.theFabricServiceObject = require("./fabric_service.js").malloc(this);
         this.theHttpInputObject = require("./fabric_ajax.js").malloc(this);
         this.theHttpServiceObject = require("./fabric_ajax_parser.js").malloc(this);
         this.debug(true, "init__", "");
