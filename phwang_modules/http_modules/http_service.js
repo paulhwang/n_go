@@ -260,7 +260,7 @@ function HttpServiceClass(root_object_val) {
     this.defaultLinkUpdateInterval = function () {return 3000;};
     this.linkUpdateInterval = function () {return this.theLinkUpdateInterval;};
     this.setLinkUpdateInterval = function (val) {this.theLinkUpdateInterval = val;};
-    this.objectName = function () {return "FabricAjaxParserClass";};
+    this.objectName = function () {return "HttpServiceClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.fabricServiceObject = function () {return this.rootObject().fabricServiceObject();};
     this.httpInputObject = function () {return this.rootObject().httpInputObject();};

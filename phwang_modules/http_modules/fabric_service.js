@@ -6,6 +6,7 @@
 
 var FABRIC_SERVER_IP_ADDRESS = "127.0.0.1";
 var FABRIC_SERVER_TCP_PORT = 8006;
+var FABRIC_SERVER_AJAX_ID_SIZE = 3;
 
 var the_fabric_service_object = null;
 
@@ -173,7 +174,7 @@ function FabricServiceClass (root_object_val) {
         this.theMaxGolbalAjaxId -= 1;
     };
 
-    this.ajaxIdSize = function () {return 3;};
+    this.ajaxIdSize = function () {return FABRIC_SERVER_AJAX_ID_SIZE;};
     this.maxAjaxIdIndex = function () {return this.theMaxAjaxIdIndex;};
     this.incrementMaxAjaxIdIndex = function () {this.theMaxAjaxIdIndex++;};
     this.globalAjaxId = function () {return this.theGlobalAjaxId;};
@@ -181,7 +182,7 @@ function FabricServiceClass (root_object_val) {
     this.ajaxIdArrayElement = function (index) {return this.theAjaxIdArray[index];};
     this.setAjaxIdArrayElement = function (index, val) {this.theAjaxIdArray[index] = val;};
     this.clearAjaxIdArrayElement = function (index) {this.theAjaxIdArray[index] = 0;};
-    this.objectName = function () {return "LinkMgrServiceClass";};
+    this.objectName = function () {return "FabricServiceClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.netSocketOjbect = function () {return this.theNetSocketObject;};
     this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
