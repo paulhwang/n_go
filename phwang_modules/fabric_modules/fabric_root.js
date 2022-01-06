@@ -21,7 +21,7 @@ function FabricRootClass () {
     this.init__ = function () {
         this.theFabricServiceObject = require("./fabric_service.js").malloc(this);
         this.theHttpInputObject = require("./fabric_ajax.js").malloc(this);
-        this.theHttpServiceObject = require("./fabric_ajax_parser.js").malloc(this);
+        this.theHttpServiceObject = require("./http_service.js").malloc(this);
         this.debug(true, "init__", "");
     };
 
