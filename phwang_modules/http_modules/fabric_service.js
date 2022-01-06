@@ -7,6 +7,7 @@
 var FABRIC_SERVER_IP_ADDRESS = "127.0.0.1";
 var FABRIC_SERVER_TCP_PORT = 8006;
 var FABRIC_SERVER_AJAX_ID_SIZE = 3;
+var FABRIC_SERVER_DATA_LENGTH_SIZE = 5;
 
 var the_fabric_service_object = null;
 
@@ -120,11 +121,13 @@ function FabricServiceClass (root_object_val) {
     this.transmitData = function (ajax_entry_object_val, data_val) {
         this.putAjaxEntryObject(ajax_entry_object_val);
         if (data_val.length < 1000) {
-            this.netSocketOjbect().write("{" + this.encodeNumber(data_val.length, 3) + data_val + "}");
+            var data = "{" + this.encodeNumber(data_val.length, 3) + data_val + "}";
         }
         else {
-            this.netSocketOjbect().write("[" + this.encodeNumber(data_val.length, 5) + data_val + "]");
+            var data = "[" + this.encodeNumber(data_val.length, 5) + data_val + "]";
         }
+        this.debug(true, "transmitData", data);
+        this.netSocketOjbect().write(data);
     };
 
     this.getAjaxEntryObject = function (ajax_id_val) {
