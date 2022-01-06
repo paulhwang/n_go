@@ -7,14 +7,14 @@
 var LINK_MGR_SERVICE_IP_ADDRESS = "127.0.0.1";
 var LINK_MGR_SERVICE_IP_PORT = 8006;
 
-var the_ajax_fabric_service_object = null;
+var the_fabric_service_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {
-        if (!the_ajax_fabric_service_object) {
-            the_ajax_fabric_service_object = new AjaxFabricServiceClass(root_object_val);
+        if (!the_fabric_service_object) {
+            the_fabric_service_object = new FabricServiceClass(root_object_val);
         }
-        return the_ajax_fabric_service_object;
+        return the_fabric_service_object;
     },
 };
 
@@ -35,7 +35,7 @@ function AjaxEntryClass (ajax_id_val, callback_func_val, go_request_val, res_val
     this.init__(ajax_id_val, callback_func_val, go_request_val, res_val);
 }
 
-function AjaxFabricServiceClass (root_object_val) {
+function FabricServiceClass (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
