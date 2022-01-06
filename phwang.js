@@ -1,8 +1,8 @@
 var net = require("net");
 var express = require('express');
 var bodyParser = require('body-parser');
-require('./phwang_modules/fabric_modules/http_root.js').malloc();
-var http_input_module = require('./phwang_modules/fabric_modules/http_input.js');
+require('./phwang_modules/http_modules/http_root.js').malloc();
+var http_input_module = require('./phwang_modules/http_modules/http_input.js');
 var app = express();
 
 app.use(bodyParser.json());
