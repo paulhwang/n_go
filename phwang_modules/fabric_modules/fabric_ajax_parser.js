@@ -4,18 +4,18 @@
  * File name: switch_module.js
  */
 
-var the_ajax_web_service_object = null;
+var the_http_service_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {
-        if (!the_ajax_web_service_object) {
-            the_ajax_web_service_object = new AjaxWebServiceClass(root_object_val);
+        if (!the_http_service_object) {
+            the_http_service_object = new HttpServiceClass(root_object_val);
         }
-        return the_ajax_web_service_object;
+        return the_http_service_object;
     },
 };
 
-function AjaxWebServiceClass(root_object_val) {
+function HttpServiceClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {

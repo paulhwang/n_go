@@ -60,7 +60,7 @@ function HttpInputClass(root_object_val) {
             return;
         }
 
-        var data = this.ajaxWebServiceObject().parseGetRequest(req.headers.phwangajaxrequest, command_index_val, res);
+        var data = this.httpServiceObject().parseGetRequest(req.headers.phwangajaxrequest, command_index_val, res);
     };
 
     this.sendHttpResponse = function (request_val, res, data_val) {
@@ -87,7 +87,7 @@ function HttpInputClass(root_object_val) {
 
     this.objectName = function () {return "HttpInputClass";};
     this.rootObject = function () {return this.theRootObject;};
-    this.ajaxWebServiceObject = function () {return this.rootObject().ajaxWebServiceObject();};
+    this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
     this.importObject = function () {return this.rootObject().importObject();};
     this.utilObject = function () {return this.utilObject().utilObject();};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};

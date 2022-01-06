@@ -99,7 +99,7 @@ function AjaxFabricServiceClass (root_object_val) {
             return;
         }
 
-        ajax_entry_object.callbackFunction().bind(this.ajaxWebServiceObject())(this.ajaxWebServiceObject(), rest_data_val, ajax_entry_object);
+        ajax_entry_object.callbackFunction().bind(this.httpServiceObject())(this.httpServiceObject(), rest_data_val, ajax_entry_object);
     };
 
     this.receiveCloseFromFabric = function () {
@@ -184,7 +184,7 @@ function AjaxFabricServiceClass (root_object_val) {
     this.objectName = function () {return "LinkMgrServiceClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.netClientOjbect = function () {return this.theNetClientObject;};
-    this.ajaxWebServiceObject = function () {return this.rootObject().ajaxWebServiceObject();};
+    this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
     this.importObject = function () {return this.rootObject().importObject();};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
