@@ -1,11 +1,11 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: fabric_serveric.js
+ * File name: fabric_service.js
  */
 
-var LINK_MGR_SERVICE_IP_ADDRESS = "127.0.0.1";
-var LINK_MGR_SERVICE_IP_PORT = 8006;
+var FABRIC_SERVER_IP_ADDRESS = "127.0.0.1";
+var FABRIC_SERVER_TCP_PORT = 8006;
 
 var the_fabric_service_object = null;
 
@@ -58,7 +58,7 @@ function FabricServiceClass (root_object_val) {
 
     this.setupConnectionToFabric = function () {
         var this0 = this;
-        this.netSocketOjbect().connect(LINK_MGR_SERVICE_IP_PORT, LINK_MGR_SERVICE_IP_ADDRESS, function () {
+        this.netSocketOjbect().connect(FABRIC_SERVER_TCP_PORT, FABRIC_SERVER_IP_ADDRESS, function () {
             this0.debug(true, "init__", "fabric is connected");
         });
 
