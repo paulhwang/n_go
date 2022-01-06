@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: net_client.js
+ * File name: net_socket.js
  */
 
 module.exports = {
