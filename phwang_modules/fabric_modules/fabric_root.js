@@ -4,18 +4,18 @@
  * File name: fabric_root.js
  */
 
-var the_fabric_root_object = null;
+var the_http_root_object = null;
 
 module.exports = {
     malloc: function () {
-        if (!the_fabric_root_object) {
-            the_fabric_root_object = new FabricRootClass();
+        if (!the_http_root_object) {
+            the_http_root_object = new HttpRootClass();
         }
-        return the_fabric_root_object;
+        return the_http_root_object;
     },
 };
 
-function FabricRootClass () {
+function HttpRootClass () {
     "use strict";
 
     this.init__ = function () {
@@ -25,7 +25,7 @@ function FabricRootClass () {
         this.debug(true, "init__", "");
     };
 
-    this.objectName = function () {return "FabricRootClass";};
+    this.objectName = function () {return "HttpRootClass";};
     this.importObject = function () {return this.theImportObject;};
     this.fabricServiceObject = function () {return this.theFabricServiceObject;};
     this.httpInputObject = function () {return this.theHttpInputObject;};
