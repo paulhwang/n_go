@@ -117,10 +117,10 @@ function FabricServiceClass (root_object_val) {
     this.transmitData = function (ajax_entry_object_val, data_val) {
         this.putAjaxEntryObject(ajax_entry_object_val);
         if (data_val.length < 1000) {
-            var data = "{" + this.encodeNumber(data_val.length, 3) + data_val + "}";
+            var data = "{" + this.encodeNumber(data_val.length, this.fabricSeriverDataLengthSize() - 2) + data_val + "}";
         }
         else {
-            var data = "[" + this.encodeNumber(data_val.length, 5) + data_val + "]";
+            var data = "[" + this.encodeNumber(data_val.length, this.fabricSeriverDataLengthSize()) + data_val + "]";
         }
         this.debug(true, "transmitData", data);
         this.netSocketOjbect().write(data);
