@@ -30,6 +30,7 @@ function HttpRootClass () {
     this.fabricServiceObject = function () {return this.theFabricServiceObject;};
     this.httpInputObject = function () {return this.theHttpInputObject;};
     this.httpServiceObject = function () {return this.theHttpServiceObject;};
+
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {this.ABEND(this.objectName() + "." + str1_val, str2_val);};

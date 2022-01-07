@@ -4,6 +4,8 @@
  * File name: http_service.js
  */
 
+var FABRIC_PROTOCOL_DEFAULT_LINK_UPDATE_INTERNAL = 3000;
+
 var the_http_service_object = null;
 
 module.exports = {
@@ -257,15 +259,17 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.httpSwitchTableArray = function (index_val) {return this.theHttpSwitchTableArray[index_val];};
-    this.defaultLinkUpdateInterval = function () {return 3000;};
+    this.defaultLinkUpdateInterval = function () {return FABRIC_PROTOCOL_DEFAULT_LINK_UPDATE_INTERNAL;};
     this.linkUpdateInterval = function () {return this.theLinkUpdateInterval;};
     this.setLinkUpdateInterval = function (val) {this.theLinkUpdateInterval = val;};
+
     this.objectName = function () {return "HttpServiceClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.fabricServiceObject = function () {return this.rootObject().fabricServiceObject();};
     this.httpInputObject = function () {return this.rootObject().httpInputObject();};
+
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function (str1_val, str2_val) {        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
+    this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
