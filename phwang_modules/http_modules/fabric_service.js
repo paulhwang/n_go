@@ -42,6 +42,7 @@ function FabricServiceClass (root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theFabricProtocolObject = require("./fabric_protocol.js").malloc();
         this.theNetSocketObject =  require("../util_modules/net_socket.js").malloc(this.rootObject());
         this.setupConnectionToFabric();
         this.theGlobalAjaxId = 0;
@@ -192,6 +193,7 @@ function FabricServiceClass (root_object_val) {
 
     this.objectName = function () {return "FabricServiceClass";};
     this.rootObject = function () {return this.theRootObject;};
+    this.fabricProtocolObject = function () {return this.theFabricProtocolObject;};
     this.netSocketOjbect = function () {return this.theNetSocketObject;};
     this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
     this.importObject = function () {return this.rootObject().importObject();};
