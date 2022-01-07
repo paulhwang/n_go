@@ -4,11 +4,6 @@
  * File name: fabric_service.js
  */
 
-var FABRIC_SERVER_IP_ADDRESS = "127.0.0.1";
-var FABRIC_SERVER_TCP_PORT = 8006;
-var FABRIC_SERVER_AJAX_ID_SIZE = 3;
-var FABRIC_SERVER_DATA_LENGTH_SIZE = 5;
-
 var the_fabric_service_object = null;
 
 module.exports = {
@@ -186,16 +181,17 @@ function FabricServiceClass (root_object_val) {
     this.setAjaxIdArrayElement = function (index, val) {this.theAjaxIdArray[index] = val;};
     this.clearAjaxIdArrayElement = function (index) {this.theAjaxIdArray[index] = 0;};
 
-    this.fabricSeriverIpAddr = function () {return FABRIC_SERVER_IP_ADDRESS;};
-    this.fabricSeriverTcpPort = function () {return FABRIC_SERVER_TCP_PORT;};
-    this.fabricSeriverAjaxIdSize = function () {return FABRIC_SERVER_AJAX_ID_SIZE;};
-    this.fabricSeriverDataLengthSize = function () {return FABRIC_SERVER_DATA_LENGTH_SIZE;};
-
     this.objectName = function () {return "FabricServiceClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.fabricProtocolObject = function () {return this.theFabricProtocolObject;};
     this.netSocketOjbect = function () {return this.theNetSocketObject;};
     this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
+
+    this.fabricSeriverIpAddr = function () {return this.fabricProtocolObject().fabricSeriverIpAddr();};
+    this.fabricSeriverTcpPort = function () {return this.fabricProtocolObject().fabricSeriverTcpPort();};
+    this.fabricSeriverAjaxIdSize = function () {return this.fabricProtocolObject().fabricSeriverAjaxIdSize();};
+    this.fabricSeriverDataLengthSize = function () {return this.fabricProtocolObject().fabricSeriverDataLengthSize();};
+
     this.importObject = function () {return this.rootObject().importObject();};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
