@@ -74,9 +74,6 @@ function FabricServiceClass (root_object_val) {
         var data_val;
 
         if (raw_data_val.charAt(0) === '{') {
-            data_val = raw_data_val.slice(1 + this.fabricSeriverDataLengthSize() - 2, raw_length - 1);
-        }
-        else if (raw_data_val.charAt(0) === '[') {
             data_val = raw_data_val.slice(1 + this.fabricSeriverDataLengthSize(), raw_length - 1);
         }
         else {
@@ -117,10 +114,7 @@ function FabricServiceClass (root_object_val) {
     this.transmitData = function (ajax_entry_object_val, data_val) {
         this.putAjaxEntryObject(ajax_entry_object_val);
         if (data_val.length < 1000) {
-            var data = "{" + this.encodeNumber(data_val.length, this.fabricSeriverDataLengthSize() - 2) + data_val + "}";
-        }
-        else {
-            var data = "[" + this.encodeNumber(data_val.length, this.fabricSeriverDataLengthSize()) + data_val + "]";
+            var data = "{" + this.encodeNumber(data_val.length, this.fabricSeriverDataLengthSize()) + data_val + "}";
         }
         this.debug(true, "transmitData", data);
         this.netSocketOjbect().write(data);
