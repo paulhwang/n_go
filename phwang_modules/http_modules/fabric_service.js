@@ -74,10 +74,10 @@ function FabricServiceClass (root_object_val) {
         var data_val;
 
         if (raw_data_val.charAt(0) === '{') {
-            data_val = raw_data_val.slice(1 + 3, raw_length - 1);
+            data_val = raw_data_val.slice(1 + this.fabricSeriverDataLengthSize() - 2, raw_length - 1);
         }
         else if (raw_data_val.charAt(0) === '[') {
-            data_val = raw_data_val.slice(1 + 5, raw_length - 1);
+            data_val = raw_data_val.slice(1 + this.fabricSeriverDataLengthSize(), raw_length - 1);
         }
         else {
             this.abend("receiveDataFromFabric", "wrong header: " + raw_data_val);
