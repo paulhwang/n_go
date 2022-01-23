@@ -61,6 +61,12 @@ function HttpServiceClass(root_object_val) {
     this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
         var go_request = JSON.parse(go_request_json_val);
 
+        if ((go_request.command !== "setup_link") &&
+            (go_request.time_stamp !== this.fabricServiceObject().timeStampString())) {
+            this.debug(true, "parseGetRequest", "***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp);
+            return null;
+        }
+
         if (go_request.command === "get_link_data") {
             this.debug(false, "parseGetRequest", "go_request_json_val=" + go_request_json_val);
         } else {
