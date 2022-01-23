@@ -60,6 +60,8 @@ function FabricServiceClass (root_object_val) {
             this0.debug(true, "init__", "fabric is connected");
         });
 
+        this.netSocketOjbect().write(this.phwangLogo());
+
         this.netSocketOjbect().onData(function (data_val) {
             this0.receiveDataFromFabric(data_val);
         });
@@ -176,6 +178,7 @@ function FabricServiceClass (root_object_val) {
     this.clearAjaxIdArrayElement = function (index) {this.theAjaxIdArray[index] = 0;};
 
     this.objectName = function () {return "FabricServiceClass";};
+    this.phwangLogo = function () {return "phwang168";};
     this.rootObject = function () {return this.theRootObject;};
     this.fabricProtocolObject = function () {return this.theFabricProtocolObject;};
     this.netSocketOjbect = function () {return this.theNetSocketObject;};
