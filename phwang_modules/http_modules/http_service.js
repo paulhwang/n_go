@@ -63,7 +63,7 @@ function HttpServiceClass(root_object_val) {
 
         if ((go_request.command !== "setup_link") &&
             (go_request.time_stamp !== this.fabricServiceObject().timeStampString())) {
-            this.debug(true, "parseGetRequest", "***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp);
+            this.debug(true, "parseGetRequest", "***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp + " " + this.fabricServiceObject().timeStampString());
             return null;
         }
 
