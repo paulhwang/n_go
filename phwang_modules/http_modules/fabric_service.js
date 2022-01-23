@@ -37,6 +37,7 @@ function FabricServiceClass (root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theTimeStampString = "";
         this.theFabricProtocolObject = require("./fabric_protocol.js").malloc();
         this.theNetSocketObject =  require("../util_modules/net_socket.js").malloc(this.rootObject());
         this.setupConnectionToFabric();
@@ -72,6 +73,12 @@ function FabricServiceClass (root_object_val) {
     };
 
     this.receiveDataFromFabric = function (raw_data_val) {
+        if (this.timeStampString() === "") {
+            this.theTimeStampString = raw_data_val;
+            this.debug(true, "receiveDataFromFabric", "timeStampString=" + this.timeStampString());
+            return;
+        }
+
         var raw_length = raw_data_val.length;
         var data_val;
 
@@ -184,6 +191,7 @@ function FabricServiceClass (root_object_val) {
     this.netSocketOjbect = function () {return this.theNetSocketObject;};
     this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
     this.importObject = function () {return this.rootObject().importObject();};
+    this.timeStampString = function () {return this.theTimeStampString;};
 
     this.fabricSeriverIpAddr = function () {return this.fabricProtocolObject().fabricSeriverIpAddr();};
     this.fabricSeriverTcpPort = function () {return this.fabricProtocolObject().fabricSeriverTcpPort();};
