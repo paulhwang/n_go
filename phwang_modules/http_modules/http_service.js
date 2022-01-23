@@ -86,6 +86,7 @@ function HttpServiceClass(root_object_val) {
 
         var output = JSON.stringify({
                         my_name: ajax_entry_object_val.my_name,
+                        time_stamp: this.fabricServiceObject().timeStampString(),
                         link_id: data_val,
                         });
         this0.debug(true, "setupLinkResponse", "output=" + output);
