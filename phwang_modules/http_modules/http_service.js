@@ -83,9 +83,25 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.encodeString = function(input_val) {
+        var header;
         var length = input_val.length;
-        var output = "1" + length + input_val;
-        return output;
+
+        if (length < 10) {
+            header = "1";
+        }
+        else if (length < 100) {
+            header = "2";
+        }
+        else if (length < 1000) {
+            header = "3";
+        }
+        else if (length < 10000) {
+            header = "4";
+        }
+        else if (length < 100000) {
+            header = "5";
+        }
+        return header + length + input_val;
     };
 
     this.setupLink = function (go_request, res) {
