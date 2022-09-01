@@ -92,10 +92,16 @@ function HttpServiceClass(root_object_val) {
     this.setupLinkResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
+        this0.debug(true, "setupLinkResponse", "data_val=" + data_val);
+        var link_id = data_val.slice(0, 8);
+        var result = data_val.slice(8);
+        this0.debug(true, "setupLinkResponse", "link_id=" + link_id);
+        this0.debug(true, "setupLinkResponse", "result=" + result);
+        
         var output = JSON.stringify({
                         my_name: ajax_entry_object_val.my_name,
                         time_stamp: this.fabricServiceObject().timeStampString(),
-                        link_id: data_val,
+                        link_id: link_id,
                         });
         this0.debug(true, "setupLinkResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
