@@ -82,15 +82,15 @@ function HttpServiceClass(root_object_val) {
         }
     };
 
-    this.encodeString1 = function(input_val) {
+    this.encodeString = function(input_val) {
         var length = input_val.length;
-        var output = length + input_val;
+        var output = "1" + length + input_val;
         return output;
     };
 
     this.setupLink = function (go_request, res) {
-        var my_name = this.encodeString1(go_request.my_name);
-        var password = this.encodeString1(go_request.password);
+        var my_name = this.encodeString(go_request.my_name);
+        var password = this.encodeString(go_request.password);
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupLinkResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "L" + ajax_entry_object.ajaxId() + my_name + password);
     };
