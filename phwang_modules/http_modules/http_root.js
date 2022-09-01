@@ -19,6 +19,7 @@ function HttpRootClass () {
     "use strict";
 
     this.init__ = function () {
+        this.theEncodeObject = require("../util_modules/encode.js").malloc(this);
         this.theFabricServiceObject = require("./fabric_service.js").malloc(this);
         this.theHttpInputObject = require("./http_input.js").malloc(this);
         this.theHttpServiceObject = require("./http_service.js").malloc(this);
