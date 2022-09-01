@@ -82,31 +82,9 @@ function HttpServiceClass(root_object_val) {
         }
     };
 
-    this.encodeString = function(input_val) {
-        var header;
-        var length = input_val.length;
-
-        if (length < 10) {
-            header = "1";
-        }
-        else if (length < 100) {
-            header = "2";
-        }
-        else if (length < 1000) {
-            header = "3";
-        }
-        else if (length < 10000) {
-            header = "4";
-        }
-        else if (length < 100000) {
-            header = "5";
-        }
-        return header + length + input_val;
-    };
-
     this.setupLink = function (go_request, res) {
-        var my_name = this.encodeString(go_request.my_name);
-        var password = this.encodeString(go_request.password);
+        var my_name = this.encodeObject().encodeString(go_request.my_name);
+        var password = this.encodeObject().encodeString(go_request.password);
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupLinkResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "L" + ajax_entry_object.ajaxId() + my_name + password);
     };
@@ -298,6 +276,7 @@ function HttpServiceClass(root_object_val) {
     this.rootObject = function () {return this.theRootObject;};
     this.fabricServiceObject = function () {return this.rootObject().fabricServiceObject();};
     this.httpInputObject = function () {return this.rootObject().httpInputObject();};
+    this.encodeObject = function () {return this.rootObject().encodeObject();};
 
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};

@@ -27,6 +27,7 @@ function HttpRootClass () {
     };
 
     this.objectName = function () {return "HttpRootClass";};
+    this.encodeObject = function () {return this.theEncodeObject;};
     this.importObject = function () {return this.theImportObject;};
     this.fabricServiceObject = function () {return this.theFabricServiceObject;};
     this.httpInputObject = function () {return this.theHttpInputObject;};
