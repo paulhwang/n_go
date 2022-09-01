@@ -4,10 +4,14 @@
  * File name: encode.js
  */
 
+var the_encode_object = null;
+
 module.exports = {
     malloc: function (root_object_val) {
-        var encode_object = new EncodeClass(root_object_val)
-        return encode_object;
+        if (!the_encode_object) {
+            the_encode_object = new EncodeClass(root_object_val);
+        }
+        return the_encode_object;
     },
 };
 
