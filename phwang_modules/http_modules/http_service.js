@@ -32,6 +32,7 @@ function HttpServiceClass(root_object_val) {
             "setup_session": this.setupSession,
         };
         var get_switch_table = {
+            "sign_up": this.signUpRequest,
             "setup_link": this.setupLink,
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
@@ -61,7 +62,8 @@ function HttpServiceClass(root_object_val) {
     this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
         var go_request = JSON.parse(go_request_json_val);
 
-        if ((go_request.command !== "setup_link") &&
+        if ((go_request.command !== "sign_up") &&
+            (go_request.command !== "setup_link") &&
             (go_request.time_stamp !== this.fabricServiceObject().timeStampString())) {
             this.debug(true, "parseGetRequest", "***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp + " " + this.fabricServiceObject().timeStampString());
             return null;
@@ -81,6 +83,32 @@ function HttpServiceClass(root_object_val) {
             return null;
         }
     };
+
+    this.signUpRequest = function (go_request, res) {
+        var my_name = this.encodeObject().encodeString(go_request.my_name);
+        var password = this.encodeObject().encodeString(go_request.password);
+        var email = this.encodeObject().encodeString(go_request.email);
+        this.debug(true, "signUpRequest", "name=" + my_name + "password=" + password + "email=" + email);
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.signUpResponse, go_request, res);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "U" + ajax_entry_object.ajaxId() + my_name + password + email);
+    };
+
+    this.signUpResponse = function (this0, data_val, ajax_entry_object_val) {
+        this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
+
+        var link_id = data_val.slice(0, 8);
+        var result = data_val.slice(8);
+
+        var output = JSON.stringify({
+                        my_name: ajax_entry_object_val.my_name,
+                        time_stamp: this.fabricServiceObject().timeStampString(),
+                        link_id: link_id,
+                        result: result,
+                        });
+        this0.debug(true, "signUpResponse", "output=" + output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+    };
+
 
     this.setupLink = function (go_request, res) {
         var my_name = this.encodeObject().encodeString(go_request.my_name);
