@@ -86,6 +86,44 @@ function HttpServiceClass(root_object_val) {
         }
     };
 
+    this.mmwReadDataRequest = function (go_request, res) {
+        var act = this.encodeObject().encodeString(go_request.act);
+        var data = this.encodeObject().encodeString(go_request.data);
+        this.debug(true, "mmwReadDataRequest", "act=" + act + " data=" + data);
+
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.mmwReadDataResponse, go_request, res);
+        var act_val;
+        if (act === "14init") {
+            act_val = "I";
+        }
+        else if (act === "14read") {
+            act_val = "R";
+        }
+        else if (act === "15write") {
+            act_val = "W";
+        }
+        else {
+            this.abend("mmwReadDataRequest", "bad act=" + act);
+        }
+        this.fabricServiceObject().transmitData(ajax_entry_object, "0M" + ajax_entry_object.ajaxId() + act_val + data);
+    };
+
+    this.mmwReadDataResponse = function (this0, data_val, ajax_entry_object_val) {
+        this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
+
+        var result = data_val;
+
+        this0.debug(true, "mmwReadDataResponse", "result=" + result);
+        this0.debug(true, "mmwReadDataResponse", "act=" + ajax_entry_object_val.act + " data=" + ajax_entry_object_val.act );
+        var output = JSON.stringify({
+                        filename: ajax_entry_object_val.filename,
+                        time_stamp: this.fabricServiceObject().timeStampString(),
+                        result: result,
+                        });
+        this0.debug(true, "mmwReadDataResponse", "output=" + output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+    };
+
     this.signUpRequest = function (go_request, res) {
         var my_name = this.encodeObject().encodeString(go_request.my_name);
         var password = this.encodeObject().encodeString(go_request.password);
@@ -285,29 +323,6 @@ function HttpServiceClass(root_object_val) {
         this0.debug(true, "putSessionDataResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
-
-    this.mmwReadDataRequest = function (go_request, res) {
-        var filename = this.encodeObject().encodeString(go_request.filename);
-        this.debug(true, "mmwReadDataRequest", "filename=" + filename );
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.mmwReadDataResponse, go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "0M" + ajax_entry_object.ajaxId() + filename);
-    };
-
-    this.mmwReadDataResponse = function (this0, data_val, ajax_entry_object_val) {
-        this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
-
-        var result = data_val;
-
-        this0.debug(true, "mmwReadDataResponse", "filename=" + ajax_entry_object_val.filename);
-        var output = JSON.stringify({
-                        filename: ajax_entry_object_val.filename,
-                        time_stamp: this.fabricServiceObject().timeStampString(),
-                        result: result,
-                        });
-        this0.debug(true, "mmwReadDataResponse", "output=" + output);
-        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
-    };
-
 
     this.keepAlive = function (go_request, res) {
         this.abend("keepAlive", "keepAlive is not implemented");
