@@ -42,7 +42,7 @@ function HttpServiceClass(root_object_val) {
             "setup_session3": this.setupSession3,
             "get_session_data": this.getSessionData,
             "put_session_data": this.putSessionData,
-            "read_mmw_data": this.readMmwDataRequest,
+            "mmw_read_data": this.mmwReadDataRequest,
             "keep_alive": this.keepAlive,
         };
         var put_switch_table = {
@@ -65,7 +65,7 @@ function HttpServiceClass(root_object_val) {
 
         if ((go_request.command !== "sign_up") &&
             (go_request.command !== "setup_link") &&
-            (go_request.command !== "read_mmw_data") &&
+            (go_request.command !== "mmw_read_data") &&
             (go_request.time_stamp !== this.fabricServiceObject().timeStampString())) {
             this.debug(true, "parseGetRequest", "***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp + " " + this.fabricServiceObject().timeStampString());
             return null;
@@ -286,25 +286,25 @@ function HttpServiceClass(root_object_val) {
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
-    this.readMmwDataRequest = function (go_request, res) {
+    this.mmwReadDataRequest = function (go_request, res) {
         var filename = this.encodeObject().encodeString(go_request.filename);
-        this.debug(true, "readMmwDataRequest", "filename=" + filename );
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.readMmwDataResponse, go_request, res);
+        this.debug(true, "mmwReadDataRequest", "filename=" + filename );
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.mmwReadDataResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "0M" + ajax_entry_object.ajaxId() + filename);
     };
 
-    this.readMmwDataResponse = function (this0, data_val, ajax_entry_object_val) {
+    this.mmwReadDataResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var result = data_val;
 
-        this0.debug(true, "readMmwDataResponse", "filename=" + ajax_entry_object_val.filename);
+        this0.debug(true, "mmwReadDataResponse", "filename=" + ajax_entry_object_val.filename);
         var output = JSON.stringify({
                         filename: ajax_entry_object_val.filename,
                         time_stamp: this.fabricServiceObject().timeStampString(),
                         result: result,
                         });
-        this0.debug(true, "readMmwDataResponse", "output=" + output);
+        this0.debug(true, "mmwReadDataResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
