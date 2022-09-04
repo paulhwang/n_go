@@ -108,13 +108,23 @@ function HttpServiceClass(root_object_val) {
         this.fabricServiceObject().transmitData(ajax_entry_object, "0M" + ajax_entry_object.ajaxId() + act_val + data);
     };
 
-    this.mmwReadDataResponse = function (this0, data_val, ajax_entry_object_val) {
+    this.mmwReadDataResponse = function (this0, input_data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
-        var result = data_val;
+        var current_encoded_input = input_data_val;
 
-        this0.debug(true, "mmwReadDataResponse", "result=" + result);
+        this0.debug(true, "mmwReadDataResponse", "input_data_val=" + input_data_val);
         this0.debug(true, "mmwReadDataResponse", "act=" + ajax_entry_object_val.act + " data=" + ajax_entry_object_val.act );
+
+        var encoded_result_length = this.encodeObject().encodedStringlength(current_encoded_input);
+        var result = this.encodeObject().decodeString(current_encoded_input);
+        this0.debug(true, "mmwReadDataResponse", "result=" + result);
+
+        current_encoded_input = current_encoded_input.slice(encoded_result_length);
+        //var encoded_data_length = this.encodeObject().encodedStringlength(current_encoded_input);
+        var data = this.encodeObject().decodeString(current_encoded_input);
+        this0.debug(true, "mmwReadDataResponse", "data=" + data);
+
         var output = JSON.stringify({
                         filename: ajax_entry_object_val.filename,
                         time_stamp: this.fabricServiceObject().timeStampString(),
