@@ -129,6 +129,7 @@ function HttpServiceClass(root_object_val) {
                         filename: ajax_entry_object_val.filename,
                         time_stamp: this.fabricServiceObject().timeStampString(),
                         result: result,
+                        data: data,
                         });
         this0.debug(true, "mmwReadDataResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
