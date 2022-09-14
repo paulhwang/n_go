@@ -300,7 +300,6 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
-        var go_request = ajax_entry_object_val.ajaxRequest();
         var result = data_val.slice(0, 2);
         var link_id = data_val.slice(2, 10);
         var session_id = data_val.slice(10, 18);
@@ -325,7 +324,6 @@ function HttpServiceClass(root_object_val) {
     this.putSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "putSessionDataResponse", "data_val=" + data_val);
 
-        var go_request = ajax_entry_object_val.ajaxRequest();
         var result = data_val.slice(0, 2);
         var link_id = data_val.slice(2, 10);
         var session_id = data_val.slice(10, 18);
