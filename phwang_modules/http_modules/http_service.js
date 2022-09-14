@@ -283,10 +283,14 @@ function HttpServiceClass(root_object_val) {
 
     this.setupSession3Response = function (this0, data_val, ajax_entry_object_val) {
         var go_request = ajax_entry_object_val.ajaxRequest();
+        var result = data_val.slice(0, 2);
+        var link_id = data_val.slice(2, 10);
+        var session_id = data_val.slice(10, 18);
         var output = JSON.stringify({
-                        link_id: go_request.link_id,
-                        session_id1: go_request.session_id,
-                        session_id: data_val,
+                        result: result,
+                        link_id: link_id,
+                        session_id1: session_id,
+                        session_id: session_id,
                         topic_data: go_request.topic_data,
                         his_name: "tbd",
                         });
