@@ -190,11 +190,17 @@ function HttpServiceClass(root_object_val) {
     this.getLinkDataResponse = function (this0, data_val, ajax_entry_object_val) {
         var go_request = ajax_entry_object_val.ajaxRequest();
         this0.debug(false, "getLinkDataResponse", "link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
+        this0.debug(false, "getLinkDataResponse", "data_val=" + data_val);
 
+        var result = data_val.slice(0, 2);
+        var link_id = data_val.slice(2,10);
+
+        data_val = data_val.slice(10);
         var pending_session_setup = data_val.slice(4);
 
         var output = JSON.stringify({
-                        link_id: go_request.link_id,
+                        result: result,
+                        link_id: link_id,
                         interval: this0.linkUpdateInterval(),
                         data: data_val,
                         pending_session_setup: pending_session_setup, 
