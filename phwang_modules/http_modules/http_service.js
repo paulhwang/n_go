@@ -244,10 +244,13 @@ function HttpServiceClass(root_object_val) {
         this0.debug(true, "setupSessionResponse", "data_val=" + data_val);
 
         var go_request = ajax_entry_object_val.ajaxRequest();
+        var result = data_val.slice(0, 2);
+        var link_id = data_val.slice(2, 10);
+        var session_id = data_val.slice(10, 18);
         var output = JSON.stringify({
-                        link_id: go_request.link_id,
-                        session_id: data_val,
-                        result: 0,
+                        result: result,
+                        link_id: link_id,
+                        session_id: session_id,
                         });
         this0.debug(true, "setupSessionResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
