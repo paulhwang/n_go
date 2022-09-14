@@ -324,11 +324,13 @@ function HttpServiceClass(root_object_val) {
         this0.debug(true, "putSessionDataResponse", "data_val=" + data_val);
 
         var go_request = ajax_entry_object_val.ajaxRequest();
-        var link_id = data_val.slice(0, 8);
-        var session_id = data_val.slice(8, 16);
-        var c_data = data_val.slice(16);
+        var result = data_val.slice(0, 2);
+        var link_id = data_val.slice(2, 10);
+        var session_id = data_val.slice(10, 18);
+        var c_data = data_val.slice(18);
 
         var output = JSON.stringify({
+                        result: result,
                         link_id: link_id,
                         session_id: session_id,
                         c_data: c_data,
