@@ -243,7 +243,6 @@ function HttpServiceClass(root_object_val) {
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "setupSessionResponse", "data_val=" + data_val);
 
-        var go_request = ajax_entry_object_val.ajaxRequest();
         var result = data_val.slice(0, 2);
         var link_id = data_val.slice(2, 10);
         var session_id = data_val.slice(10, 18);
@@ -282,17 +281,13 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.setupSession3Response = function (this0, data_val, ajax_entry_object_val) {
-        var go_request = ajax_entry_object_val.ajaxRequest();
         var result = data_val.slice(0, 2);
         var link_id = data_val.slice(2, 10);
         var session_id = data_val.slice(10, 18);
         var output = JSON.stringify({
                         result: result,
                         link_id: link_id,
-                        session_id1: session_id,
                         session_id: session_id,
-                        topic_data: go_request.topic_data,
-                        his_name: "tbd",
                         });
         this0.debug(true, "setupSession3Response", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
