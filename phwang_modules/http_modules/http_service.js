@@ -226,9 +226,15 @@ function HttpServiceClass(root_object_val) {
 
     this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
         var go_request = ajax_entry_object_val.ajaxRequest();
+
+        var result = data_val.slice(0, 2);
+        var link_id = data_val.slice(2, 10);
+        var name_list = data_val.slice(10);
+
         var output = JSON.stringify({
-                        link_id: go_request.link_id,
-                        c_name_list: data_val,
+                        result: result,
+                        link_id: link_id,
+                        c_name_list: name_list,
                         });
         this0.debug(true, "getNameListResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
