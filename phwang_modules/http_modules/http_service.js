@@ -111,7 +111,8 @@ function HttpServiceClass(root_object_val) {
     this.mmwReadDataResponse = function (this0, input_data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
-        var current_encoded_input = input_data_val;
+        var result = input_data_val.slice(0, 2);
+        var current_encoded_input = input_data_val.slice(2);
 
         this0.debug(true, "mmwReadDataResponse", "input_data_val=" + input_data_val);
         this0.debug(true, "mmwReadDataResponse", "act=" + ajax_entry_object_val.act + " data=" + ajax_entry_object_val.act );
@@ -126,6 +127,7 @@ function HttpServiceClass(root_object_val) {
         this0.debug(true, "mmwReadDataResponse", "data=" + data);
 
         var output = JSON.stringify({
+                        result: result,
                         filename: ajax_entry_object_val.filename,
                         time_stamp: this.fabricServiceObject().timeStampString(),
                         result: result,
