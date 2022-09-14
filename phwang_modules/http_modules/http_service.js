@@ -299,14 +299,16 @@ function HttpServiceClass(root_object_val) {
 
     this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         var go_request = ajax_entry_object_val.ajaxRequest();
-        var link_id = data_val.slice(0, 8);
-        var session_id = data_val.slice(8, 16);
-        var c_data = data_val.slice(16);
+        var result = data_val.slice(0, 2);
+        var link_id = data_val.slice(2, 10);
+        var session_id = data_val.slice(10, 18);
+        var data = data_val.slice(18);
 
         var output = JSON.stringify({
+                        result: result,
                         link_id: link_id,
                         session_id: session_id,
-                        c_data: c_data,
+                        c_data: data,
                         });
         this0.debug(true, "getSessionDataResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
