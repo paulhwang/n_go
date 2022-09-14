@@ -194,14 +194,15 @@ function HttpServiceClass(root_object_val) {
 
         var result = data_val.slice(0, 2);
         var link_id = data_val.slice(2,10);
-
+        var name_tag = data_val.slice(10, 14);
+        var pending_session_setup = data_val.slice(14);
         data_val = data_val.slice(10);
-        var pending_session_setup = data_val.slice(4);
 
         var output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         interval: this0.linkUpdateInterval(),
+                        name_tag: name_tag,
                         data: data_val,
                         pending_session_setup: pending_session_setup, 
                         });
