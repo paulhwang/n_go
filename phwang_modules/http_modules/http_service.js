@@ -117,11 +117,6 @@ function HttpServiceClass(root_object_val) {
         this0.debug(true, "mmwReadDataResponse", "input_data_val=" + input_data_val);
         this0.debug(true, "mmwReadDataResponse", "act=" + ajax_entry_object_val.act + " data=" + ajax_entry_object_val.act );
 
-        var encoded_result_length = this.encodeObject().encodedStringlength(current_encoded_input);
-        var result = this.encodeObject().decodeString(current_encoded_input);
-        this0.debug(true, "mmwReadDataResponse", "result=" + result);
-
-        current_encoded_input = current_encoded_input.slice(encoded_result_length);
         //var encoded_data_length = this.encodeObject().encodedStringlength(current_encoded_input);
         var data = this.encodeObject().decodeString(current_encoded_input);
         this0.debug(true, "mmwReadDataResponse", "data=" + data);
