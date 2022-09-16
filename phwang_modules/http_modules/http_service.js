@@ -268,7 +268,7 @@ function HttpServiceClass(root_object_val) {
     this.setupSession2 = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSession2Response, go_request, res);
         this.debug(true, "setupSession2", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1R" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id + go_request.theme_data);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N2R" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id + go_request.theme_data);
     };
 
     this.setupSession2Response = function (this0, data_val, ajax_entry_object_val) {
