@@ -34,6 +34,7 @@ function HttpServiceClass(root_object_val) {
         var get_switch_table = {
             "sign_up": this.signUpRequest,
             "setup_link": this.setupLink,
+            "sign_off": this.signOffRequest,
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
             "get_name_list": this.getNameList,
@@ -155,6 +156,33 @@ function HttpServiceClass(root_object_val) {
         this0.debug(true, "signUpResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
+
+    this.signOffRequest = function (go_request, res) {
+        this.debug(true, "signOffRequest", "link_id=" + go_request.link_id + " name=" + go_request.my_name);
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.signOffResponse, go_request, res);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N1O" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.my_name);
+    };
+
+    this.signOffResponse = function (this0, data_val, ajax_entry_object_val) {
+        this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
+
+        var result = data_val.slice(0, 2);
+        var link_id = data_val.slice(2, 10);
+        var encoded_my_name = data_val.slice(10);
+        var my_name = encoded_my_name;//It's ok for now
+
+        /************* not good. fix it */ this0.debug(true, "signOffResponse", "my_name=" + ajax_entry_object_val.my_name);
+
+        var output = JSON.stringify({
+                        my_name: ajax_entry_object_val.my_name,
+                        result: result,
+                        link_id: link_id,
+                        my_name: my_name,
+                        });
+        this0.debug(true, "signOffResponse", "output=" + output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+    };
+
 
     this.setupLink = function (go_request, res) {
         var my_name = this.encodeObject().encodeString(go_request.my_name);
