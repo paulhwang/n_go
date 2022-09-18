@@ -33,6 +33,9 @@ function EncodeClass(root_object_val) {
     };
 
     this.encodeString = function(input_val) {
+        if ((input_val === undefined) || (input_val === null)) {
+            this.abend("encodeString", "null_input_val");
+        }
         var header;
         var length = input_val.length;
 
