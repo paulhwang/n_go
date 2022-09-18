@@ -64,11 +64,18 @@ function HttpServiceClass(root_object_val) {
     this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
         var go_request = JSON.parse(go_request_json_val);
 
-        if ((go_request.command !== "sign_up") &&
-            (go_request.command !== "setup_link") &&
-            (go_request.command !== "mmw_read_data") &&
-            (go_request.time_stamp !== this.fabricServiceObject().timeStampString())) {
+        if ((go_request.command === "sign_up") ||
+            (go_request.command === "setup_link") ||
+            (go_request.command == "mmw_read_data")) {
+        }
+        else if (go_request.time_stamp !== this.fabricServiceObject().timeStampString()) {
             this.debug(true, "parseGetRequest", "***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp + " " + this.fabricServiceObject().timeStampString());
+            var output = JSON.stringify({
+                            command: go_request.command,
+                            result: "50",
+                            });
+            this.debug(true, "signUpResponse", "output=" + output);
+            this.httpInputObject().sendHttpResponse(go_request, res, output);
             return null;
         }
 
@@ -150,7 +157,6 @@ function HttpServiceClass(root_object_val) {
 
         var output = JSON.stringify({
                         my_name: ajax_entry_object_val.my_name,
-                        time_stamp: this.fabricServiceObject().timeStampString(),
                         result: result,
                         my_name: my_name,
                         });
@@ -175,7 +181,7 @@ function HttpServiceClass(root_object_val) {
         /************* not good. fix it */ this0.debug(true, "signOffResponse", "my_name=" + ajax_entry_object_val.my_name);
 
         var output = JSON.stringify({
-                        my_name: ajax_entry_object_val.my_name,
+                        my_name: my_name,
                         result: result,
                         link_id: link_id,
                         my_name: my_name,
