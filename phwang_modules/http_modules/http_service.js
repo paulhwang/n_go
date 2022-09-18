@@ -145,13 +145,14 @@ function HttpServiceClass(root_object_val) {
     this.signUpResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
-        var result = data_val;
+        var result = data_val.slice(0, 2);
+        var my_name = data_val.slice(2);
 
-        this0.debug(true, "signUpResponse", "my_name=" + ajax_entry_object_val.my_name);
         var output = JSON.stringify({
                         my_name: ajax_entry_object_val.my_name,
                         time_stamp: this.fabricServiceObject().timeStampString(),
                         result: result,
+                        my_name: my_name,
                         });
         this0.debug(true, "signUpResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
