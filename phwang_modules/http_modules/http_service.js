@@ -29,7 +29,7 @@ function HttpServiceClass(root_object_val) {
     this.initSwitchTableArray = function () {
         var post_switch_table = {
             "setup_link": this.setupLink,
-            "setup_session": this.setupSession,
+            "setup_session": this.setupSession1,
         };
         var get_switch_table = {
             "sign_up": this.signUpRequest,
@@ -38,7 +38,7 @@ function HttpServiceClass(root_object_val) {
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
             "get_name_list": this.getNameList,
-            "setup_session": this.setupSession,
+            "setup_session": this.setupSession1,
             "setup_session2": this.setupSession2,
             "setup_session3": this.setupSession3,
             "get_session_data": this.getSessionData,
@@ -282,14 +282,14 @@ function HttpServiceClass(root_object_val) {
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
-    this.setupSession = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSessionResponse, go_request, res);
-        this.debug(true, "setupSession", "link_id=" + go_request.link_id + " his_name=" + go_request.his_name);
+    this.setupSession1 = function (go_request, res) {
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSession1Response, go_request, res);
+        this.debug(true, "setupSession1", "link_id=" + go_request.link_id + " his_name=" + go_request.his_name);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1X" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.theme_data + go_request.his_name);
     };
 
-    this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
-        this0.debug(true, "setupSessionResponse", "data_val=" + data_val);
+    this.setupSession1Response = function (this0, data_val, ajax_entry_object_val) {
+        this0.debug(true, "setupSession1Response", "data_val=" + data_val);
 
         var result = data_val.slice(0, 2);
         var link_id = data_val.slice(2, 10);
@@ -299,7 +299,7 @@ function HttpServiceClass(root_object_val) {
                         link_id: link_id,
                         session_id: session_id,
                         });
-        this0.debug(true, "setupSessionResponse", "output=" + output);
+        this0.debug(true, "setupSession1Response", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
