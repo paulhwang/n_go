@@ -29,7 +29,7 @@ function HttpServiceClass(root_object_val) {
     this.initSwitchTableArray = function () {
         var post_switch_table = {
             "setup_link": this.setupLink,
-            "setup_session": this.setupSession1,
+            "setup_session1": this.setupSession1,
         };
         var get_switch_table = {
             "sign_up": this.signUpRequest,
@@ -38,7 +38,7 @@ function HttpServiceClass(root_object_val) {
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
             "get_name_list": this.getNameList,
-            "setup_session": this.setupSession1,
+            "setup_session1": this.setupSession1,
             "setup_session2": this.setupSession2,
             "setup_session3": this.setupSession3,
             "get_session_data": this.getSessionData,
