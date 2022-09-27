@@ -42,6 +42,7 @@ function HttpServiceClass(root_object_val) {
             "setup_session1": this.setupSession1,
             "setup_session2": this.setupSession2,
             "setup_session3": this.setupSession3,
+            "get_session_setup_status": this.getSessionSetupStatus,
             "get_session_data": this.getSessionData,
             "put_session_data": this.putSessionData,
             "mmw_read_data": this.mmwReadDataRequest,
@@ -373,6 +374,49 @@ function HttpServiceClass(root_object_val) {
                         session_id: session_id,
                         });
         this0.debug(true, "setupSession3Response", "output=" + output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+    };
+
+    this.getSessionSetupStatus = function (go_request, res) {
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getSessionSetupStatusResponse, go_request, res);
+        this.debug(true, "getSessionSetupStatus", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N2T" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id);
+    };
+
+    this.getSessionSetupStatusResponse = function (this0, data_val, ajax_entry_object_val) {
+        this0.debug(true, "getSessionSetupStatusResponse", "data_val=" + data_val);
+
+        var result = data_val.slice(0, 2);
+        var link_id = data_val.slice(2, 10);
+        var session_id = data_val.slice(10, 18);
+        var session_status = data_val[18];
+        var session_type = data_val[19];
+
+        var index = 20;
+        var encoded_theme_data = data_val.slice(index);
+        var theme_data = this.encodeObject().decodeString(encoded_theme_data);
+        var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
+        index += theme_data_len;
+
+        var encoded_initiator_name = data_val.slice(index);
+        var initiator_name = this.encodeObject().decodeString(encoded_initiator_name);
+        var initiator_name_len = this.encodeObject().decodeStringGetLength(encoded_initiator_name);
+        index += initiator_name_len;
+
+        var encoded_peer_name = data_val.slice(index);
+        var peer_name = this.encodeObject().decodeString(encoded_peer_name);
+
+        var output = JSON.stringify({
+                        result: result,
+                        link_id: link_id,
+                        session_id: session_id,
+                        session_status: session_status,
+                        session_type: session_type,
+                        theme_data:theme_data,
+                        initiator_name: initiator_name,
+                        peer_name: peer_name,
+                        });
+        this0.debug(true, "getSessionSetupStatusResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
