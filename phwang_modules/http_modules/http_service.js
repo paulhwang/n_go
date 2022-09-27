@@ -285,8 +285,8 @@ function HttpServiceClass(root_object_val) {
 
     this.setupSession = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSessionResponse, go_request, res);
-        this.debug(true, "setupSession", "link_id=" + go_request.link_id + " his_name=" + go_request.his_name);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id + this.encodeObject().encodeString(go_request.theme_data) + this.encodeObject().encodeString(go_request.his_name));
+        this.debug(true, "setupSession", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id + this.encodeObject().encodeString(go_request.theme_data) + this.encodeObject().encodeString(go_request.peer_name));
     };
 
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -298,15 +298,15 @@ function HttpServiceClass(root_object_val) {
         var encoded_theme_data = data_val.slice(18);
         var theme_data = this.encodeObject().decodeString(encoded_theme_data);
         var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
-        var encoded_his_name = data_val.slice(18 + theme_data_len);
-        var his_name = this.encodeObject().decodeString(encoded_his_name);
+        var encoded_peer_name = data_val.slice(18 + theme_data_len);
+        var peer_name = this.encodeObject().decodeString(encoded_peer_name);
 
         var output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
                         theme_data:theme_data,
-                        his_name: his_name,
+                        peer_name: peer_name,
                         });
         this0.debug(true, "setupSessionResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
