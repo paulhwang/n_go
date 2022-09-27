@@ -137,6 +137,41 @@ function EncodeClass(root_object_val) {
         }
     };
 
+    this.decodeStringGetLength = function(input_val)
+    {
+        var length = 0;
+        switch (input_val.charAt(0)) {
+            case '1':
+                var length_str = input_val.slice(1, 1 + 1);
+                length = this.decodeNumber(length_str, 1);
+                return length + 1 + 1;
+
+            case '2':
+                var length_str = input_val.slice(1, 1 + 2);
+                length = this.decodeNumber(length_str, 2);
+                return length + 1 + 2;
+
+            case '3':
+                var length_str = input_val.slice(1, 1 + 3);
+                length = this.decodeNumber(length_str, 3);
+                return length + 1 + 3;
+
+            case '4':
+                var length_str = input_val.slice(1, 1 + 4);
+                length = this.decodeNumber(length_str, 4);
+                return length + 1 + 4;
+
+            case '5':
+                var length_str = input_val.slice(1, 1 + 5);
+                length = this.decodeNumber(length_str, 5);
+                return length + 1 + 5;
+
+            default:
+                this.abend("decodeStringGetLength", "TBD");
+                return length;
+        }
+    };
+
     this.objectName = function () {return "EncodeClass";};
     this.rootObject = function () {return this.theRootObject;};
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};

@@ -286,7 +286,7 @@ function HttpServiceClass(root_object_val) {
     this.setupSession = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSessionResponse, go_request, res);
         this.debug(true, "setupSession", "link_id=" + go_request.link_id + " his_name=" + go_request.his_name);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.theme_data + go_request.his_name);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id + this.encodeObject().encodeString(go_request.theme_data) + this.encodeObject().encodeString(go_request.his_name));
     };
 
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -295,12 +295,18 @@ function HttpServiceClass(root_object_val) {
         var result = data_val.slice(0, 2);
         var link_id = data_val.slice(2, 10);
         var session_id = data_val.slice(10, 18);
-        var theme_data = data_val.slice(18);
+        var encoded_theme_data = data_val.slice(18);
+        var theme_data = this.encodeObject().decodeString(encoded_theme_data);
+        var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
+        var encoded_his_name = data_val.slice(18 + theme_data_len);
+        var his_name = this.encodeObject().decodeString(encoded_his_name);
+
         var output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
                         theme_data:theme_data,
+                        his_name: his_name,
                         });
         this0.debug(true, "setupSessionResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
@@ -309,7 +315,7 @@ function HttpServiceClass(root_object_val) {
     this.setupSession1 = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSession1Response, go_request, res);
         this.debug(true, "setupSession1", "link_id=" + go_request.link_id + " his_name=" + go_request.his_name);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1X" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.theme_data + go_request.his_name);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N1X" + ajax_entry_object.ajaxId() + go_request.link_id + this.encodeObject().encodeString(go_request.theme_data) + this.encodeObject().encodeString(go_request.his_name));
     };
 
     this.setupSession1Response = function (this0, data_val, ajax_entry_object_val) {
