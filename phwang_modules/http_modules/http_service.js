@@ -296,13 +296,20 @@ function HttpServiceClass(root_object_val) {
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "setupSessionResponse", "data_val=" + data_val);
 
-        var result = data_val.slice(0, 2);
-        var link_id = data_val.slice(2, 10);
-        var session_id = data_val.slice(10, 18);
-        var encoded_theme_data = data_val.slice(18);
+        var index = 0;
+        var result = data_val.slice(index, index + 2);
+        index += 2;
+        var link_id = data_val.slice(index, index + 8);
+        index += 8;
+        var session_id = data_val.slice(index, index + 8);
+        index += 8;
+
+        var encoded_theme_data = data_val.slice(index);
         var theme_data = this.encodeObject().decodeString(encoded_theme_data);
         var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
-        var encoded_peer_name = data_val.slice(18 + theme_data_len);
+        index += theme_data_len;
+
+        var encoded_peer_name = data_val.slice(index);
         var peer_name = this.encodeObject().decodeString(encoded_peer_name);
 
         var output = JSON.stringify({
@@ -328,9 +335,13 @@ function HttpServiceClass(root_object_val) {
     this.setupSession1Response = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "setupSession1Response", "data_val=" + data_val);
 
-        var result = data_val.slice(0, 2);
-        var link_id = data_val.slice(2, 10);
-        var session_id = data_val.slice(10, 18);
+        var index = 0;
+        var result = data_val.slice(index, index + 2);
+        index += 2;
+        var link_id = data_val.slice(index, index + 8);
+        index += 8;
+        var session_id = data_val.slice(index, index + 8);
+
         var output = JSON.stringify({
                         result: result,
                         link_id: link_id,
@@ -347,10 +358,15 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.setupSession2Response = function (this0, data_val, ajax_entry_object_val) {
-        var go_request = ajax_entry_object_val.ajaxRequest();
-        var result = data_val.slice(0, 2);
-        var link_id = data_val.slice(2, 10);
-        var session_id = data_val.slice(10, 18);
+        //var go_request = ajax_entry_object_val.ajaxRequest();
+
+        var index = 0;
+        var result = data_val.slice(index, index + 2);
+        index += 2;
+        var link_id = data_val.slice(index, index + 8);
+        index += 8;
+        var session_id = data_val.slice(index, index + 8);
+
         var output = JSON.stringify({
                         //link_id: go_request.link_id,
                         //confirm: "yes",
@@ -371,9 +387,13 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.setupSession3Response = function (this0, data_val, ajax_entry_object_val) {
-        var result = data_val.slice(0, 2);
-        var link_id = data_val.slice(2, 10);
-        var session_id = data_val.slice(10, 18);
+        var index = 0;
+        var result = data_val.slice(index, index + 2);
+        index += 2;
+        var link_id = data_val.slice(index, index + 8);
+        index += 8;
+        var session_id = data_val.slice(index, index + 8);
+
         var output = JSON.stringify({
                         result: result,
                         link_id: link_id,
