@@ -395,7 +395,7 @@ function HttpServiceClass(root_object_val) {
         var result = data_val.slice(0, 2);
         var link_id = data_val.slice(2, 10);
         var session_id = data_val.slice(10, 18);
-        var session_status = data_val[18];
+        var room_status = data_val[18];
         var group_mode = data_val[19];
 
         var index = 20;
@@ -416,7 +416,7 @@ function HttpServiceClass(root_object_val) {
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
-                        session_status: session_status,
+                        room_status: room_status,
                         group_mode: group_mode,
                         theme_data:theme_data,
                         initiator_name: initiator_name,
