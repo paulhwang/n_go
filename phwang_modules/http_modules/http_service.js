@@ -392,13 +392,16 @@ function HttpServiceClass(root_object_val) {
     this.getSessionSetupStatusResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "getSessionSetupStatusResponse", "data_val=" + data_val);
 
-        var result = data_val.slice(0, 2);
-        var link_id = data_val.slice(2, 10);
-        var session_id = data_val.slice(10, 18);
-        var room_status = data_val[18];
-        var group_mode = data_val[19];
+        var index = 0;
+        var result = data_val.slice(index, index + 2);
+        index += 2;
+        var link_id = data_val.slice(index, index + 8);
+        index += 8;
+        var session_id = data_val.slice(index, index + 8);
+        index += 8;
+        var room_status = data_val[index++];
+        var group_mode = data_val[index++];
 
-        var index = 20;
         var encoded_theme_data = data_val.slice(index);
         var theme_data = this.encodeObject().decodeString(encoded_theme_data);
         var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
@@ -433,10 +436,14 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
-        var result = data_val.slice(0, 2);
-        var link_id = data_val.slice(2, 10);
-        var session_id = data_val.slice(10, 18);
-        var data = data_val.slice(18);
+        var current = 0;
+        var result = data_val.slice(current, current + 2);
+        current += 2;
+        var link_id = data_val.slice(current, current + 8);
+        current += 8;
+        var session_id = data_val.slice(current, current + 8);
+        current += 8;
+        var data = data_val.slice(current);
 
         var output = JSON.stringify({
                         result: result,
@@ -457,16 +464,20 @@ function HttpServiceClass(root_object_val) {
     this.putSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "putSessionDataResponse", "data_val=" + data_val);
 
-        var result = data_val.slice(0, 2);
-        var link_id = data_val.slice(2, 10);
-        var session_id = data_val.slice(10, 18);
-        var c_data = data_val.slice(18);
+        var current = 0;
+        var result = data_val.slice(current, current + 2);
+        current += 2;
+        var link_id = data_val.slice(current, current + 8);
+        current += 8;
+        var session_id = data_val.slice(current, current + 8);
+        current += 8;
+        var data = data_val.slice(current);
 
         var output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
-                        c_data: c_data,
+                        data: data,
                         });
         this0.debug(true, "putSessionDataResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
