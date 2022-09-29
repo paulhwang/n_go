@@ -19,6 +19,7 @@ function HttpRootClass () {
     "use strict";
 
     this.init__ = function () {
+        this.FABRIC_DEF_ = require("./fabric_protocol.js").malloc();
         this.theEncodeObject = require("../util_modules/encode.js").malloc(this);
         this.theFabricServiceObject = require("./fabric_service.js").malloc(this);
         this.theHttpInputObject = require("./http_input.js").malloc(this);
@@ -27,6 +28,7 @@ function HttpRootClass () {
     };
 
     this.objectName = function () {return "HttpRootClass";};
+    this.FABRIC_DEF = function () {return this.FABRIC_DEF_;};
     this.encodeObject = function () {return this.theEncodeObject;};
     this.importObject = function () {return this.theImportObject;};
     this.fabricServiceObject = function () {return this.theFabricServiceObject;};

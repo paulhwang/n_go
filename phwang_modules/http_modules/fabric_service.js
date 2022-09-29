@@ -38,7 +38,6 @@ function FabricServiceClass (root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.theTimeStampString = "";
-        this.theFabricProtocolObject = require("./fabric_protocol.js").malloc();
         this.theNetSocketObject =  require("../util_modules/net_socket.js").malloc(this.rootObject());
         this.setupConnectionToFabric();
         this.theGlobalAjaxId = 0;
@@ -187,16 +186,16 @@ function FabricServiceClass (root_object_val) {
     this.objectName = function () {return "FabricServiceClass";};
     this.phwangLogo = function () {return "phwang168";};
     this.rootObject = function () {return this.theRootObject;};
-    this.fabricProtocolObject = function () {return this.theFabricProtocolObject;};
+    this.FABRIC_DEF = function () {return this.rootObject().FABRIC_DEF();};
     this.netSocketOjbect = function () {return this.theNetSocketObject;};
     this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
     this.importObject = function () {return this.rootObject().importObject();};
     this.timeStampString = function () {return this.theTimeStampString;};
 
-    this.fabricSeriverIpAddr = function () {return this.fabricProtocolObject().fabricSeriverIpAddr();};
-    this.fabricSeriverTcpPort = function () {return this.fabricProtocolObject().fabricSeriverTcpPort();};
-    this.fabricSeriverAjaxIdSize = function () {return this.fabricProtocolObject().fabricSeriverAjaxIdSize();};
-    this.fabricSeriverDataLengthSize = function () {return this.fabricProtocolObject().fabricSeriverDataLengthSize();};
+    this.fabricSeriverIpAddr = function () {return this.FABRIC_DEF().fabricSeriverIpAddr();};
+    this.fabricSeriverTcpPort = function () {return this.FABRIC_DEF().fabricSeriverTcpPort();};
+    this.fabricSeriverAjaxIdSize = function () {return this.FABRIC_DEF().fabricSeriverAjaxIdSize();};
+    this.fabricSeriverDataLengthSize = function () {return this.FABRIC_DEF().fabricSeriverDataLengthSize();};
 
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};

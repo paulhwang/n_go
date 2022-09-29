@@ -21,6 +21,9 @@ module.exports = {
 };
 
 function FabricProtocolClass () {
+    this.RESULT_SIZE = function() {return 2;};
+    this.LINK_ID_SIZE = function() {return 8;};
+    this.SESSION_ID_SIZE = function() {return 8;};
     this.fabricSeriverIpAddr = function () {return FABRIC_PROTOCOL_SERVER_IP_ADDRESS;};
     this.fabricSeriverTcpPort = function () {return FABRIC_PROTOCOL_SERVER_TCP_PORT;};
     this.fabricSeriverAjaxIdSize = function () {return FABRIC_PROTOCOL_AJAX_ID_SIZE;};
