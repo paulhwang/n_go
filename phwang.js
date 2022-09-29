@@ -2,7 +2,7 @@ var net = require("net");
 var express = require('express');
 var bodyParser = require('body-parser');
 require('./phwang_modules/front_end_modules/front_end_root.js').malloc();
-var http_input_module = require('./phwang_modules/front_end_modules/http_input.js');
+var http_input_module = require('./phwang_modules/http_input.js');
 var app = express();
 
 app.use(bodyParser.json());
