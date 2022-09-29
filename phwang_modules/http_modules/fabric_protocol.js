@@ -4,9 +4,6 @@
  * File name: fabric_protocol.js
  */
 
-var FABRIC_PROTOCOL_SERVER_IP_ADDRESS = "127.0.0.1";
-var FABRIC_PROTOCOL_SERVER_TCP_PORT = 8006;
-var FABRIC_PROTOCOL_AJAX_ID_SIZE = 3;
 var FABRIC_PROTOCOL_DATA_LENGTH_SIZE = 4;
 
 var the_fabric_protocol_object = null;
@@ -24,8 +21,10 @@ function FabricProtocolClass () {
     this.RESULT_SIZE = function() {return 2;};
     this.LINK_ID_SIZE = function() {return 8;};
     this.SESSION_ID_SIZE = function() {return 8;};
-    this.fabricSeriverIpAddr = function () {return FABRIC_PROTOCOL_SERVER_IP_ADDRESS;};
-    this.fabricSeriverTcpPort = function () {return FABRIC_PROTOCOL_SERVER_TCP_PORT;};
-    this.fabricSeriverAjaxIdSize = function () {return FABRIC_PROTOCOL_AJAX_ID_SIZE;};
+    this.AJAX_ID_SIZE = function () {return 3;};
+
+    this.FABRIC_IP_ADDRESS = function () {return "127.0.0.1";};
+    this.FABRIC_TCP_PORT = function () {return 8006;};
+
     this.fabricSeriverDataLengthSize = function () {return FABRIC_PROTOCOL_DATA_LENGTH_SIZE;};
 }

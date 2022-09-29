@@ -43,20 +43,20 @@ function FabricServiceClass (root_object_val) {
         this.theGlobalAjaxId = 0;
         this.theMaxAjaxIdIndex = 0;
         this.theAjaxIdArray = [];
-        this.setMaxGlobalAjaxId(this.fabricSeriverAjaxIdSize());
+        this.setMaxGlobalAjaxId(this.FABRIC_DEF().AJAX_ID_SIZE());
         this.debug(true, "init__", "");
     };
 
     this.mallocAjaxEntryObject = function (callback_func_val, go_request_val, res_val) {
         this.incrementGlobalAjaxId();
-        var ajax_id_str = this.encodeNumber(this.globalAjaxId(), this.fabricSeriverAjaxIdSize());
+        var ajax_id_str = this.encodeNumber(this.globalAjaxId(), this.FABRIC_DEF().AJAX_ID_SIZE());
         var ajax_entry_object = new AjaxEntryClass(ajax_id_str, callback_func_val, go_request_val, res_val);
         return ajax_entry_object;
     };
 
     this.setupConnectionToFabric = function () {
         var this0 = this;
-        this.netSocketOjbect().connect(this.fabricSeriverTcpPort(), this.fabricSeriverIpAddr(), function () {
+        this.netSocketOjbect().connect(this.FABRIC_DEF().FABRIC_TCP_PORT(), this.FABRIC_DEF().FABRIC_IP_ADDRESS(), function () {
             this0.debug(true, "init__", "fabric is connected");
         });
 
@@ -93,8 +93,8 @@ function FabricServiceClass (root_object_val) {
             this.debug(true, "receiveDataFromFabric", data_val);
         }
 
-        var ajax_id_val = data_val.slice(1, 1 + this.fabricSeriverAjaxIdSize());
-        var rest_data_val = data_val.slice(1 + this.fabricSeriverAjaxIdSize());
+        var ajax_id_val = data_val.slice(1, 1 + this.FABRIC_DEF().AJAX_ID_SIZE());
+        var rest_data_val = data_val.slice(1 + this.FABRIC_DEF().AJAX_ID_SIZE());
 
         var ajax_entry_object = this.getAjaxEntryObject(ajax_id_val);
         if (!ajax_entry_object) {
@@ -192,9 +192,6 @@ function FabricServiceClass (root_object_val) {
     this.importObject = function () {return this.rootObject().importObject();};
     this.timeStampString = function () {return this.theTimeStampString;};
 
-    this.fabricSeriverIpAddr = function () {return this.FABRIC_DEF().fabricSeriverIpAddr();};
-    this.fabricSeriverTcpPort = function () {return this.FABRIC_DEF().fabricSeriverTcpPort();};
-    this.fabricSeriverAjaxIdSize = function () {return this.FABRIC_DEF().fabricSeriverAjaxIdSize();};
     this.fabricSeriverDataLengthSize = function () {return this.FABRIC_DEF().fabricSeriverDataLengthSize();};
 
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
