@@ -82,7 +82,7 @@ function FabricServiceClass (root_object_val) {
         var data_val;
 
         if (raw_data_val.charAt(0) === '{') {
-            data_val = raw_data_val.slice(1 + this.fabricSeriverDataLengthSize(), raw_length - 1);
+            data_val = raw_data_val.slice(1 + this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE(), raw_length - 1);
         }
         else {
             this.abend("receiveDataFromFabric", "wrong header: " + raw_data_val);
@@ -122,7 +122,7 @@ function FabricServiceClass (root_object_val) {
     this.transmitData = function (ajax_entry_object_val, data_val) {
         this.putAjaxEntryObject(ajax_entry_object_val);
         if (data_val.length < 1000) {
-            var data = "{" + this.encodeNumber(data_val.length, this.fabricSeriverDataLengthSize()) + data_val + "}";
+            var data = "{" + this.encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
         }
         this.debug(false, "transmitData", data);
         this.netSocketOjbect().write(data);
@@ -191,8 +191,6 @@ function FabricServiceClass (root_object_val) {
     this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
     this.importObject = function () {return this.rootObject().importObject();};
     this.timeStampString = function () {return this.theTimeStampString;};
-
-    this.fabricSeriverDataLengthSize = function () {return this.FABRIC_DEF().fabricSeriverDataLengthSize();};
 
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};

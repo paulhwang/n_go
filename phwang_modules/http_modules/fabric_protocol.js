@@ -1,23 +1,21 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: fabric_protocol.js
+ * File name: fabric_def.js
  */
 
-var FABRIC_PROTOCOL_DATA_LENGTH_SIZE = 4;
-
-var the_fabric_protocol_object = null;
+var THE_FABRIC_DEF = null;
 
 module.exports = {
     malloc: function () {
-        if (!the_fabric_protocol_object) {
-            the_fabric_protocol_object = new FabricProtocolClass();
+        if (!THE_FABRIC_DEF) {
+            THE_FABRIC_DEF = new FABRIC_DEF_CLASS();
         }
-        return the_fabric_protocol_object;
+        return THE_FABRIC_DEF;
     },
 };
 
-function FabricProtocolClass () {
+function FABRIC_DEF_CLASS () {
     this.RESULT_SIZE = function() {return 2;};
     this.LINK_ID_SIZE = function() {return 8;};
     this.SESSION_ID_SIZE = function() {return 8;};
@@ -25,6 +23,5 @@ function FabricProtocolClass () {
 
     this.FABRIC_IP_ADDRESS = function () {return "127.0.0.1";};
     this.FABRIC_TCP_PORT = function () {return 8006;};
-
-    this.fabricSeriverDataLengthSize = function () {return FABRIC_PROTOCOL_DATA_LENGTH_SIZE;};
+    this.FABRIC_TCP_DATA_SIZE = function () {return 4;};
 }
