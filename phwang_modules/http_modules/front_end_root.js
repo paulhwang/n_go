@@ -1,25 +1,25 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: http_root.js
+ * File name: front_end_root.js
  */
 
-var the_http_root_object = null;
+var the_front_end_root_object = null;
 
 module.exports = {
     malloc: function () {
-        if (!the_http_root_object) {
-            the_http_root_object = new HttpRootClass();
+        if (!the_front_end_root_object) {
+            the_front_end_root_object = new FrontEndRootClass();
         }
-        return the_http_root_object;
+        return the_front_end_root_object;
     },
 };
 
-function HttpRootClass () {
+function FrontEndRootClass () {
     "use strict";
 
     this.init__ = function () {
-        this.FABRIC_DEF_ = require("./fabric_protocol.js").malloc();
+        this.FABRIC_DEF_ = require("./fabric_def.js").malloc();
         this.theEncodeObject = require("../util_modules/encode.js").malloc(this);
         this.theFabricServiceObject = require("./fabric_service.js").malloc(this);
         this.theHttpInputObject = require("./http_input.js").malloc(this);
@@ -27,7 +27,7 @@ function HttpRootClass () {
         this.debug(true, "init__", "");
     };
 
-    this.objectName = function () {return "HttpRootClass";};
+    this.objectName = function () {return "FrontEndRootClass";};
     this.FABRIC_DEF = function () {return this.FABRIC_DEF_;};
     this.encodeObject = function () {return this.theEncodeObject;};
     this.importObject = function () {return this.theImportObject;};
