@@ -38,10 +38,11 @@ function HttpServiceClass(root_object_val) {
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
             "get_name_list": this.getNameList,
-            "setup_session": this.setupSession,
-            "setup_session1": this.setupSession1,
-            "setup_session2": this.setupSession2,
-            "setup_session3": this.setupSession3,
+            "setup_solo": this.setupSession,
+            "setup_duet1": this.setupSession1,
+            "setup_duet2": this.setupSession2,
+            "setup_duet3": this.setupSession3,
+            "setup_trio": this.setupSession,
             "get_session_setup_status": this.getSessionSetupStatus,
             "get_session_data": this.getSessionData,
             "put_session_data": this.putSessionData,
@@ -71,27 +72,27 @@ function HttpServiceClass(root_object_val) {
             (go_request.command == "mmw_read_data")) {
         }
         else if (go_request.time_stamp !== this.fabricServiceObject().timeStampString()) {
-            this.debug(true, "parseGetRequest", "***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp + " " + this.fabricServiceObject().timeStampString());
+            console.log("HttpServiceClass.parseGetRequest() ***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp + " " + this.fabricServiceObject().timeStampString());
             var output = JSON.stringify({
                             command: go_request.command,
                             result: "50",
                             });
-            this.debug(true, "signUpResponse", "output=" + output);
             this.httpInputObject().sendHttpResponse(go_request, res, output);
             return null;
         }
 
         if (go_request.command === "get_link_data") {
-            this.debug(false, "parseGetRequest", "go_request_json_val=" + go_request_json_val);
+            console.log("HttpServiceClass.parseGetRequest() go_request_json_val=" + go_request_json_val);
         } else {
-            this.debug(true, "parseGetRequest", "go_request_json_val=" + go_request_json_val);
+            console.log("HttpServiceClass.parseGetRequest() go_request_json_val=" + go_request_json_val);
         }
 
         var func = this.httpSwitchTableArray(command_index_val)[go_request.command];
         if (func) {
             return func.bind(this)(go_request, res);
         } else {
-            this.abend("parseGetRequest", "bad command=" + go_request.command);
+            console.log("HttpServiceClass.parseGetRequest() bad command=" + go_request.command);
+            abend();
             return null;
         }
     };
