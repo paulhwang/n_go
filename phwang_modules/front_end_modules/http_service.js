@@ -42,7 +42,7 @@ function HttpServiceClass(root_object_val) {
             "setup_duet1": this.setupDuet1,
             "setup_duet2": this.setupDuet2,
             "setup_duet3": this.setupDuet3,
-            "setup_trio": this.setupEnsemble,
+            "setup_ensemble": this.setupEnsemble,
             "get_session_setup_status": this.getSessionSetupStatus,
             "get_session_data": this.getSessionData,
             "put_session_data": this.putSessionData,
