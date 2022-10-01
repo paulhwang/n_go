@@ -150,7 +150,7 @@ function HttpServiceClass(root_object_val) {
         var email = this.encodeObject().encodeString(go_request.email);
         this.debug(true, "registerRequest", "name=" + my_name + "password=" + password + "email=" + email);
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.registerResponse, go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N0U" + ajax_entry_object.ajaxId() + my_name + password + email);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N0R" + ajax_entry_object.ajaxId() + my_name + password + email);
     };
 
     this.registerResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -205,7 +205,7 @@ function HttpServiceClass(root_object_val) {
         var my_name = this.encodeObject().encodeString(go_request.my_name);
         var password = this.encodeObject().encodeString(go_request.password);
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.loginResponse, go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N0L" + ajax_entry_object.ajaxId() + my_name + password);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N0I" + ajax_entry_object.ajaxId() + my_name + password);
     };
 
     this.loginResponse = function (this0, data_val, ajax_entry_object_val) {
