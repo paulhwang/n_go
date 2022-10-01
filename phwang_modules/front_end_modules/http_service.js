@@ -32,9 +32,9 @@ function HttpServiceClass(root_object_val) {
             "setup_session1": this.setupSession1,
         };
         var get_switch_table = {
-            "register": this.signUpRequest,
-            "login": this.setupLink,
-            "logout": this.signOffRequest,
+            "register": this.registerRequest,
+            "login": this.loginRequest,
+            "logout": this.logoutRequest,
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
             "get_name_list": this.getNameList,
@@ -144,11 +144,11 @@ function HttpServiceClass(root_object_val) {
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
-    this.signUpRequest = function (go_request, res) {
+    this.registerRequest = function (go_request, res) {
         var my_name = this.encodeObject().encodeString(go_request.my_name);
         var password = this.encodeObject().encodeString(go_request.password);
         var email = this.encodeObject().encodeString(go_request.email);
-        this.debug(true, "signUpRequest", "name=" + my_name + "password=" + password + "email=" + email);
+        this.debug(true, "registerRequest", "name=" + my_name + "password=" + password + "email=" + email);
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.signUpResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N0U" + ajax_entry_object.ajaxId() + my_name + password + email);
     };
@@ -170,8 +170,8 @@ function HttpServiceClass(root_object_val) {
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
-    this.signOffRequest = function (go_request, res) {
-        this.debug(true, "signOffRequest", "link_id=" + go_request.link_id + " name=" + go_request.my_name);
+    this.logoutRequest = function (go_request, res) {
+        this.debug(true, "logoutRequest", "link_id=" + go_request.link_id + " name=" + go_request.my_name);
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.signOffResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1O" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.my_name);
     };
@@ -201,7 +201,7 @@ function HttpServiceClass(root_object_val) {
     };
 
 
-    this.setupLink = function (go_request, res) {
+    this.loginRequest = function (go_request, res) {
         var my_name = this.encodeObject().encodeString(go_request.my_name);
         var password = this.encodeObject().encodeString(go_request.password);
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupLinkResponse, go_request, res);
