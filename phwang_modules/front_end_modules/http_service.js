@@ -32,9 +32,9 @@ function HttpServiceClass(root_object_val) {
             "setup_session1": this.setupSession1,
         };
         var get_switch_table = {
-            "sign_up": this.signUpRequest,
-            "setup_link": this.setupLink,
-            "sign_off": this.signOffRequest,
+            "register": this.signUpRequest,
+            "login": this.setupLink,
+            "logout": this.signOffRequest,
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
             "get_name_list": this.getNameList,
@@ -66,8 +66,8 @@ function HttpServiceClass(root_object_val) {
     this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
         var go_request = JSON.parse(go_request_json_val);
 
-        if ((go_request.command === "sign_up") ||
-            (go_request.command === "setup_link") ||
+        if ((go_request.command === "register") ||
+            (go_request.command === "login") ||
             (go_request.command == "mmw_read_data")) {
         }
         else if (go_request.time_stamp !== this.fabricServiceObject().timeStampString()) {
