@@ -90,7 +90,7 @@ function FabricServiceClass (root_object_val) {
         }
 
         if (data_val.charAt(0) != 'd') {
-            this.debug(true, "receiveDataFromFabric", data_val);
+            console.log("FabricServiceClass.receiveDataFromFabric() data=" + data_val);
         }
 
         var ajax_id_val = data_val.slice(1, 1 + this.FABRIC_DEF().AJAX_ID_SIZE());
@@ -140,7 +140,8 @@ function FabricServiceClass (root_object_val) {
         }
 
         if (!found) {
-            this.abend("getAjaxEntryObject", "not found" + ajax_id_val);
+            console.log("FabricServiceClass.getAjaxEntryObject() not_found! ajax_id_val=" + ajax_id_val);
+            abend();
             return;
         }
 
