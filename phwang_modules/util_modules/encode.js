@@ -19,8 +19,7 @@ function EncodeClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
-        this.debug(true, "init__", "");
+        this.rootObject_ = root_object_val;
     };
 
     this.decodeNumber = function(input_val, size_val) {
@@ -34,7 +33,8 @@ function EncodeClass(root_object_val) {
 
     this.encodeString = function(input_val) {
         if ((input_val === undefined) || (input_val === null)) {
-            this.abend("encodeString", "null_input_val");
+            console.log("EncodeClass.encodeString() null_input_val");
+            abend();
         }
         var header;
         var length = input_val.length;
@@ -88,7 +88,8 @@ function EncodeClass(root_object_val) {
                 return 1 + 5 + length;
 
             default:
-                this.abend("encodedStringlength", "TBD");
+                console.log("EncodeClass.encodedStringlength() TBD");
+                abend();
                 return buf;
         }
         return buf;
@@ -132,7 +133,8 @@ function EncodeClass(root_object_val) {
                 return buf;
 
             default:
-                this.abend("decodeString", "TBD");
+                console.log("EncodeClass.decodeString() TBD");
+                abend();
                 return buf;
         }
     };
@@ -167,15 +169,12 @@ function EncodeClass(root_object_val) {
                 return length + 1 + 5;
 
             default:
-                this.abend("decodeStringGetLength", "TBD");
+                console.log("EncodeClass.decodeStringGetLength() TBD");
+                abend();
                 return length;
         }
     };
 
-    this.objectName = function () {return "EncodeClass";};
-    this.rootObject = function () {return this.theRootObject;};
-    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
-    this.abend = function (str1_val, str2_val) {this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
+    this.rootObject = function () {return this.rootObject_;};
     this.init__(root_object_val);
 };

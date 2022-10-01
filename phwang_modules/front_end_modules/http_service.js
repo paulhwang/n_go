@@ -302,7 +302,7 @@ function HttpServiceClass(root_object_val) {
         this.debug(true, "setupSolo", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id 
                                               + this.encodeObject().encodeString(go_request.theme_data)
-                                              + this.encodeObject().encodeString(go_request.initiator_name)
+                                              + this.encodeObject().encodeString(go_request.first_fiddle)
                                               + this.encodeObject().encodeString(go_request.peer_name));
     };
 
@@ -341,7 +341,7 @@ function HttpServiceClass(root_object_val) {
         this.debug(true, "setupDuet1", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1X" + ajax_entry_object.ajaxId() + go_request.link_id
                                               + this.encodeObject().encodeString(go_request.theme_data)
-                                              + this.encodeObject().encodeString(go_request.initiator_name)
+                                              + this.encodeObject().encodeString(go_request.first_fiddle)
                                               + this.encodeObject().encodeString(go_request.peer_name));
     };
 
@@ -421,7 +421,7 @@ function HttpServiceClass(root_object_val) {
         console.log("HttpServiceClass.setupEnsemble() link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1E" + ajax_entry_object.ajaxId() + go_request.link_id 
                                               + this.encodeObject().encodeString(go_request.theme_data)
-                                              + this.encodeObject().encodeString(go_request.initiator_name)
+                                              + this.encodeObject().encodeString(go_request.first_fiddle)
                                               + this.encodeObject().encodeString(go_request.peer_name));
     };
 
