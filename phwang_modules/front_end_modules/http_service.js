@@ -42,7 +42,7 @@ function HttpServiceClass(root_object_val) {
             "setup_duet1": this.setupDuet1,
             "setup_duet2": this.setupDuet2,
             "setup_duet3": this.setupDuet3,
-            "setup_trio": this.setupTrio,
+            "setup_trio": this.setupEnsemble,
             "get_session_setup_status": this.getSessionSetupStatus,
             "get_session_data": this.getSessionData,
             "put_session_data": this.putSessionData,
@@ -416,17 +416,17 @@ function HttpServiceClass(root_object_val) {
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
-    this.setupTrio = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupTrioResponse, go_request, res);
-        this.debug(true, "setupTrio", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
+    this.setupEnsemble = function (go_request, res) {
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupEnsembleResponse, go_request, res);
+        console.log("HttpServiceClass.setupEnsemble() link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1E" + ajax_entry_object.ajaxId() + go_request.link_id 
                                               + this.encodeObject().encodeString(go_request.theme_data)
                                               + this.encodeObject().encodeString(go_request.initiator_name)
                                               + this.encodeObject().encodeString(go_request.peer_name));
     };
 
-    this.setupTrioResponse = function (this0, data_val, ajax_entry_object_val) {
-        this0.debug(true, "setupTrioResponse", "data_val=" + data_val);
+    this.setupEnsembleResponse = function (this0, data_val, ajax_entry_object_val) {
+        console.log("HttpServiceClass.setupEnsembleResponse() data_val=" + data_val);
 
         var index = 0;
         var result = data_val.slice(index, index + 2);
@@ -451,7 +451,7 @@ function HttpServiceClass(root_object_val) {
                         theme_data:theme_data,
                         peer_name: peer_name,
                         });
-        this0.debug(true, "setupTrioResponse", "output=" + output);
+        console.log("HttpServiceClass.setupEnsembleResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
