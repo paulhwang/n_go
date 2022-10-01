@@ -419,7 +419,7 @@ function HttpServiceClass(root_object_val) {
     this.setupTrio = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupTrioResponse, go_request, res);
         this.debug(true, "setupTrio", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id 
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N1E" + ajax_entry_object.ajaxId() + go_request.link_id 
                                               + this.encodeObject().encodeString(go_request.theme_data)
                                               + this.encodeObject().encodeString(go_request.initiator_name)
                                               + this.encodeObject().encodeString(go_request.peer_name));
