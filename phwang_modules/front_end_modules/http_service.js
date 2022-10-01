@@ -38,11 +38,11 @@ function HttpServiceClass(root_object_val) {
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
             "get_name_list": this.getNameList,
-            "setup_solo": this.setupSession,
-            "setup_duet1": this.setupSession1,
-            "setup_duet2": this.setupSession2,
-            "setup_duet3": this.setupSession3,
-            "setup_trio": this.setupSession,
+            "setup_solo": this.setupSolo,
+            "setup_duet1": this.setupDuet1,
+            "setup_duet2": this.setupDuet2,
+            "setup_duet3": this.setupDuet3,
+            "setup_trio": this.setupTrio,
             "get_session_setup_status": this.getSessionSetupStatus,
             "get_session_data": this.getSessionData,
             "put_session_data": this.putSessionData,
@@ -297,17 +297,17 @@ function HttpServiceClass(root_object_val) {
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
-    this.setupSession = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSessionResponse, go_request, res);
-        this.debug(true, "setupSession", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
+    this.setupSolo = function (go_request, res) {
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSoloResponse, go_request, res);
+        this.debug(true, "setupSolo", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id 
                                               + this.encodeObject().encodeString(go_request.theme_data)
                                               + this.encodeObject().encodeString(go_request.initiator_name)
                                               + this.encodeObject().encodeString(go_request.peer_name));
     };
 
-    this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
-        this0.debug(true, "setupSessionResponse", "data_val=" + data_val);
+    this.setupSoloResponse = function (this0, data_val, ajax_entry_object_val) {
+        this0.debug(true, "setupSoloResponse", "data_val=" + data_val);
 
         var index = 0;
         var result = data_val.slice(index, index + 2);
@@ -332,21 +332,21 @@ function HttpServiceClass(root_object_val) {
                         theme_data:theme_data,
                         peer_name: peer_name,
                         });
-        this0.debug(true, "setupSessionResponse", "output=" + output);
+        this0.debug(true, "setupSoloResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
-    this.setupSession1 = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSession1Response, go_request, res);
-        this.debug(true, "setupSession1", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
+    this.setupDuet1 = function (go_request, res) {
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupDuet1Response, go_request, res);
+        this.debug(true, "setupDuet1", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1X" + ajax_entry_object.ajaxId() + go_request.link_id
                                               + this.encodeObject().encodeString(go_request.theme_data)
                                               + this.encodeObject().encodeString(go_request.initiator_name)
                                               + this.encodeObject().encodeString(go_request.peer_name));
     };
 
-    this.setupSession1Response = function (this0, data_val, ajax_entry_object_val) {
-        this0.debug(true, "setupSession1Response", "data_val=" + data_val);
+    this.setupDuet1Response = function (this0, data_val, ajax_entry_object_val) {
+        this0.debug(true, "setupDuet1Response", "data_val=" + data_val);
 
         var index = 0;
         var result = data_val.slice(index, index + 2);
@@ -360,7 +360,7 @@ function HttpServiceClass(root_object_val) {
                         link_id: link_id,
                         session_id: session_id,
                         });
-        this0.debug(true, "setupSession1Response", "output=" + output);
+        this0.debug(true, "setupDuet1Response", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
@@ -413,6 +413,45 @@ function HttpServiceClass(root_object_val) {
                         session_id: session_id,
                         });
         this0.debug(true, "setupSession3Response", "output=" + output);
+        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+    };
+
+    this.setupTrio = function (go_request, res) {
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupTrioResponse, go_request, res);
+        this.debug(true, "setupTrio", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id 
+                                              + this.encodeObject().encodeString(go_request.theme_data)
+                                              + this.encodeObject().encodeString(go_request.initiator_name)
+                                              + this.encodeObject().encodeString(go_request.peer_name));
+    };
+
+    this.setupTrioResponse = function (this0, data_val, ajax_entry_object_val) {
+        this0.debug(true, "setupTrioResponse", "data_val=" + data_val);
+
+        var index = 0;
+        var result = data_val.slice(index, index + 2);
+        index += 2;
+        var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
+        index += this.FABRIC_DEF().LINK_ID_SIZE();
+        var session_id = data_val.slice(index, index + 8);
+        index += 8;
+
+        var encoded_theme_data = data_val.slice(index);
+        var theme_data = this.encodeObject().decodeString(encoded_theme_data);
+        var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
+        index += theme_data_len;
+
+        var encoded_peer_name = data_val.slice(index);
+        var peer_name = this.encodeObject().decodeString(encoded_peer_name);
+
+        var output = JSON.stringify({
+                        result: result,
+                        link_id: link_id,
+                        session_id: session_id,
+                        theme_data:theme_data,
+                        peer_name: peer_name,
+                        });
+        this0.debug(true, "setupTrioResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
