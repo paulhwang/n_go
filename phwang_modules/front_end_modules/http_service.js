@@ -149,11 +149,11 @@ function HttpServiceClass(root_object_val) {
         var password = this.encodeObject().encodeString(go_request.password);
         var email = this.encodeObject().encodeString(go_request.email);
         this.debug(true, "registerRequest", "name=" + my_name + "password=" + password + "email=" + email);
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.signUpResponse, go_request, res);
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.registerResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N0U" + ajax_entry_object.ajaxId() + my_name + password + email);
     };
 
-    this.signUpResponse = function (this0, data_val, ajax_entry_object_val) {
+    this.registerResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var index = 0;
@@ -166,17 +166,17 @@ function HttpServiceClass(root_object_val) {
                         result: result,
                         my_name: my_name,
                         });
-        this0.debug(true, "signUpResponse", "output=" + output);
+        console.log("HttpServiceClass.registerResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.logoutRequest = function (go_request, res) {
         this.debug(true, "logoutRequest", "link_id=" + go_request.link_id + " name=" + go_request.my_name);
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.signOffResponse, go_request, res);
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.logoutResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1O" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.my_name);
     };
 
-    this.signOffResponse = function (this0, data_val, ajax_entry_object_val) {
+    this.logoutResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var index = 0;
@@ -196,7 +196,7 @@ function HttpServiceClass(root_object_val) {
                         link_id: link_id,
                         my_name: my_name,
                         });
-        this0.debug(true, "signOffResponse", "output=" + output);
+        console.log("HttpServiceClass.logoutResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
@@ -204,11 +204,11 @@ function HttpServiceClass(root_object_val) {
     this.loginRequest = function (go_request, res) {
         var my_name = this.encodeObject().encodeString(go_request.my_name);
         var password = this.encodeObject().encodeString(go_request.password);
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupLinkResponse, go_request, res);
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.loginResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N0L" + ajax_entry_object.ajaxId() + my_name + password);
     };
 
-    this.setupLinkResponse = function (this0, data_val, ajax_entry_object_val) {
+    this.loginResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var index = 0;
@@ -227,7 +227,7 @@ function HttpServiceClass(root_object_val) {
                         link_id: link_id,
                         my_name: my_name,
                         });
-        this0.debug(true, "setupLinkResponse", "output=" + output);
+        console.log("HttpServiceClass.loginResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
