@@ -440,25 +440,33 @@ function HttpServiceClass(root_object_val) {
         var index = 0;
         var result = data_val.slice(index, index + 2);
         index += 2;
+
         var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
+
         var session_id = data_val.slice(index, index + 8);
         index += 8;
+
+        var room_status = data_val[index++];
+        var group_mode = data_val[index++];
 
         var encoded_theme_data = data_val.slice(index);
         var theme_data = this.encodeObject().decodeString(encoded_theme_data);
         var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
         index += theme_data_len;
 
-        var encoded_peer_name = data_val.slice(index);
-        var peer_name = this.encodeObject().decodeString(encoded_peer_name);
+        var encoded_first_fiddle = data_val.slice(index);
+        var first_fiddle = this.encodeObject().decodeString(encoded_first_fiddle);
+        var first_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_first_fiddle);
+        index += first_fiddle_len;
 
         var output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
+                        room_status: room_status,
+                        group_mode: group_mode,
                         theme_data:theme_data,
-                        peer_name: peer_name,
                         });
         console.log("HttpServiceClass.setupEnsembleResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
