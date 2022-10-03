@@ -333,6 +333,11 @@ function HttpServiceClass(root_object_val) {
         var first_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_first_fiddle);
         index += first_fiddle_len;
 
+        var encoded_second_fiddle = data_val.slice(index);
+        var second_fiddle = this.encodeObject().decodeString(encoded_second_fiddle);
+        var second_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_second_fiddle);
+        index += second_fiddle_len;
+
         var output = JSON.stringify({
                         result: result,
                         link_id: link_id,
@@ -341,6 +346,7 @@ function HttpServiceClass(root_object_val) {
                         group_mode: group_mode,
                         theme_data:theme_data,
                         first_fiddle: first_fiddle,
+                        second_fiddle: second_fiddle,
                         });
         this0.debug(true, "setupSoloResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
