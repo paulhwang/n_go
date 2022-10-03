@@ -123,8 +123,8 @@ function HttpServiceClass(root_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
+        var result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        index += this.FABRIC_DEF().RESULT_SIZE();
         var current_encoded_input = data_val.slice(index);
 
         this0.debug(true, "mmwReadDataResponse", "input_data_val=" + input_data_val);
@@ -158,8 +158,8 @@ function HttpServiceClass(root_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
+        var result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        index += this.FABRIC_DEF().RESULT_SIZE();
         var my_name = data_val.slice(index);
 
         var output = JSON.stringify({
@@ -181,8 +181,8 @@ function HttpServiceClass(root_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
+        var result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        index += this.FABRIC_DEF().RESULT_SIZE();
         var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
@@ -213,8 +213,8 @@ function HttpServiceClass(root_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
+        var result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        index += this.FABRIC_DEF().RESULT_SIZE();
         var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
@@ -311,14 +311,14 @@ function HttpServiceClass(root_object_val) {
         this0.debug(true, "setupSoloResponse", "data_val=" + data_val);
 
         var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
+        var result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        index += this.FABRIC_DEF().RESULT_SIZE();
 
         var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
-        var session_id = data_val.slice(index, index + 8);
-        index += 8;
+        var session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
+        index += this.FABRIC_DEF().SESSION_ID_SIZE();
 
         var room_status = data_val[index++];
         var group_mode = data_val[index++];
@@ -344,7 +344,7 @@ function HttpServiceClass(root_object_val) {
                         session_id: session_id,
                         room_status: room_status,
                         group_mode: group_mode,
-                        theme_data:theme_data,
+                        theme_data: theme_data,
                         first_fiddle: first_fiddle,
                         second_fiddle: second_fiddle,
                         });
@@ -537,8 +537,8 @@ function HttpServiceClass(root_object_val) {
         current += 2;
         var link_id = data_val.slice(current, current + this.FABRIC_DEF().LINK_ID_SIZE());
         current += this.FABRIC_DEF().LINK_ID_SIZE();
-        var session_id = data_val.slice(current, current + 8);
-        current += 8;
+        var session_id = data_val.slice(current, current + this.FABRIC_DEF().SESSION_ID_SIZE());
+        current += this.FABRIC_DEF().SESSION_ID_SIZE();
         var data = data_val.slice(current);
 
         var output = JSON.stringify({
@@ -565,8 +565,8 @@ function HttpServiceClass(root_object_val) {
         current += 2;
         var link_id = data_val.slice(current, current + this.FABRIC_DEF().LINK_ID_SIZE());
         current += this.FABRIC_DEF().LINK_ID_SIZE();
-        var session_id = data_val.slice(current, current + 8);
-        current += 8;
+        var session_id = data_val.slice(current, current + this.FABRIC_DEF().SESSION_ID_SIZE());
+        current += this.FABRIC_DEF().SESSION_ID_SIZE();
         var data = data_val.slice(current);
 
         var output = JSON.stringify({
