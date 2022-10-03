@@ -299,11 +299,12 @@ function HttpServiceClass(root_object_val) {
 
     this.setupSolo = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSoloResponse, go_request, res);
-        this.debug(true, "setupSolo", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id 
+        this.debug(true, "setupSolo", "link_id=" + go_request.link_id + " group_mode=" + go_request.group_mode + " second_fiddle=" + go_request.second_fiddle);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id
+                                              + go_request.group_mode
                                               + this.encodeObject().encodeString(go_request.theme_data)
                                               + this.encodeObject().encodeString(go_request.first_fiddle)
-                                              + this.encodeObject().encodeString(go_request.peer_name));
+                                              + this.encodeObject().encodeString(go_request.second_fiddle));
     };
 
     this.setupSoloResponse = function (this0, data_val, ajax_entry_object_val) {
