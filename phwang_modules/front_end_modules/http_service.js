@@ -441,20 +441,27 @@ function HttpServiceClass(root_object_val) {
     this.putSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "putSessionDataResponse", "data_val=" + data_val);
 
-        var current = 0;
-        var result = data_val.slice(current, current + 2);
+        let current = 0;
+        const result = data_val.slice(current, current + 2);
         current += 2;
-        var link_id = data_val.slice(current, current + this.FABRIC_DEF().LINK_ID_SIZE());
-        current += this.FABRIC_DEF().LINK_ID_SIZE();
-        var session_id = data_val.slice(current, current + this.FABRIC_DEF().SESSION_ID_SIZE());
-        current += this.FABRIC_DEF().SESSION_ID_SIZE();
-        var data = data_val.slice(current);
 
-        var output = JSON.stringify({
+        const link_id = data_val.slice(current, current + this.FABRIC_DEF().LINK_ID_SIZE());
+        current += this.FABRIC_DEF().LINK_ID_SIZE();
+
+        const session_id = data_val.slice(current, current + this.FABRIC_DEF().SESSION_ID_SIZE());
+        current += this.FABRIC_DEF().SESSION_ID_SIZE();
+
+        const theme_type = data_val.charAt(current);
+        current++;
+
+        const result_data = data_val.slice(current);
+
+        const output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
-                        data: data,
+                        theme_type: theme_type,
+                        result_data: result_data,
                         });
         this0.debug(true, "putSessionDataResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
