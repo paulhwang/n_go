@@ -299,9 +299,9 @@ function HttpServiceClass(root_object_val) {
 
     this.setupSolo = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSoloResponse, go_request, res);
-        this.debug(true, "setupSolo", "link_id=" + go_request.link_id + " group_mode=" + go_request.group_mode + " second_fiddle=" + go_request.second_fiddle);
+        this.debug(true, "setupSolo", "link_id=" + go_request.link_id + " group_mode=" + go_request.group_mode + " theme_type=" + go_request.theme_type + " second_fiddle=" + go_request.second_fiddle);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id
-                                              + go_request.group_mode
+                                              + go_request.group_mode + go_request.theme_type
                                               + this.encodeObject().encodeString(go_request.theme_data)
                                               + this.encodeObject().encodeString(go_request.first_fiddle)
                                               + this.encodeObject().encodeString(go_request.second_fiddle));
@@ -310,40 +310,42 @@ function HttpServiceClass(root_object_val) {
     this.setupSoloResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.debug(true, "setupSoloResponse", "data_val=" + data_val);
 
-        var index = 0;
-        var result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        let index = 0;
+        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
 
-        var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
+        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
-        var session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
+        const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
         index += this.FABRIC_DEF().SESSION_ID_SIZE();
 
-        var room_status = data_val[index++];
-        var group_mode = data_val[index++];
+        const room_status = data_val[index++];
+        const group_mode = data_val[index++];
+        const theme_type = data_val[index++];
 
-        var encoded_theme_data = data_val.slice(index);
-        var theme_data = this.encodeObject().decodeString(encoded_theme_data);
-        var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
+        const encoded_theme_data = data_val.slice(index);
+        const theme_data = this.encodeObject().decodeString(encoded_theme_data);
+        const theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
         index += theme_data_len;
 
-        var encoded_first_fiddle = data_val.slice(index);
-        var first_fiddle = this.encodeObject().decodeString(encoded_first_fiddle);
-        var first_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_first_fiddle);
+        const encoded_first_fiddle = data_val.slice(index);
+        const first_fiddle = this.encodeObject().decodeString(encoded_first_fiddle);
+        const first_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_first_fiddle);
         index += first_fiddle_len;
 
-        var encoded_second_fiddle = data_val.slice(index);
-        var second_fiddle = this.encodeObject().decodeString(encoded_second_fiddle);
-        var second_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_second_fiddle);
+        const encoded_second_fiddle = data_val.slice(index);
+        const second_fiddle = this.encodeObject().decodeString(encoded_second_fiddle);
+        const second_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_second_fiddle);
         index += second_fiddle_len;
 
-        var output = JSON.stringify({
+        const output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
                         room_status: room_status,
                         group_mode: group_mode,
+                        theme_type: theme_type,
                         theme_data: theme_data,
                         first_fiddle: first_fiddle,
                         second_fiddle: second_fiddle,
