@@ -354,34 +354,6 @@ function HttpServiceClass(root_object_val) {
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
-    this.setupDuet1 = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupDuet1Response, go_request, res);
-        this.debug(true, "setupDuet1", "link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1X" + ajax_entry_object.ajaxId() + go_request.link_id
-                                              + this.encodeObject().encodeString(go_request.theme_data)
-                                              + this.encodeObject().encodeString(go_request.first_fiddle)
-                                              + this.encodeObject().encodeString(go_request.peer_name));
-    };
-
-    this.setupDuet1Response = function (this0, data_val, ajax_entry_object_val) {
-        this0.debug(true, "setupDuet1Response", "data_val=" + data_val);
-
-        var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
-        var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-        var session_id = data_val.slice(index, index + 8);
-
-        var output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        session_id: session_id,
-                        });
-        this0.debug(true, "setupDuet1Response", "output=" + output);
-        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
-    };
-
     this.setupSession2 = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSession2Response, go_request, res);
         this.debug(true, "setupSession2", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
@@ -431,99 +403,6 @@ function HttpServiceClass(root_object_val) {
                         session_id: session_id,
                         });
         this0.debug(true, "setupSession3Response", "output=" + output);
-        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
-    };
-
-    this.setupEnsemble = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupEnsembleResponse, go_request, res);
-        console.log("HttpServiceClass.setupEnsemble() link_id=" + go_request.link_id + " peer_name=" + go_request.peer_name);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1E" + ajax_entry_object.ajaxId() + go_request.link_id 
-                                              + this.encodeObject().encodeString(go_request.theme_data)
-                                              + this.encodeObject().encodeString(go_request.first_fiddle)
-                                              + this.encodeObject().encodeString(go_request.peer_name));
-    };
-
-    this.setupEnsembleResponse = function (this0, data_val, ajax_entry_object_val) {
-        console.log("HttpServiceClass.setupEnsembleResponse() data_val=" + data_val);
-
-        var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
-
-        var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-
-        var session_id = data_val.slice(index, index + 8);
-        index += 8;
-
-        var room_status = data_val[index++];
-        var group_mode = data_val[index++];
-
-        var encoded_theme_data = data_val.slice(index);
-        var theme_data = this.encodeObject().decodeString(encoded_theme_data);
-        var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
-        index += theme_data_len;
-
-        var encoded_first_fiddle = data_val.slice(index);
-        var first_fiddle = this.encodeObject().decodeString(encoded_first_fiddle);
-        var first_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_first_fiddle);
-        index += first_fiddle_len;
-
-        var output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        session_id: session_id,
-                        room_status: room_status,
-                        group_mode: group_mode,
-                        theme_data:theme_data,
-                        });
-        console.log("HttpServiceClass.setupEnsembleResponse() output=" + output);
-        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
-    };
-
-    this.getSessionSetupStatus = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getSessionSetupStatusResponse, go_request, res);
-        this.debug(true, "getSessionSetupStatus", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N2T" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id);
-    };
-
-    this.getSessionSetupStatusResponse = function (this0, data_val, ajax_entry_object_val) {
-        this0.debug(true, "getSessionSetupStatusResponse", "data_val=" + data_val);
-
-        var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
-        var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-        var session_id = data_val.slice(index, index + 8);
-        index += 8;
-        var room_status = data_val[index++];
-        var group_mode = data_val[index++];
-
-        var encoded_theme_data = data_val.slice(index);
-        var theme_data = this.encodeObject().decodeString(encoded_theme_data);
-        var theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
-        index += theme_data_len;
-
-        var encoded_initiator_name = data_val.slice(index);
-        var initiator_name = this.encodeObject().decodeString(encoded_initiator_name);
-        var initiator_name_len = this.encodeObject().decodeStringGetLength(encoded_initiator_name);
-        index += initiator_name_len;
-
-        var encoded_peer_name = data_val.slice(index);
-        var peer_name = this.encodeObject().decodeString(encoded_peer_name);
-
-        var output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        session_id: session_id,
-                        room_status: room_status,
-                        group_mode: group_mode,
-                        theme_data:theme_data,
-                        initiator_name: initiator_name,
-                        peer_name: peer_name,
-                        });
-        this0.debug(true, "getSessionSetupStatusResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
