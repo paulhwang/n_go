@@ -143,23 +143,23 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.registerRequest = function (go_request, res) {
-        var my_name = this.encodeObject().encodeString(go_request.my_name);
-        var password = this.encodeObject().encodeString(go_request.password);
-        var email = this.encodeObject().encodeString(go_request.email);
-        this.debug(true, "registerRequest", "name=" + my_name + "password=" + password + "email=" + email);
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.registerResponse, go_request, res);
+        const my_name = this.encodeObject().encodeString(go_request.my_name);
+        const password = this.encodeObject().encodeString(go_request.password);
+        const email = this.encodeObject().encodeString(go_request.email);
+        console.log("HttpServiceClass.registerRequest() name=" + my_name + "password=" + password + "email=" + email);
+        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.registerResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N0R" + ajax_entry_object.ajaxId() + my_name + password + email);
     };
 
     this.registerResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
-        var index = 0;
-        var result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        let index = 0;
+        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
-        var my_name = data_val.slice(index);
+        const my_name = data_val.slice(index);
 
-        var output = JSON.stringify({
+        const output = JSON.stringify({
                         my_name: ajax_entry_object_val.my_name,
                         result: result,
                         my_name: my_name,
@@ -169,26 +169,26 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.logoutRequest = function (go_request, res) {
-        this.debug(true, "logoutRequest", "link_id=" + go_request.link_id + " name=" + go_request.my_name);
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.logoutResponse, go_request, res);
+        console.log("HttpServiceClass.logoutRequest() link_id=" + go_request.link_id + " name=" + go_request.my_name);
+        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.logoutResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1O" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.my_name);
     };
 
     this.logoutResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
-        var index = 0;
-        var result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        let index = 0;
+        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
-        var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
+        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
-        var encoded_my_name = data_val.slice(index);
-        var my_name = encoded_my_name;//It's ok for now
+        const encoded_my_name = data_val.slice(index);
+        const my_name = encoded_my_name;//It's ok for now
 
         /************* not good. fix it */ this0.debug(true, "signOffResponse", "my_name=" + ajax_entry_object_val.my_name);
 
-        var output = JSON.stringify({
+        const output = JSON.stringify({
                         my_name: my_name,
                         result: result,
                         link_id: link_id,
@@ -200,25 +200,25 @@ function HttpServiceClass(root_object_val) {
 
 
     this.loginRequest = function (go_request, res) {
-        var my_name = this.encodeObject().encodeString(go_request.my_name);
-        var password = this.encodeObject().encodeString(go_request.password);
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.loginResponse, go_request, res);
+        const my_name = this.encodeObject().encodeString(go_request.my_name);
+        const password = this.encodeObject().encodeString(go_request.password);
+        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.loginResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N0I" + ajax_entry_object.ajaxId() + my_name + password);
     };
 
     this.loginResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
-        var index = 0;
-        var result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        let index = 0;
+        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
-        var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
+        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
-        var encoded_my_name = data_val.slice(index);
-        var my_name = this.encodeObject().decodeString(encoded_my_name);
+        const encoded_my_name = data_val.slice(index);
+        const my_name = this.encodeObject().decodeString(encoded_my_name);
 
-        var output = JSON.stringify({
+        const output = JSON.stringify({
                         my_name: ajax_entry_object_val.my_name,
                         time_stamp: this.fabricServiceObject().timeStampString(),
                         result: result,
@@ -230,22 +230,22 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.getLinkData = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getLinkDataResponse, go_request, res);
+        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getLinkDataResponse, go_request, res);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1D" + ajax_entry_object.ajaxId() + go_request.link_id);
     };
 
     this.getLinkDataResponse = function (this0, data_val, ajax_entry_object_val) {
-        var go_request = ajax_entry_object_val.ajaxRequest();
+        const go_request = ajax_entry_object_val.ajaxRequest();
         this0.debug(false, "getLinkDataResponse", "link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
         this0.debug(false, "getLinkDataResponse", "data_val=" + data_val);
 
-        var result = data_val.slice(0, 2);
-        var link_id = data_val.slice(2,10);
-        var name_tag = data_val.slice(10, 14);
-        var pending_session_setup = data_val.slice(14);
+        const result = data_val.slice(0, 2);
+        const link_id = data_val.slice(2,10);
+        const name_tag = data_val.slice(10, 14);
+        const pending_session_setup = data_val.slice(14);
         data_val = data_val.slice(10);
 
-        var output = JSON.stringify({
+        const output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         interval: this0.linkUpdateInterval(),
@@ -262,8 +262,8 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.getNameList = function (go_request, res) {
-        var name_list_tag = Number(go_request.name_list_tag);
-        var buf = "";
+        const name_list_tag = Number(go_request.name_list_tag);
+        let buf = "";
 
         if (name_list_tag < 100) {
             buf = buf + 0;
@@ -273,19 +273,19 @@ function HttpServiceClass(root_object_val) {
         }
         buf = buf + name_list_tag;
 
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getNameListResponse, go_request, res);
+        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getNameListResponse, go_request, res);
         this.debug(false, "getNameList", "link_id=" + go_request.link_id);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1N" + ajax_entry_object.ajaxId() + go_request.link_id + buf);
     };
 
     this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
-        var go_request = ajax_entry_object_val.ajaxRequest();
+        const go_request = ajax_entry_object_val.ajaxRequest();
 
-        var result = data_val.slice(0, 2);
-        var link_id = data_val.slice(2, 10);
-        var name_list = data_val.slice(10);
+        const result = data_val.slice(0, 2);
+        const link_id = data_val.slice(2, 10);
+        const name_list = data_val.slice(10);
 
-        var output = JSON.stringify({
+        const output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         c_name_list: name_list,
@@ -305,7 +305,7 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
-        this0.debug(true, "setupSessionResponse", "data_val=" + data_val);
+        console.log("HttpServiceClass.setupSessionResponse() data_val=" + data_val);
 
         let index = 0;
         const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
@@ -405,38 +405,38 @@ function HttpServiceClass(root_object_val) {
 
     this.getSessionData = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getSessionDataResponse, go_request, res);
-        this.debug(true, "getSessionData", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
+        console.log("HttpServiceClass.getSessionData() link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N2G" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id);
     };
 
     this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
-        var current = 0;
-        var result = data_val.slice(current, current + 2);
+        let current = 0;
+        const result = data_val.slice(current, current + 2);
         current += 2;
-        var link_id = data_val.slice(current, current + this.FABRIC_DEF().LINK_ID_SIZE());
+        const link_id = data_val.slice(current, current + this.FABRIC_DEF().LINK_ID_SIZE());
         current += this.FABRIC_DEF().LINK_ID_SIZE();
-        var session_id = data_val.slice(current, current + this.FABRIC_DEF().SESSION_ID_SIZE());
+        const session_id = data_val.slice(current, current + this.FABRIC_DEF().SESSION_ID_SIZE());
         current += this.FABRIC_DEF().SESSION_ID_SIZE();
-        var data = data_val.slice(current);
+        const data = data_val.slice(current);
 
-        var output = JSON.stringify({
+        const output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
                         c_data: data,
                         });
-        this0.debug(true, "getSessionDataResponse", "output=" + output);
+        console.log("HttpServiceClass.getSessionDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.putSessionData = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.putSessionDataResponse, go_request, res);
-        this.debug(true, "putSessionData", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id + " data=" + go_request.data);
+        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.putSessionDataResponse, go_request, res);
+        console.log("HttpServiceClass.putSessionData() link_id=" + go_request.link_id + " session_id=" + go_request.session_id + " data=" + go_request.data);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N2P" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id + go_request.data);
     };
 
     this.putSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
-        this0.debug(true, "putSessionDataResponse", "data_val=" + data_val);
+        console.log("HttpServiceClass.putSessionDataResponse() data_val=" + data_val);
 
         let current = 0;
         const result = data_val.slice(current, current + 2);
@@ -460,15 +460,15 @@ function HttpServiceClass(root_object_val) {
                         theme_type: theme_type,
                         result_data: result_data,
                         });
-        this0.debug(true, "putSessionDataResponse", "output=" + output);
+        console.log("HttpServiceClass.putSessionDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.keepAlive = function (go_request, res) {
         this.abend("keepAlive", "keepAlive is not implemented");
-        var my_link_id = go_request.link_id;
+        const my_link_id = go_request.link_id;
         this.debug(false, "keepAlive", "link_id=" + my_link_id + " my_name=" + go_request.my_name);
-        var link = this.linkMgrObject().searchLink(go_request.my_name, my_link_id);
+        const link = this.linkMgrObject().searchLink(go_request.my_name, my_link_id);
         if (!link) {
             res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("keepAlive", "***null link***" + "link_id=" + my_link_id + " my_name=" + go_request.my_name);
