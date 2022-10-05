@@ -27,33 +27,30 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.initSwitchTableArray = function () {
-        var post_switch_table = {
+        const post_switch_table = {
             "setup_link": this.setupLink,
             "setup_session1": this.setupSession1,
         };
-        var get_switch_table = {
+        const get_switch_table = {
             "register": this.registerRequest,
             "login": this.loginRequest,
             "logout": this.logoutRequest,
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
             "get_name_list": this.getNameList,
-            "setup_solo": this.setupSolo,
-            "setup_duet1": this.setupDuet1,
-            "setup_duet2": this.setupDuet2,
-            "setup_duet3": this.setupDuet3,
-            "setup_ensemble": this.setupEnsemble,
-            "get_session_setup_status": this.getSessionSetupStatus,
+            "setup_session": this.setupSession,
+            "setup_session2": this.setupSession2,
+            "setup_session3": this.setupSession3,
             "get_session_data": this.getSessionData,
             "put_session_data": this.putSessionData,
             "mmw_read_data": this.mmwReadDataRequest,
             "keep_alive": this.keepAlive,
         };
-        var put_switch_table = {
+        const put_switch_table = {
             "put_link_data": this.putLinkData,
             "put_session_data": this.putSessionData,
         };
-        var delete_switch_table = {
+        const delete_switch_table = {
             "delete_link": this.setupLink,
             "delete_session": this.setupSession,
         };
@@ -65,7 +62,7 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
-        var go_request = JSON.parse(go_request_json_val);
+        const go_request = JSON.parse(go_request_json_val);
 
         if ((go_request.command === "register") ||
             (go_request.command === "login") ||
@@ -73,7 +70,7 @@ function HttpServiceClass(root_object_val) {
         }
         else if (go_request.time_stamp !== this.fabricServiceObject().timeStampString()) {
             console.log("HttpServiceClass.parseGetRequest() ***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp + " " + this.fabricServiceObject().timeStampString());
-            var output = JSON.stringify({
+            const output = JSON.stringify({
                             command: go_request.command,
                             result: "50",
                             });
@@ -87,7 +84,7 @@ function HttpServiceClass(root_object_val) {
             console.log("HttpServiceClass.parseGetRequest() go_request_json_val=" + go_request_json_val);
         }
 
-        var func = this.httpSwitchTableArray(command_index_val)[go_request.command];
+        const func = this.httpSwitchTableArray(command_index_val)[go_request.command];
         if (func) {
             return func.bind(this)(go_request, res);
         } else {
@@ -297,9 +294,9 @@ function HttpServiceClass(root_object_val) {
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
-    this.setupSolo = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSoloResponse, go_request, res);
-        this.debug(true, "setupSolo", "link_id=" + go_request.link_id + " group_mode=" + go_request.group_mode + " theme_type=" + go_request.theme_type + " second_fiddle=" + go_request.second_fiddle);
+    this.setupSession = function (go_request, res) {
+        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSessionResponse, go_request, res);
+        console.log("HttpServiceClass.setupSession() link_id=" + go_request.link_id + " group_mode=" + go_request.group_mode + " theme_type=" + go_request.theme_type + " second_fiddle=" + go_request.second_fiddle);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id
                                               + go_request.group_mode + go_request.theme_type
                                               + this.encodeObject().encodeString(go_request.theme_data)
@@ -307,8 +304,8 @@ function HttpServiceClass(root_object_val) {
                                               + this.encodeObject().encodeString(go_request.second_fiddle));
     };
 
-    this.setupSoloResponse = function (this0, data_val, ajax_entry_object_val) {
-        this0.debug(true, "setupSoloResponse", "data_val=" + data_val);
+    this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
+        this0.debug(true, "setupSessionResponse", "data_val=" + data_val);
 
         let index = 0;
         const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
@@ -350,7 +347,7 @@ function HttpServiceClass(root_object_val) {
                         first_fiddle: first_fiddle,
                         second_fiddle: second_fiddle,
                         });
-        this0.debug(true, "setupSoloResponse", "output=" + output);
+        console.log("HttpServiceClass.setupSessionResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
