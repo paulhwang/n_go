@@ -482,12 +482,12 @@ function HttpServiceClass(root_object_val) {
     this.linkUpdateInterval = function () {return this.theLinkUpdateInterval;};
     this.setLinkUpdateInterval = function (val) {this.theLinkUpdateInterval = val;};
 
-    this.objectName = function () {return "HttpServiceClass";};
-    this.rootObject = function () {return this.theRootObject;};
-    this.fabricServiceObject = function () {return this.rootObject().fabricServiceObject();};
-    this.httpInputObject = function () {return this.rootObject().httpInputObject();};
-    this.encodeObject = function () {return this.rootObject().encodeObject();};
-    this.FABRIC_DEF = function () {return this.rootObject().FABRIC_DEF();};
+    this.objectName = () => "HttpServiceClass";
+    this.rootObject = () => this.theRootObject;
+    this.fabricServiceObject = () => this.rootObject().fabricServiceObject();
+    this.httpInputObject = () => this.rootObject().httpInputObject();
+    this.encodeObject = () => this.rootObject().encodeObject();
+    this.FABRIC_DEF = () => this.rootObject().FABRIC_DEF();
 
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
