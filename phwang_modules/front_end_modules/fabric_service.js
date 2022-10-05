@@ -19,16 +19,16 @@ function AjaxEntryClass (ajax_id_val, callback_func_val, go_request_val, res_val
     "use strict";
 
     this.init__ = function (ajax_id_val, callback_func_val, go_request_val, res_val) {
-        this.theAjaxId = ajax_id_val;
-        this.theCallbackFunction = callback_func_val;
-        this.theAjaxRequest = go_request_val;
-        this.theAjaxResponse = res_val;
+        this.ajaxId_ = ajax_id_val;
+        this.callbackFunction_ = callback_func_val;
+        this.ajaxRequest_ = go_request_val;
+        this.ajaxResponse_ = res_val;
     }
 
-    this.ajaxId = function () {return this.theAjaxId;};
-    this.callbackFunction = function () {return this.theCallbackFunction;};
-    this.ajaxRequest = function () {return this.theAjaxRequest;}
-    this.ajaxResponse = function () {return this.theAjaxResponse;}
+    this.ajaxId = () => this.ajaxId_;
+    this.callbackFunction = () => this.callbackFunction_;
+    this.ajaxRequest = () => this.ajaxRequest_;
+    this.ajaxResponse = () => this.ajaxResponse_;
     this.init__(ajax_id_val, callback_func_val, go_request_val, res_val);
 }
 
@@ -36,7 +36,7 @@ function FabricServiceClass (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
+        this.rootObject_ = root_object_val;
         this.theTimeStampString = "";
         this.theNetSocketObject =  require("../util_modules/net_socket.js").malloc(this.rootObject());
         this.setupConnectionToFabric();
@@ -44,7 +44,7 @@ function FabricServiceClass (root_object_val) {
         this.theMaxAjaxIdIndex = 0;
         this.theAjaxIdArray = [];
         this.setMaxGlobalAjaxId(this.FABRIC_DEF().AJAX_ID_SIZE());
-        this.debug(true, "init__", "");
+        console.log("FabricServiceClass.init__()");
     };
 
     this.mallocAjaxEntryObject = function (callback_func_val, go_request_val, res_val) {
@@ -57,7 +57,7 @@ function FabricServiceClass (root_object_val) {
     this.setupConnectionToFabric = function () {
         var this0 = this;
         this.netSocketOjbect().connect(this.FABRIC_DEF().FABRIC_TCP_PORT(), this.FABRIC_DEF().FABRIC_IP_ADDRESS(), function () {
-            this0.debug(true, "init__", "fabric is connected");
+            console.log("FabricServiceClass.setupConnectionToFabric() fabric is connected");
         });
 
         this.netSocketOjbect().write(this.phwangLogo());
@@ -74,18 +74,19 @@ function FabricServiceClass (root_object_val) {
     this.receiveDataFromFabric = function (raw_data_val) {
         if (this.timeStampString() === "") {
             this.theTimeStampString = raw_data_val;
-            this.debug(true, "receiveDataFromFabric", "timeStampString=" + this.timeStampString());
+            console.log("FabricServiceClass.receiveDataFromFabric() timeStampString=" + this.timeStampString());
             return;
         }
 
-        var raw_length = raw_data_val.length;
-        var data_val;
+        const raw_length = raw_data_val.length;
+        let data_val;
 
         if (raw_data_val.charAt(0) === '{') {
             data_val = raw_data_val.slice(1 + this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE(), raw_length - 1);
         }
         else {
-            this.abend("receiveDataFromFabric", "wrong header: " + raw_data_val);
+            console.log("FabricServiceClass.receiveDataFromFabric() wrong header=" + raw_data_val);
+            abend();
             return;
         }
 
@@ -93,12 +94,13 @@ function FabricServiceClass (root_object_val) {
             console.log("FabricServiceClass.receiveDataFromFabric() data=" + data_val);
         }
 
-        var ajax_id_val = data_val.slice(1, 1 + this.FABRIC_DEF().AJAX_ID_SIZE());
-        var rest_data_val = data_val.slice(1 + this.FABRIC_DEF().AJAX_ID_SIZE());
+        const ajax_id_val = data_val.slice(1, 1 + this.FABRIC_DEF().AJAX_ID_SIZE());
+        let rest_data_val = data_val.slice(1 + this.FABRIC_DEF().AJAX_ID_SIZE());
 
-        var ajax_entry_object = this.getAjaxEntryObject(ajax_id_val);
+        const ajax_entry_object = this.getAjaxEntryObject(ajax_id_val);
         if (!ajax_entry_object) {
-            this.abend("receiveDataFromFabric", "null ajax_entry_object");
+            console.log("FabricServiceClass.receiveDataFromFabric() null ajax_entry_object");
+            abend();
             return;
         }
 
@@ -106,13 +108,13 @@ function FabricServiceClass (root_object_val) {
     };
 
     this.receiveCloseFromFabric = function () {
-        this.debug(true, "receiveCloseFromFabric", "");
+        console.log("FabricServiceClass.receiveCloseFromFabric()");
     };
 
     this.encodeNumber = function(number_val, size_val) {
-        var str = number_val.toString();
-        var buf = "";
-        for (var i = str.length; i < size_val; i++) {
+        const str = number_val.toString();
+        let buf = "";
+        for (let i = str.length; i < size_val; i++) {
             buf = buf + "0";
         }
         buf = buf + str;
@@ -121,18 +123,20 @@ function FabricServiceClass (root_object_val) {
 
     this.transmitData = function (ajax_entry_object_val, data_val) {
         this.putAjaxEntryObject(ajax_entry_object_val);
+        let data;
         if (data_val.length < 1000) {
-            var data = "{" + this.encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
+            data = "{" + this.encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
         }
-        this.debug(false, "transmitData", data);
+        console.log("FabricServiceClass.transmitData() data=" + data);
         this.netSocketOjbect().write(data);
     };
 
     this.getAjaxEntryObject = function (ajax_id_val) {
-        var found = false;
-        for (var i = 0; i < this.maxAjaxIdIndex(); i++) {
-            if (this.ajaxIdArrayElement(i)) {
-                if (this.ajaxIdArrayElement(i).ajaxId() === ajax_id_val) {
+        let found = false;
+        let index = 0;
+        for (; index < this.maxAjaxIdIndex(); index++) {
+            if (this.ajaxIdArrayElement(index)) {
+                if (this.ajaxIdArrayElement(index).ajaxId() === ajax_id_val) {
                     found = true;
                     break;
                 }
@@ -145,13 +149,13 @@ function FabricServiceClass (root_object_val) {
             return;
         }
 
-        var element = this.ajaxIdArrayElement(i);
-        this.clearAjaxIdArrayElement(i)
+        const element = this.ajaxIdArrayElement(index);
+        this.clearAjaxIdArrayElement(index)
         return element;
     };
 
     this.putAjaxEntryObject = function (val) {
-        for (var i = 0; i < this.maxAjaxIdIndex(); i++) {
+        for (let i = 0; i < this.maxAjaxIdIndex(); i++) {
             if (!this.ajaxIdArrayElement(i)) {
                 this.setAjaxIdArrayElement(i, val);
                 return;
@@ -170,7 +174,7 @@ function FabricServiceClass (root_object_val) {
 
     this.setMaxGlobalAjaxId = function (ajax_id_size_val) {
         this.theMaxGolbalAjaxId = 1;
-        for (var i = 0; i < ajax_id_size_val; i++) {
+        for (let i = 0; i < ajax_id_size_val; i++) {
             this.theMaxGolbalAjaxId *= 10;
         }
         this.theMaxGolbalAjaxId -= 1;
@@ -186,15 +190,12 @@ function FabricServiceClass (root_object_val) {
 
     this.objectName = function () {return "FabricServiceClass";};
     this.phwangLogo = function () {return "phwang168";};
-    this.rootObject = function () {return this.theRootObject;};
+    this.rootObject = () => this.rootObject_;
     this.FABRIC_DEF = function () {return this.rootObject().FABRIC_DEF();};
     this.netSocketOjbect = function () {return this.theNetSocketObject;};
     this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
     this.importObject = function () {return this.rootObject().importObject();};
     this.timeStampString = function () {return this.theTimeStampString;};
 
-    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
-    this.abend = function (str1_val, str2_val) {this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
