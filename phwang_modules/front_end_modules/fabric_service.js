@@ -180,21 +180,18 @@ function FabricServiceClass (root_object_val) {
         this.theMaxGolbalAjaxId -= 1;
     };
 
-    this.maxAjaxIdIndex = function () {return this.theMaxAjaxIdIndex;};
-    this.incrementMaxAjaxIdIndex = function () {this.theMaxAjaxIdIndex++;};
-    this.globalAjaxId = function () {return this.theGlobalAjaxId;};
-    this.maxGolbalAjaxId = function () {return this.theMaxGolbalAjaxId;};
-    this.ajaxIdArrayElement = function (index) {return this.theAjaxIdArray[index];};
-    this.setAjaxIdArrayElement = function (index, val) {this.theAjaxIdArray[index] = val;};
-    this.clearAjaxIdArrayElement = function (index) {this.theAjaxIdArray[index] = 0;};
+    this.maxAjaxIdIndex = () => this.theMaxAjaxIdIndex;
+    this.incrementMaxAjaxIdIndex = () => {this.theMaxAjaxIdIndex++;}
+    this.globalAjaxId = () => this.theGlobalAjaxId;
+    this.maxGolbalAjaxId = () => this.theMaxGolbalAjaxId;
+    this.ajaxIdArrayElement = (index) => this.theAjaxIdArray[index];
+    this.setAjaxIdArrayElement = (index, val) => {this.theAjaxIdArray[index] = val;}
+    this.clearAjaxIdArrayElement = (index) => {this.theAjaxIdArray[index] = 0;}
 
-    //this.objectName = function () {return "FabricServiceClass";};
-    //this.phwangLogo = function () {return "phwang168";};
     this.rootObject = () => this.rootObject_;
     this.FABRIC_DEF = () => this.rootObject().FABRIC_DEF();
     this.netSocketOjbect = () => this.netSocketObject_;
     this.httpServiceObject = () => this.rootObject().httpServiceObject();
-    //this.importObject = function () {return this.rootObject().importObject();};
     this.timeStampString = () => this.timeStampString_;
     this.setTimeStampString = (val) => {this.timeStampString_ = val;}
 
