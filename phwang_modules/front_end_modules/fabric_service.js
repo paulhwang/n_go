@@ -37,8 +37,8 @@ function FabricServiceClass (root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.rootObject_ = root_object_val;
-        this.theTimeStampString = "";
-        this.theNetSocketObject =  require("../util_modules/net_socket.js").malloc(this.rootObject());
+        this.timeStampString_ = "";
+        this.netSocketObject_ =  require("../util_modules/net_socket.js").malloc(this.rootObject());
         this.setupConnectionToFabric();
         this.theGlobalAjaxId = 0;
         this.theMaxAjaxIdIndex = 0;
@@ -60,7 +60,7 @@ function FabricServiceClass (root_object_val) {
             console.log("FabricServiceClass.setupConnectionToFabric() fabric is connected");
         });
 
-        this.netSocketOjbect().write(this.phwangLogo());
+        this.netSocketOjbect().write(this.FABRIC_DEF().PHWANG_LOGO());
 
         this.netSocketOjbect().onData(function (data_val) {
             this0.receiveDataFromFabric(data_val);
@@ -73,7 +73,7 @@ function FabricServiceClass (root_object_val) {
 
     this.receiveDataFromFabric = function (raw_data_val) {
         if (this.timeStampString() === "") {
-            this.theTimeStampString = raw_data_val;
+            this.setTimeStampString(raw_data_val);
             console.log("FabricServiceClass.receiveDataFromFabric() timeStampString=" + this.timeStampString());
             return;
         }
@@ -188,14 +188,15 @@ function FabricServiceClass (root_object_val) {
     this.setAjaxIdArrayElement = function (index, val) {this.theAjaxIdArray[index] = val;};
     this.clearAjaxIdArrayElement = function (index) {this.theAjaxIdArray[index] = 0;};
 
-    this.objectName = function () {return "FabricServiceClass";};
-    this.phwangLogo = function () {return "phwang168";};
+    //this.objectName = function () {return "FabricServiceClass";};
+    //this.phwangLogo = function () {return "phwang168";};
     this.rootObject = () => this.rootObject_;
-    this.FABRIC_DEF = function () {return this.rootObject().FABRIC_DEF();};
-    this.netSocketOjbect = function () {return this.theNetSocketObject;};
-    this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
-    this.importObject = function () {return this.rootObject().importObject();};
-    this.timeStampString = function () {return this.theTimeStampString;};
+    this.FABRIC_DEF = () => this.rootObject().FABRIC_DEF();
+    this.netSocketOjbect = () => this.netSocketObject_;
+    this.httpServiceObject = () => this.rootObject().httpServiceObject();
+    //this.importObject = function () {return this.rootObject().importObject();};
+    this.timeStampString = () => this.timeStampString_;
+    this.setTimeStampString = (val) => {this.timeStampString_ = val;}
 
     this.init__(root_object_val);
 }

@@ -24,4 +24,7 @@ function FABRIC_DEF_CLASS () {
     this.FABRIC_IP_ADDRESS = () => "127.0.0.1";
     this.FABRIC_TCP_PORT   = () => 8006;
     this.FABRIC_TCP_DATA_SIZE = () => 4;
+
+    this.PHWANG_LOGO = () => "phwang168";
+
 }
