@@ -42,21 +42,23 @@ module.exports = {
 function HttpInputClass(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
-        this.debug(true, "init__", "");
+        this.rootObject_ = root_object_val;
+        console.log("HttpInputClass.init__()");
     };
 
     this.processHttp = function (req, res, command_index_val) {
         if (!req.headers.phwangajaxrequest) {
-            this.abend("processHttp", "null phwangajaxrequest");
+            console.log("HttpInputClass.processHttp() null phwangajaxrequest");
+            abend()
             return;
         }
 
-        this.debug(false, "processHttp", "phwangajaxrequest=" + req.headers.phwangajaxrequest);
+        //console.log("HttpInputClass.processHttp() phwangajaxrequest=" + req.headers.phwangajaxrequest);
 
         var go_request = JSON.parse(req.headers.phwangajaxrequest);
         if (!go_request) {
-            this.abend("processHttp", "null go_request");
+            console.log("HttpInputClass.processHttp() null go_request");
+            abend();
             return;
         }
 
@@ -85,14 +87,8 @@ function HttpInputClass(root_object_val) {
         console.log("HttpInputClass.processFailure() state=" + state);
     };
 
-    this.objectName = function () {return "HttpInputClass";};
-    this.rootObject = function () {return this.theRootObject;};
-    this.httpServiceObject = function () {return this.rootObject().httpServiceObject();};
-    this.importObject = function () {return this.rootObject().importObject();};
-    this.utilObject = function () {return this.utilObject().utilObject();};
+    this.rootObject = () => this.rootObject_;
+    this.httpServiceObject = () => this.rootObject().httpServiceObject();
 
-    this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
-    this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
-    this.abend = function (str1_val, str2_val) {this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
     this.init__(root_object_val);
 }
