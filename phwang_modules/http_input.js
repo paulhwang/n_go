@@ -68,21 +68,21 @@ function HttpInputClass(root_object_val) {
                         command: request_val.command,
                         data: data_val,
                     });
-        this.debug(false, "sendHttpResponse", json_str);
+        //console.log("HttpInputClass.sendHttpResponse() json_str=" + json_str);
         res.type('application/json');
         res.send(json_str);
     };
 
     this.processNotFound = function (req, res) {
-        console.log(req.headers);
-        this.debug(true, "processNotFound", "*****");
+        console.log("HttpInputClass.processNotFound() req.headers=" + req.headers);
+        console.log("HttpInputClass.processNotFound() *****");
         res.type('text/plain');
         res.status(404);
         res.send('Not Found');
     };
 
     this.processFailure = function (err, req, res, next) {
-        this.logit("processFailure", state);
+        console.log("HttpInputClass.processFailure() state=" + state);
     };
 
     this.objectName = function () {return "HttpInputClass";};

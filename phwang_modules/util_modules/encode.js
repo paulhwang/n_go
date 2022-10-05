@@ -7,24 +7,23 @@
 var the_encode_object = null;
 
 module.exports = {
-    malloc: function (root_object_val) {
+    malloc: function () {
         if (!the_encode_object) {
-            the_encode_object = new EncodeClass(root_object_val);
+            the_encode_object = new EncodeClass();
         }
         return the_encode_object;
     },
 };
 
-function EncodeClass(root_object_val) {
+function EncodeClass() {
     "use strict";
 
-    this.init__ = function (root_object_val) {
-        this.rootObject_ = root_object_val;
+    this.init__ = function () {
     };
 
     this.decodeNumber = function(input_val, size_val) {
-        var output = 0;
-        for (var index = 0; index < size_val; index++) {
+        let output = 0;
+        for (let index = 0; index < size_val; index++) {
             output *= 10;
             output += input_val.charAt(index) - '0';
         }
@@ -36,8 +35,8 @@ function EncodeClass(root_object_val) {
             console.log("EncodeClass.encodeString() null_input_val");
             abend();
         }
-        var header;
-        var length = input_val.length;
+        let header;
+        const length = input_val.length;
 
         if (length < 10) {
             header = "1";
@@ -57,9 +56,8 @@ function EncodeClass(root_object_val) {
         return header + length + input_val;
     };
 
-    this.encodedStringlength = function(input_val)
-    {
-        var length = 0;
+    this.encodedStringlength = function(input_val) {
+        let length = 0;
 
         switch (input_val.charAt(0)) {
             case '1':
@@ -98,36 +96,37 @@ function EncodeClass(root_object_val) {
 
     this.decodeString = function(input_val)
     {
-        var length = 0;
-        var buf;
+        let length = 0;
+        let buf = "";
+        let length_str;
 
         switch (input_val.charAt(0)) {
             case '1':
-                var length_str = input_val.slice(1, 1 + 1);
+                length_str = input_val.slice(1, 1 + 1);
                 length = this.decodeNumber(length_str, 1);
                 buf = input_val.slice(1 + 1, 1 + 1 + length);
                 return buf;
 
             case '2':
-                var length_str = input_val.slice(1, 1 + 2);
+                length_str = input_val.slice(1, 1 + 2);
                 length = this.decodeNumber(length_str, 2);
                 buf = input_val.slice(1 + 2, 1 + 2 + length);
                 return buf;
 
             case '3':
-                var length_str = input_val.slice(1, 1 + 3);
+                length_str = input_val.slice(1, 1 + 3);
                 length = this.decodeNumber(length_str, 3);
                 buf = input_val.slice(1 + 3, 1 + 3 + length);
                 return buf;
 
             case '4':
-                var length_str = input_val.slice(1, 1 + 4);
+                length_str = input_val.slice(1, 1 + 4);
                 length = this.decodeNumber(length_str, 4);
                 buf = input_val.slice(1 + 4, 1 + 4 + length);
                 return buf;
 
             case '5':
-                var length_str = input_val.slice(1, 1 + 5);
+                length_str = input_val.slice(1, 1 + 5);
                 length = this.decodeNumber(length_str, 5);
                 buf = input_val.slice(1 + 5, 1 + 5 + length);
                 return buf;
@@ -139,32 +138,33 @@ function EncodeClass(root_object_val) {
         }
     };
 
-    this.decodeStringGetLength = function(input_val)
-    {
-        var length = 0;
+    this.decodeStringGetLength = function(input_val) {
+        let length = 0;
+        let length_str;
+
         switch (input_val.charAt(0)) {
             case '1':
-                var length_str = input_val.slice(1, 1 + 1);
+                length_str = input_val.slice(1, 1 + 1);
                 length = this.decodeNumber(length_str, 1);
                 return length + 1 + 1;
 
             case '2':
-                var length_str = input_val.slice(1, 1 + 2);
+                length_str = input_val.slice(1, 1 + 2);
                 length = this.decodeNumber(length_str, 2);
                 return length + 1 + 2;
 
             case '3':
-                var length_str = input_val.slice(1, 1 + 3);
+                length_str = input_val.slice(1, 1 + 3);
                 length = this.decodeNumber(length_str, 3);
                 return length + 1 + 3;
 
             case '4':
-                var length_str = input_val.slice(1, 1 + 4);
+                length_str = input_val.slice(1, 1 + 4);
                 length = this.decodeNumber(length_str, 4);
                 return length + 1 + 4;
 
             case '5':
-                var length_str = input_val.slice(1, 1 + 5);
+                length_str = input_val.slice(1, 1 + 5);
                 length = this.decodeNumber(length_str, 5);
                 return length + 1 + 5;
 
@@ -175,6 +175,5 @@ function EncodeClass(root_object_val) {
         }
     };
 
-    this.rootObject = function () {return this.rootObject_;};
-    this.init__(root_object_val);
+    this.init__();
 };

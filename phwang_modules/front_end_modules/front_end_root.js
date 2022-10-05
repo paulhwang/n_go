@@ -20,7 +20,7 @@ function FrontEndRootClass () {
 
     this.init__ = function () {
         this.FABRIC_DEF_ = require("./fabric_def.js").malloc();
-        this.encodeObject_ = require("../util_modules/encode.js").malloc(this);
+        this.encodeObject_ = require("../util_modules/encode.js").malloc();
         this.fabricServiceObject_ = require("./fabric_service.js").malloc(this);
         this.httpInputObject_ = require("../http_input.js").malloc(this);
         this.httpServiceObject_ = require("./http_service.js").malloc(this);
@@ -29,7 +29,6 @@ function FrontEndRootClass () {
 
     this.FABRIC_DEF = () => this.FABRIC_DEF_;
     this.encodeObject = () => this.encodeObject_;
-    //this.importObject = function () {return this.theImportObject;};
     this.fabricServiceObject = () => this.fabricServiceObject_;
     this.httpInputObject = () => this.httpInputObject_;
     this.httpServiceObject = () => this.httpServiceObject_;
