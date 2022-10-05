@@ -317,6 +317,7 @@ function HttpServiceClass(root_object_val) {
         const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
         index += this.FABRIC_DEF().SESSION_ID_SIZE();
 
+        const more_ajx_id = data_val[index++];
         const room_status = data_val[index++];
         const group_mode = data_val[index++];
         const theme_type = data_val[index++];
@@ -340,6 +341,7 @@ function HttpServiceClass(root_object_val) {
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
+                        more_ajx_id: more_ajx_id,
                         room_status: room_status,
                         group_mode: group_mode,
                         theme_type: theme_type,
@@ -448,6 +450,9 @@ function HttpServiceClass(root_object_val) {
         const session_id = data_val.slice(current, current + this.FABRIC_DEF().SESSION_ID_SIZE());
         current += this.FABRIC_DEF().SESSION_ID_SIZE();
 
+        const more_ajx_id = data_val.charAt(current);
+        current++;
+
         const theme_type = data_val.charAt(current);
         current++;
 
@@ -457,6 +462,7 @@ function HttpServiceClass(root_object_val) {
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
+                        more_ajx_id: more_ajx_id,
                         theme_type: theme_type,
                         result_data: result_data,
                         });
