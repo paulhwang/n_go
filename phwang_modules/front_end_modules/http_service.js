@@ -236,8 +236,8 @@ function HttpServiceClass(root_object_val) {
 
     this.getLinkDataResponse = function (this0, data_val, ajax_entry_object_val) {
         const go_request = ajax_entry_object_val.ajaxRequest();
-        this0.debug(false, "getLinkDataResponse", "link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
-        this0.debug(false, "getLinkDataResponse", "data_val=" + data_val);
+        console.log("HttpServiceClass.getLinkDataResponse() link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
+        console.log("HttpServiceClass.getLinkDataResponse() data_val=" + data_val);
 
         const result = data_val.slice(0, 2);
         const link_id = data_val.slice(2,10);
@@ -253,7 +253,7 @@ function HttpServiceClass(root_object_val) {
                         data: data_val,
                         pending_session_setup: pending_session_setup, 
                         });
-        this0.debug(false, "getLinkDataResponse", "output=" + output);
+        console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
