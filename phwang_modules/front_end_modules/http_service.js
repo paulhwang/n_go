@@ -79,7 +79,7 @@ function HttpServiceClass(root_object_val) {
         }
 
         if (go_request.command === "get_link_data") {
-            console.log("HttpServiceClass.parseGetRequest() go_request_json_val=" + go_request_json_val);
+            //console.log("HttpServiceClass.parseGetRequest() go_request_json_val=" + go_request_json_val);
         } else {
             console.log("HttpServiceClass.parseGetRequest() go_request_json_val=" + go_request_json_val);
         }

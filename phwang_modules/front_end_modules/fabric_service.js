@@ -127,7 +127,7 @@ function FabricServiceClass (root_object_val) {
         if (data_val.length < 1000) {
             data = "{" + this.encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
         }
-        console.log("FabricServiceClass.transmitData() data=" + data);
+        //console.log("FabricServiceClass.transmitData() data=" + data);
         this.netSocketOjbect().write(data);
     };
 
