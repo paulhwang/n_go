@@ -239,18 +239,26 @@ function HttpServiceClass(root_object_val) {
         console.log("HttpServiceClass.getLinkDataResponse() link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
         console.log("HttpServiceClass.getLinkDataResponse() data_val=" + data_val);
 
-        const result = data_val.slice(0, 2);
-        const link_id = data_val.slice(2,10);
-        const name_tag = data_val.slice(10, 14);
-        const pending_session_setup = data_val.slice(14);
-        data_val = data_val.slice(10);
+        let index = 0;
+        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        index += this.FABRIC_DEF().RESULT_SIZE();
+
+        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
+        index += this.FABRIC_DEF().LINK_ID_SIZE();
+
+        let all_data = data_val.slice(index);
+
+        const name_tag = data_val.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE_WITH_TYPE());
+        index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE_WITH_TYPE();
+
+        const pending_session_setup = data_val.slice(index);
 
         const output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         interval: this0.linkUpdateInterval(),
+                        all_data: all_data,
                         name_tag: name_tag,
-                        data: data_val,
                         pending_session_setup: pending_session_setup, 
                         });
         console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
