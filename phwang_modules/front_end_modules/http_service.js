@@ -246,10 +246,11 @@ function HttpServiceClass(root_object_val) {
         const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
-        let all_data = data_val.slice(index);
+        index++;
+        const name_list_tag = data_val.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE());
+        index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE();
 
-        const name_tag = data_val.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE_WITH_TYPE());
-        index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE_WITH_TYPE();
+        let data = data_val.slice(index);
 
         const pending_session_setup = data_val.slice(index);
 
@@ -257,8 +258,9 @@ function HttpServiceClass(root_object_val) {
                         result: result,
                         link_id: link_id,
                         interval: this0.linkUpdateInterval(),
-                        all_data: all_data,
-                        name_tag: name_tag,
+                        data: data,
+                        name_list_tag: name_list_tag,
+                        data: data,
                         pending_session_setup: pending_session_setup, 
                         });
         console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
