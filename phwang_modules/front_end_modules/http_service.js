@@ -212,6 +212,7 @@ function HttpServiceClass(root_object_val) {
         let index = 0;
         const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
+
         const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
@@ -284,7 +285,7 @@ function HttpServiceClass(root_object_val) {
         }
         buf = buf + name_list_tag;
         */
-        
+
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getNameListResponse, go_request, res);
         this.debug(false, "getNameList", "link_id=" + go_request.link_id);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1N" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.name_list_tag);
@@ -293,14 +294,19 @@ function HttpServiceClass(root_object_val) {
     this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
         const go_request = ajax_entry_object_val.ajaxRequest();
 
-        const result = data_val.slice(0, 2);
-        const link_id = data_val.slice(2, 10);
-        const name_list = data_val.slice(10);
+        let index = 0;
+        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        index += this.FABRIC_DEF().RESULT_SIZE();
+
+        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
+        index += this.FABRIC_DEF().LINK_ID_SIZE();
+
+        const name_list = data_val.slice(index);
 
         const output = JSON.stringify({
                         result: result,
                         link_id: link_id,
-                        c_name_list: name_list,
+                        name_list: name_list,
                         });
         this0.debug(true, "getNameListResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
