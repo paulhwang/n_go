@@ -272,6 +272,7 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.getNameList = function (go_request, res) {
+        /*
         const name_list_tag = Number(go_request.name_list_tag);
         let buf = "";
 
@@ -282,10 +283,11 @@ function HttpServiceClass(root_object_val) {
             buf = buf + 0;
         }
         buf = buf + name_list_tag;
-
+        */
+        
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getNameListResponse, go_request, res);
         this.debug(false, "getNameList", "link_id=" + go_request.link_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1N" + ajax_entry_object.ajaxId() + go_request.link_id + buf);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N1N" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.name_list_tag);
     };
 
     this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
