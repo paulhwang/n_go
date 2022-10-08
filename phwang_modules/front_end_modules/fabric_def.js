@@ -25,8 +25,10 @@ function FABRIC_DEF_CLASS () {
     this.FABRIC_TCP_PORT   = () => 8006;
     this.FABRIC_TCP_DATA_SIZE = () => 4;
 
-    this.FE_GET_LINK_DATA_TYPE_NAME_LIST = () => 'N';
     this.NAME_LIST_TAG_SIZE = () => 3;
+    this.GET_LINK_DATA_TYPE_NAME_LIST        = () => 'N';
+    this.GET_LINK_DATA_TYPE_PENDING_SESSION2 = () => 'Y';
+    this.GET_LINK_DATA_TYPE_PENDING_SESSION3 = () => 'Z';
 
     this.PHWANG_LOGO = () => "phwang168";
 

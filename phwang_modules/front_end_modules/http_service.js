@@ -247,22 +247,45 @@ function HttpServiceClass(root_object_val) {
         const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
-        index++;
-        const name_list_tag = data_val.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE());
-        index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE();
+        let remaining_data = data_val.slice(index);
+        let name_list_tag = "N/A"
+        let pending_session2 = "N/A"
+        let pending_session3 = "N/A"
 
-        let data = data_val.slice(index);
+        while (remaining_data.length > 0) {
+            index = 0;
+            let type = remaining_data.charAt(index);
+            console.log("HttpServiceClass.getLinkDataResponse() type=" + type);
+            index++;
 
-        const pending_session_setup = data_val.slice(index);
+            if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_NAME_LIST()) {
+                name_list_tag = remaining_data.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE());
+                console.log("HttpServiceClass.getLinkDataResponse() name_list_tag=" + name_list_tag);
+
+                index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE();
+            }
+
+            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
+            }
+
+            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION3()) {
+            }
+
+            remaining_data = remaining_data.slice(index);
+        }
+
+        if (remaining_data.length !== 0) {
+            console.log("HttpServiceClass.getLinkDataResponse() remaining_data.length=" + remaining_data.length);
+            abend();
+        }
 
         const output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         interval: this0.linkUpdateInterval(),
-                        data: data,
                         name_list_tag: name_list_tag,
-                        data: data,
-                        pending_session_setup: pending_session_setup, 
+                        pending_session2: pending_session2, 
+                        pending_session3: pending_session3, 
                         });
         console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
@@ -391,8 +414,10 @@ function HttpServiceClass(root_object_val) {
         var index = 0;
         var result = data_val.slice(index, index + 2);
         index += 2;
+
         var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
+
         var session_id = data_val.slice(index, index + 8);
 
         var output = JSON.stringify({
@@ -418,6 +443,7 @@ function HttpServiceClass(root_object_val) {
         var index = 0;
         var result = data_val.slice(index, index + 2);
         index += 2;
+
         var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
@@ -468,20 +494,20 @@ function HttpServiceClass(root_object_val) {
     this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         console.log("HttpServiceClass.getSessionDataResponse() data_val=" + data_val);
 
-        let current = 0;
-        const result = data_val.slice(current, current + 2);
-        current += 2;
+        let index = 0;
+        const result = data_val.slice(index, index + 2);
+        index += 2;
 
-        const link_id = data_val.slice(current, current + this.FABRIC_DEF().LINK_ID_SIZE());
-        current += this.FABRIC_DEF().LINK_ID_SIZE();
+        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
+        index += this.FABRIC_DEF().LINK_ID_SIZE();
 
-        const session_id = data_val.slice(current, current + this.FABRIC_DEF().SESSION_ID_SIZE());
-        current += this.FABRIC_DEF().SESSION_ID_SIZE();
+        const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
+        index += this.FABRIC_DEF().SESSION_ID_SIZE();
 
-        //const theme_type = data_val.charAt(current);
-        //current++;
+        //const theme_type = data_val.charAt(index);
+        //index++;
 
-        const result_data = data_val.slice(current);
+        const result_data = data_val.slice(index);
 
         const output = JSON.stringify({
                         result: result,
@@ -503,23 +529,23 @@ function HttpServiceClass(root_object_val) {
     this.putSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         console.log("HttpServiceClass.putSessionDataResponse() data_val=" + data_val);
 
-        let current = 0;
-        const result = data_val.slice(current, current + 2);
-        current += 2;
+        let index = 0;
+        const result = data_val.slice(index, index + 2);
+        index += 2;
 
-        const link_id = data_val.slice(current, current + this.FABRIC_DEF().LINK_ID_SIZE());
-        current += this.FABRIC_DEF().LINK_ID_SIZE();
+        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
+        index += this.FABRIC_DEF().LINK_ID_SIZE();
 
-        const session_id = data_val.slice(current, current + this.FABRIC_DEF().SESSION_ID_SIZE());
-        current += this.FABRIC_DEF().SESSION_ID_SIZE();
+        const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
+        index += this.FABRIC_DEF().SESSION_ID_SIZE();
 
-        const more_ajx_id = data_val.charAt(current);
-        current++;
+        const more_ajx_id = data_val.charAt(index);
+        index++;
 
-        const theme_type = data_val.charAt(current);
-        current++;
+        const theme_type = data_val.charAt(index);
+        index++;
 
-        const result_data = data_val.slice(current);
+        const result_data = data_val.slice(index);
 
         const output = JSON.stringify({
                         result: result,
