@@ -260,15 +260,31 @@ function HttpServiceClass(root_object_val) {
 
             if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_NAME_LIST()) {
                 name_list_tag = remaining_data.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE());
-                console.log("HttpServiceClass.getLinkDataResponse() name_list_tag=" + name_list_tag);
-
                 index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE();
+
+                console.log("HttpServiceClass.getLinkDataResponse() name_list_tag=" + name_list_tag);
             }
 
             else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
+                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE());
+                index += this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE();
+
+                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE());
+                pending_session2 = remaining_data.slice(index, index + len);
+                index += len;
+
+                console.log("HttpServiceClass.getLinkDataResponse() pending_session2=" + pending_session2);
             }
 
             else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION3()) {
+                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE());
+                index += this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE();
+
+                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE());
+                pending_session3 = remaining_data.slice(index, index + len);
+                index += len;
+
+                console.log("HttpServiceClass.getLinkDataResponse() pending_session3=" + pending_session3);
             }
 
             remaining_data = remaining_data.slice(index);
