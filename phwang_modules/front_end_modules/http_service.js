@@ -237,8 +237,8 @@ function HttpServiceClass(root_object_val) {
 
     this.getLinkDataResponse = function (this0, data_val, ajax_entry_object_val) {
         const go_request = ajax_entry_object_val.ajaxRequest();
-        console.log("HttpServiceClass.getLinkDataResponse() link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
-        console.log("HttpServiceClass.getLinkDataResponse() data_val=" + data_val);
+        //console.log("HttpServiceClass.getLinkDataResponse() link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
+        //console.log("HttpServiceClass.getLinkDataResponse() data_val=" + data_val);
 
         let index = 0;
         const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
@@ -255,14 +255,14 @@ function HttpServiceClass(root_object_val) {
         while (remaining_data.length > 0) {
             index = 0;
             let type = remaining_data.charAt(index);
-            console.log("HttpServiceClass.getLinkDataResponse() type=" + type);
+            //console.log("HttpServiceClass.getLinkDataResponse() type=" + type);
             index++;
 
             if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_NAME_LIST()) {
                 name_list_tag = remaining_data.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE());
                 index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE();
 
-                console.log("HttpServiceClass.getLinkDataResponse() name_list_tag=" + name_list_tag);
+                //console.log("HttpServiceClass.getLinkDataResponse() name_list_tag=" + name_list_tag);
             }
 
             else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
@@ -303,7 +303,7 @@ function HttpServiceClass(root_object_val) {
                         pending_session2: pending_session2, 
                         pending_session3: pending_session3, 
                         });
-        console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
+        //console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
