@@ -421,29 +421,32 @@ function HttpServiceClass(root_object_val) {
     this.setupSession2 = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.setupSession2Response, go_request, res);
         this.debug(true, "setupSession2", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N2Y" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id + go_request.theme_data);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N2Y" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id + go_request.answer);
     };
 
     this.setupSession2Response = function (this0, data_val, ajax_entry_object_val) {
-        //var go_request = ajax_entry_object_val.ajaxRequest();
+        let index = 0;
+        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
+        index += this.FABRIC_DEF().RESULT_SIZE();
 
-        var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
-
-        var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
+        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
-        var session_id = data_val.slice(index, index + 8);
+        const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
+        index += this.FABRIC_DEF().SESSION_ID_SIZE();
 
-        var output = JSON.stringify({
-                        //link_id: go_request.link_id,
-                        //confirm: "yes",
+        const theme_type = data_val.charAt(index);
+        index++;
+
+        const theme_info = data_val.slice(index);
+
+        const output = JSON.stringify({
                         result: result,
                         link_id: link_id,
                         session_id: session_id,
-                        //topic_data: go_request.topic_data,
-                        //his_name: "tbd",
+                        theme_type: theme_type,
+                        theme_info: theme_info,
+                        first_fiddle: "tbd",
                         });
         this0.debug(true, "setupSession2Response", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
