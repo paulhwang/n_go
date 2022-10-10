@@ -311,6 +311,7 @@ function HttpServiceClass(root_object_val) {
                         pending_session2: pending_session2, 
                         pending_session3: pending_session3,
                         pending_data: pending_data,
+                        data: "",
                         });
         //console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
