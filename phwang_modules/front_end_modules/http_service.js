@@ -249,6 +249,7 @@ function HttpServiceClass(root_object_val) {
 
         let remaining_data = data_val.slice(index);
         let name_list_tag = "N/A"
+        let pending_data = "N/A"
         let pending_session2 = "N/A"
         let pending_session3 = "N/A"
 
@@ -265,11 +266,18 @@ function HttpServiceClass(root_object_val) {
                 //console.log("HttpServiceClass.getLinkDataResponse() name_list_tag=" + name_list_tag);
             }
 
-            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
-                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE());
-                index += this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE();
+            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_DATA()) {
+                pending_data = remaining_data.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
+                index += this.FABRIC_DEF().SESSION_ID_SIZE();
 
-                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE());
+                console.log("HttpServiceClass.getLinkDataResponse() pending_data=" + pending_data);
+            }
+
+            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
+                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
+                index += this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE();
+
+                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
                 pending_session2 = remaining_data.slice(index, index + len);
                 index += len;
 
@@ -277,10 +285,10 @@ function HttpServiceClass(root_object_val) {
             }
 
             else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION3()) {
-                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE());
-                index += this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE();
+                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
+                index += this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE();
 
-                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_PENDING_SESSION_DATA_SIZE());
+                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
                 pending_session3 = remaining_data.slice(index, index + len);
                 index += len;
 
@@ -301,7 +309,8 @@ function HttpServiceClass(root_object_val) {
                         interval: this0.linkUpdateInterval(),
                         name_list_tag: name_list_tag,
                         pending_session2: pending_session2, 
-                        pending_session3: pending_session3, 
+                        pending_session3: pending_session3,
+                        pending_data: pending_data,
                         });
         //console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
