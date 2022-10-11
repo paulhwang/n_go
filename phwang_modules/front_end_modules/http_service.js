@@ -153,17 +153,7 @@ function HttpServiceClass(root_object_val) {
 
     this.registerResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
-
-/*
-        let index = 0;
-        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
-        index += this.FABRIC_DEF().RESULT_SIZE();
-        const my_name = data_val.slice(index);
-*/
         const output = JSON.stringify({
-                        //my_name: ajax_entry_object_val.my_name,
-                        //result: result,
-                        //my_name: my_name,
                         data: data_val,
                         });
         console.log("HttpServiceClass.registerResponse() output=" + output);
@@ -210,7 +200,7 @@ function HttpServiceClass(root_object_val) {
 
     this.loginResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
-
+/*
         let index = 0;
         const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
@@ -220,13 +210,15 @@ function HttpServiceClass(root_object_val) {
 
         const encoded_my_name = data_val.slice(index);
         const my_name = this.encodeObject().decodeString(encoded_my_name);
+*/
 
         const output = JSON.stringify({
-                        my_name: ajax_entry_object_val.my_name,
+                        //my_name: ajax_entry_object_val.my_name,
                         time_stamp: this.fabricServiceObject().timeStampString(),
-                        result: result,
-                        link_id: link_id,
-                        my_name: my_name,
+                        //result: result,
+                        //link_id: link_id,
+                        //my_name: my_name,
+                        data: data_val,
                         });
         console.log("HttpServiceClass.loginResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
