@@ -319,30 +319,9 @@ function HttpServiceClass(root_object_val) {
 
     this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         console.log("HttpServiceClass.getSessionDataResponse() data_val=" + data_val);
-/*
-        let index = 0;
-        const result = data_val.slice(index, index + 2);
-        index += 2;
-
-        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-
-        const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
-        index += this.FABRIC_DEF().SESSION_ID_SIZE();
-
-        //const theme_type = data_val.charAt(index);
-        //index++;
-
-        const result_data = data_val.slice(index);
-*/
         const output = JSON.stringify({
-                        //result: result,
-                        //link_id: link_id,
-                        //session_id: session_id,
-                        //result_data: result_data,
                         data: data_val,
                         });
-        console.log("HttpServiceClass.getSessionDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
@@ -354,34 +333,9 @@ function HttpServiceClass(root_object_val) {
 
     this.putSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         console.log("HttpServiceClass.putSessionDataResponse() data_val=" + data_val);
-
-        let index = 0;
-        const result = data_val.slice(index, index + 2);
-        index += 2;
-
-        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-
-        const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
-        index += this.FABRIC_DEF().SESSION_ID_SIZE();
-
-        const more_ajx_id = data_val.charAt(index);
-        index++;
-
-        const theme_type = data_val.charAt(index);
-        index++;
-
-        const result_data = data_val.slice(index);
-
         const output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        session_id: session_id,
-                        more_ajx_id: more_ajx_id,
-                        theme_type: theme_type,
-                        result_data: result_data,
+                        data: data_val,
                         });
-        console.log("HttpServiceClass.putSessionDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
