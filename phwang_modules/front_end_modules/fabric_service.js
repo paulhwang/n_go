@@ -94,7 +94,7 @@ function FabricServiceClass (root_object_val) {
             console.log("FabricServiceClass.receiveDataFromFabric() data=" + data_val);
         }
 
-        const ajax_id_val = data_val.slice(1, 1 + this.FABRIC_DEF().AJAX_ID_SIZE());
+        const ajax_id_val = data_val.slice(0, this.FABRIC_DEF().AJAX_ID_SIZE());
         let rest_data_val = data_val.slice(1 + this.FABRIC_DEF().AJAX_ID_SIZE());
 
         const ajax_entry_object = this.getAjaxEntryObject(ajax_id_val);
