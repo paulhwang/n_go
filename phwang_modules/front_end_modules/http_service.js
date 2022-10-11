@@ -249,44 +249,16 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.getNameList = function (go_request, res) {
-        /*
-        const name_list_tag = Number(go_request.name_list_tag);
-        let buf = "";
-
-        if (name_list_tag < 100) {
-            buf = buf + 0;
-        }
-        if (name_list_tag < 10) {
-            buf = buf + 0;
-        }
-        buf = buf + name_list_tag;
-        */
-
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.getNameListResponse, go_request, res);
         this.debug(false, "getNameList", "link_id=" + go_request.link_id);
         this.fabricServiceObject().transmitData(ajax_entry_object, "N1N" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.name_list_tag);
     };
 
     this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
-        //const go_request = ajax_entry_object_val.ajaxRequest();
-
-/*
-        let index = 0;
-        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
-        index += this.FABRIC_DEF().RESULT_SIZE();
-
-        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-
-        const name_list = data_val.slice(index);
-*/
-
         const output = JSON.stringify({
-                        //result: result,
-                        //link_id: link_id,
-                        data: data_val,
+                       data: data_val,
                         });
-        this0.debug(true, "getNameListResponse", "output=" + output);
+        this0.debug(false, "getNameListResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
@@ -319,40 +291,6 @@ function HttpServiceClass(root_object_val) {
                         session_id: session_id,
                         });
 
-/*
-        const more_ajx_id = data_val[index++];
-        const room_status = data_val[index++];
-        const group_mode = data_val[index++];
-        const theme_type = data_val[index++];
-
-        const encoded_theme_data = data_val.slice(index);
-        const theme_data = this.encodeObject().decodeString(encoded_theme_data);
-        const theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
-        index += theme_data_len;
-
-        const encoded_first_fiddle = data_val.slice(index);
-        const first_fiddle = this.encodeObject().decodeString(encoded_first_fiddle);
-        const first_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_first_fiddle);
-        index += first_fiddle_len;
-
-        const encoded_second_fiddle = data_val.slice(index);
-        const second_fiddle = this.encodeObject().decodeString(encoded_second_fiddle);
-        const second_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_second_fiddle);
-        index += second_fiddle_len;
-
-        const output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        session_id: session_id,
-                        more_ajx_id: more_ajx_id,
-                        room_status: room_status,
-                        group_mode: group_mode,
-                        theme_type: theme_type,
-                        theme_data: theme_data,
-                        first_fiddle: first_fiddle,
-                        second_fiddle: second_fiddle,
-                        });
-*/
         console.log("HttpServiceClass.setupSessionResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
