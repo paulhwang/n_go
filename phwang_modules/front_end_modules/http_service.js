@@ -303,6 +303,7 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.setupSession2Response = function (this0, data_val, ajax_entry_object_val) {
+/*
         let index = 0;
         const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
@@ -317,14 +318,16 @@ function HttpServiceClass(root_object_val) {
         index++;
 
         const theme_info = data_val.slice(index);
+*/
 
         const output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        session_id: session_id,
-                        theme_type: theme_type,
-                        theme_info: theme_info,
+                        //result: result,
+                        //link_id: link_id,
+                        //session_id: session_id,
+                        //theme_type: theme_type,
+                        //theme_info: theme_info,
                         first_fiddle: "tbd",
+                        data: data_val,
                         });
         this0.debug(true, "setupSession2Response", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
