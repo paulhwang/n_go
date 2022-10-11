@@ -253,6 +253,7 @@ function HttpServiceClass(root_object_val) {
         let pending_session2 = "N/A"
         let pending_session3 = "N/A"
 
+/*
         while (remaining_data.length > 0) {
             index = 0;
             let type = remaining_data.charAt(index);
@@ -302,6 +303,7 @@ function HttpServiceClass(root_object_val) {
             console.log("HttpServiceClass.getLinkDataResponse() remaining_data.length=" + remaining_data.length);
             abend();
         }
+*/
 
         const output = JSON.stringify({
                         result: result,
@@ -311,7 +313,7 @@ function HttpServiceClass(root_object_val) {
                         pending_session2: pending_session2, 
                         pending_session3: pending_session3,
                         pending_data: pending_data,
-                        data: "",
+                        data: remaining_data,
                         });
         //console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
