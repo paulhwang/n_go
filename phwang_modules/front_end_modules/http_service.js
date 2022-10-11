@@ -236,84 +236,8 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.getLinkDataResponse = function (this0, data_val, ajax_entry_object_val) {
-        const go_request = ajax_entry_object_val.ajaxRequest();
-        //console.log("HttpServiceClass.getLinkDataResponse() link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
-        //console.log("HttpServiceClass.getLinkDataResponse() data_val=" + data_val);
-
-        /*
-        let index = 0;
-        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
-        index += this.FABRIC_DEF().RESULT_SIZE();
-
-        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-
-        let remaining_data = data_val.slice(index);
-        let name_list_tag = "N/A"
-        let pending_data = "N/A"
-        let pending_session2 = "N/A"
-        let pending_session3 = "N/A"
-*/
-/*
-        while (remaining_data.length > 0) {
-            index = 0;
-            let type = remaining_data.charAt(index);
-            //console.log("HttpServiceClass.getLinkDataResponse() type=" + type);
-            index++;
-
-            if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_NAME_LIST()) {
-                name_list_tag = remaining_data.slice(index, index + this.FABRIC_DEF().NAME_LIST_TAG_SIZE());
-                index += this.FABRIC_DEF().NAME_LIST_TAG_SIZE();
-
-                //console.log("HttpServiceClass.getLinkDataResponse() name_list_tag=" + name_list_tag);
-            }
-
-            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_DATA()) {
-                pending_data = remaining_data.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
-                index += this.FABRIC_DEF().SESSION_ID_SIZE();
-
-                console.log("HttpServiceClass.getLinkDataResponse() pending_data=" + pending_data);
-            }
-
-            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION2()) {
-                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
-                index += this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE();
-
-                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
-                pending_session2 = remaining_data.slice(index, index + len);
-                index += len;
-
-                console.log("HttpServiceClass.getLinkDataResponse() pending_session2=" + pending_session2);
-            }
-
-            else if (type === this.FABRIC_DEF().GET_LINK_DATA_TYPE_PENDING_SESSION3()) {
-                let len_str = remaining_data.slice(index, index + this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
-                index += this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE();
-
-                let len = this.encodeObject().decodeNumber(len_str, this.FABRIC_DEF().GET_LINK_DATA_LENGTH_SIZE());
-                pending_session3 = remaining_data.slice(index, index + len);
-                index += len;
-
-                console.log("HttpServiceClass.getLinkDataResponse() pending_session3=" + pending_session3);
-            }
-
-            remaining_data = remaining_data.slice(index);
-        }
-
-        if (remaining_data.length !== 0) {
-            console.log("HttpServiceClass.getLinkDataResponse() remaining_data.length=" + remaining_data.length);
-            abend();
-        }
-*/
-
         const output = JSON.stringify({
-                        //result: result,
-                        //link_id: link_id,
                         interval: this0.linkUpdateInterval(),
-                        //name_list_tag: name_list_tag,
-                        //pending_session2: pending_session2, 
-                        //pending_session3: pending_session3,
-                        //pending_data: pending_data,
                         data: data_val,
                         });
         //console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
@@ -344,8 +268,9 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.getNameListResponse = function (this0, data_val, ajax_entry_object_val) {
-        const go_request = ajax_entry_object_val.ajaxRequest();
+        //const go_request = ajax_entry_object_val.ajaxRequest();
 
+/*
         let index = 0;
         const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
@@ -354,11 +279,12 @@ function HttpServiceClass(root_object_val) {
         index += this.FABRIC_DEF().LINK_ID_SIZE();
 
         const name_list = data_val.slice(index);
+*/
 
         const output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        name_list: name_list,
+                        //result: result,
+                        //link_id: link_id,
+                        data: data_val,
                         });
         this0.debug(true, "getNameListResponse", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
