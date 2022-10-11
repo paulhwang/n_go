@@ -116,7 +116,7 @@ function HttpServiceClass(root_object_val) {
         this.fabricServiceObject().transmitData(ajax_entry_object, "N0M" + ajax_entry_object.ajaxId() + act_val + data);
     };
 
-    this.mmwReadDataResponse = function (this0, input_data_val, ajax_entry_object_val) {
+    this.mmwReadDataResponse = function (this0, data_val, ajax_entry_object_val) {
         this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
         var index = 0;
@@ -124,7 +124,7 @@ function HttpServiceClass(root_object_val) {
         index += this.FABRIC_DEF().RESULT_SIZE();
         var current_encoded_input = data_val.slice(index);
 
-        this0.debug(true, "mmwReadDataResponse", "input_data_val=" + input_data_val);
+        this0.debug(true, "mmwReadDataResponse", "data_val=" + data_val);
         this0.debug(true, "mmwReadDataResponse", "act=" + ajax_entry_object_val.act + " data=" + ajax_entry_object_val.act );
 
         //var encoded_data_length = this.encodeObject().encodedStringlength(current_encoded_input);
