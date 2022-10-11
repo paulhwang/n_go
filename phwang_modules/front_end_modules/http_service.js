@@ -206,7 +206,7 @@ function HttpServiceClass(root_object_val) {
 
 
         const output = JSON.stringify({
-                        data: data_val + this.fabricServiceObject().timeStampString(),
+                        data: data_val,
                         });
         console.log("HttpServiceClass.loginResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);

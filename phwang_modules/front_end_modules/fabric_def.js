@@ -16,6 +16,9 @@ module.exports = {
 };
 
 function FABRIC_DEF_CLASS () {
+    this.LOGIN_RESPONSE         = () => 'i';
+    this.GET_LINK_DATA_RESPONSE = () => 'd';
+
     this.RESULT_SIZE     = () => 2;
     this.LINK_ID_SIZE    = () => 8;
     this.SESSION_ID_SIZE = () => 8;

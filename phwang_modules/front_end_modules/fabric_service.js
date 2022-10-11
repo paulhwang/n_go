@@ -90,8 +90,14 @@ function FabricServiceClass (root_object_val) {
             return;
         }
 
-        if (data_val.charAt(3) != 'd') {
+        if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) != this.FABRIC_DEF().GET_LINK_DATA_RESPONSE()) {
             console.log("FabricServiceClass.receiveDataFromFabric() data=" + data_val);
+        }
+
+        if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) === this.FABRIC_DEF().LOGIN_RESPONSE()) {
+            console.log("==FabricServiceClass.receiveDataFromFabric() data=" + data_val);
+            data_val = data_val + this.timeStampString();
+            console.log("11FabricServiceClass.receiveDataFromFabric() data=" + data_val);
         }
 
         const ajax_id_val = data_val.slice(0, this.FABRIC_DEF().AJAX_ID_SIZE());
