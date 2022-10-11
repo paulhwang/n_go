@@ -274,21 +274,7 @@ function HttpServiceClass(root_object_val) {
 
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
         console.log("HttpServiceClass.setupSessionResponse() data_val=" + data_val);
-/*
-        let index = 0;
-        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
-        index += this.FABRIC_DEF().RESULT_SIZE();
-
-        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-
-        const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
-        index += this.FABRIC_DEF().SESSION_ID_SIZE();
-*/
         const output = JSON.stringify({
-                        //result: result,
-                        //link_id: link_id,
-                        //session_id: session_id,
                         data: data_val,
                         });
 
@@ -303,29 +289,7 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.setupSession2Response = function (this0, data_val, ajax_entry_object_val) {
-/*
-        let index = 0;
-        const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
-        index += this.FABRIC_DEF().RESULT_SIZE();
-
-        const link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-
-        const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
-        index += this.FABRIC_DEF().SESSION_ID_SIZE();
-
-        const theme_type = data_val.charAt(index);
-        index++;
-
-        const theme_info = data_val.slice(index);
-*/
-
         const output = JSON.stringify({
-                        //result: result,
-                        //link_id: link_id,
-                        //session_id: session_id,
-                        //theme_type: theme_type,
-                        //theme_info: theme_info,
                         first_fiddle: "tbd",
                         data: data_val,
                         });
@@ -340,47 +304,7 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.setupSession3Response = function (this0, data_val, ajax_entry_object_val) {
-        /*
-        var index = 0;
-        var result = data_val.slice(index, index + 2);
-        index += 2;
-
-        var link_id = data_val.slice(index, index + this.FABRIC_DEF().LINK_ID_SIZE());
-        index += this.FABRIC_DEF().LINK_ID_SIZE();
-
-        var session_id = data_val.slice(index, index + 8);
-        index += this.FABRIC_DEF().SESSION_ID_SIZE();
-
-        const room_status = data_val[index++];
-        const group_mode = data_val[index++];
-        const theme_type = data_val[index++];
-
-        const encoded_theme_data = data_val.slice(index);
-        console.log("theme=" + encoded_theme_data);
-        const theme_data = this.encodeObject().decodeString(encoded_theme_data);
-        const theme_data_len = this.encodeObject().decodeStringGetLength(encoded_theme_data);
-        index += theme_data_len;
-
-        const encoded_first_fiddle = data_val.slice(index);
-        const first_fiddle = this.encodeObject().decodeString(encoded_first_fiddle);
-        const first_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_first_fiddle);
-        index += first_fiddle_len;
-
-        const encoded_second_fiddle = data_val.slice(index);
-        const second_fiddle = this.encodeObject().decodeString(encoded_second_fiddle);
-        const second_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_second_fiddle);
-        index += second_fiddle_len;
-*/
         const output = JSON.stringify({
-                        //result: result,
-                        //link_id: link_id,
-                        //session_id: session_id,
-                        //room_status: room_status,
-                        //group_mode: group_mode,
-                        //theme_type: theme_type,
-                        //theme_data: theme_data,
-                        //first_fiddle: first_fiddle,
-                        //second_fiddle: second_fiddle,
                         data: data_val,
                         });
         this0.debug(true, "setupSession3Response", "output=" + output);
@@ -395,7 +319,7 @@ function HttpServiceClass(root_object_val) {
 
     this.getSessionDataResponse = function (this0, data_val, ajax_entry_object_val) {
         console.log("HttpServiceClass.getSessionDataResponse() data_val=" + data_val);
-
+/*
         let index = 0;
         const result = data_val.slice(index, index + 2);
         index += 2;
@@ -410,13 +334,13 @@ function HttpServiceClass(root_object_val) {
         //index++;
 
         const result_data = data_val.slice(index);
-
+*/
         const output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        session_id: session_id,
-                        //theme_type: theme_type,
-                        result_data: result_data,
+                        //result: result,
+                        //link_id: link_id,
+                        //session_id: session_id,
+                        //result_data: result_data,
+                        data: data_val,
                         });
         console.log("HttpServiceClass.getSessionDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
