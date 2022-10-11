@@ -90,7 +90,7 @@ function FabricServiceClass (root_object_val) {
             return;
         }
 
-        if (data_val.charAt(0) != 'd') {
+        if (data_val.charAt(3) != 'd') {
             console.log("FabricServiceClass.receiveDataFromFabric() data=" + data_val);
         }
 
