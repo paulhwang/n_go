@@ -274,7 +274,7 @@ function HttpServiceClass(root_object_val) {
 
     this.setupSessionResponse = function (this0, data_val, ajax_entry_object_val) {
         console.log("HttpServiceClass.setupSessionResponse() data_val=" + data_val);
-
+/*
         let index = 0;
         const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
@@ -284,11 +284,12 @@ function HttpServiceClass(root_object_val) {
 
         const session_id = data_val.slice(index, index + this.FABRIC_DEF().SESSION_ID_SIZE());
         index += this.FABRIC_DEF().SESSION_ID_SIZE();
-
+*/
         const output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        session_id: session_id,
+                        //result: result,
+                        //link_id: link_id,
+                        //session_id: session_id,
+                        data: data_val,
                         });
 
         console.log("HttpServiceClass.setupSessionResponse() output=" + output);
