@@ -240,6 +240,7 @@ function HttpServiceClass(root_object_val) {
         //console.log("HttpServiceClass.getLinkDataResponse() link_id=" + go_request.link_id + " packet_id=" + go_request.packet_id);
         //console.log("HttpServiceClass.getLinkDataResponse() data_val=" + data_val);
 
+        /*
         let index = 0;
         const result = data_val.slice(index, index + this.FABRIC_DEF().RESULT_SIZE());
         index += this.FABRIC_DEF().RESULT_SIZE();
@@ -252,7 +253,7 @@ function HttpServiceClass(root_object_val) {
         let pending_data = "N/A"
         let pending_session2 = "N/A"
         let pending_session3 = "N/A"
-
+*/
 /*
         while (remaining_data.length > 0) {
             index = 0;
@@ -306,14 +307,14 @@ function HttpServiceClass(root_object_val) {
 */
 
         const output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
+                        //result: result,
+                        //link_id: link_id,
                         interval: this0.linkUpdateInterval(),
-                        name_list_tag: name_list_tag,
-                        pending_session2: pending_session2, 
-                        pending_session3: pending_session3,
-                        pending_data: pending_data,
-                        data: remaining_data,
+                        //name_list_tag: name_list_tag,
+                        //pending_session2: pending_session2, 
+                        //pending_session3: pending_session3,
+                        //pending_data: pending_data,
+                        data: data_val,
                         });
         //console.log("HttpServiceClass.getLinkDataResponse() output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
