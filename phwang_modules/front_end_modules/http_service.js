@@ -340,6 +340,7 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.setupSession3Response = function (this0, data_val, ajax_entry_object_val) {
+        /*
         var index = 0;
         var result = data_val.slice(index, index + 2);
         index += 2;
@@ -369,17 +370,18 @@ function HttpServiceClass(root_object_val) {
         const second_fiddle = this.encodeObject().decodeString(encoded_second_fiddle);
         const second_fiddle_len = this.encodeObject().decodeStringGetLength(encoded_second_fiddle);
         index += second_fiddle_len;
-
+*/
         const output = JSON.stringify({
-                        result: result,
-                        link_id: link_id,
-                        session_id: session_id,
-                        room_status: room_status,
-                        group_mode: group_mode,
-                        theme_type: theme_type,
-                        theme_data: theme_data,
-                        first_fiddle: first_fiddle,
-                        second_fiddle: second_fiddle,
+                        //result: result,
+                        //link_id: link_id,
+                        //session_id: session_id,
+                        //room_status: room_status,
+                        //group_mode: group_mode,
+                        //theme_type: theme_type,
+                        //theme_data: theme_data,
+                        //first_fiddle: first_fiddle,
+                        //second_fiddle: second_fiddle,
+                        data: data_val,
                         });
         this0.debug(true, "setupSession3Response", "output=" + output);
         this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
