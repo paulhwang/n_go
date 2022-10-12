@@ -22,43 +22,6 @@ function HttpServiceClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.initSwitchTableArray();
-        this.debug(true, "init__", "");
-    };
-
-    this.initSwitchTableArray = function () {
-        const post_switch_table = {
-            "setup_link": this.setupLink,
-            "setup_session1": this.setupSession1,
-        };
-        const get_switch_table = {
-            "register": this.registerRequest,
-            "login": this.loginRequest,
-            "logout": this.logoutRequest,
-            "get_link_data": this.getLinkData,
-            "put_link_data": this.putLinkData,
-            "get_name_list": this.getNameList,
-            "setup_session": this.setupSession,
-            "setup_session2": this.setupSession2,
-            "setup_session3": this.setupSession3,
-            "get_session_data": this.getSessionData,
-            "put_session_data": this.putSessionData,
-            "mmw_read_data": this.mmwReadDataRequest,
-            "keep_alive": this.keepAlive,
-        };
-        const put_switch_table = {
-            "put_link_data": this.putLinkData,
-            "put_session_data": this.putSessionData,
-        };
-        const delete_switch_table = {
-            "delete_link": this.setupLink,
-            "delete_session": this.setupSession,
-        };
-        this.theHttpSwitchTableArray = [post_switch_table,
-                                        get_switch_table,
-                                        put_switch_table,
-                                        delete_switch_table,
-                                        ];
     };
 
     this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
@@ -84,80 +47,7 @@ function HttpServiceClass(root_object_val) {
             console.log("HttpServiceClass.parseGetRequest() go_request_json_val=" + go_request_json_val);
         }
 
-        const func = this.httpSwitchTableArray(command_index_val)[go_request.command];
-        if (func) {
-            return func.bind(this)(go_request, res);
-        } else {
-            console.log("HttpServiceClass.parseGetRequest() bad command=" + go_request.command);
-            abend();
-            return null;
-        }
-    };
-
-    this.registerRequest = function (go_request, res) {
-        //const my_name = this.encodeObject().encodeString(go_request.my_name);
-        //const password = this.encodeObject().encodeString(go_request.password);
-        //const email = this.encodeObject().encodeString(go_request.email);
-        //console.log("HttpServiceClass.registerRequest() name=" + my_name + "password=" + password + "email=" + email);
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
-    };
-
-    this.logoutRequest = function (go_request, res) {
-        //console.log("HttpServiceClass.logoutRequest() link_id=" + go_request.link_id);
-        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
-    };
-
-    this.loginRequest = function (go_request, res) {
-        //const my_name = this.encodeObject().encodeString(go_request.my_name);
-        //const password = this.encodeObject().encodeString(go_request.password);
-        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
-    };
-
-    this.getLinkData = function (go_request, res) {
-        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
-    };
-
-    this.putLinkData = function (go_request) {
-        this.abend("putLinkData", "putLinkData is not implemented");
-    };
-
-    this.getNameList = function (go_request, res) {
-        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        //this.debug(false, "getNameList", "link_id=" + go_request.link_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
-    };
-
-    this.setupSession = function (go_request, res) {
-        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        console.log("HttpServiceClass.setupSession() data=" + go_request.data);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
-    };
-
-    this.setupSession2 = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        console.log("HttpServiceClass.setupSession2() data=" + go_request.data);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
-    };
-
-    this.setupSession3 = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        console.log("HttpServiceClass.setupSession3() data=" + go_request.data);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
-    };
-
-    this.putSessionData = function (go_request, res) {
-        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        console.log("HttpServiceClass.putSessionData() data=" + go_request.data);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
-    };
-
-    this.getSessionData = function (go_request, res) {
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        console.log("HttpServiceClass.getSessionData() data=" + go_request.data);
         this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
     };
 
@@ -222,7 +112,6 @@ function HttpServiceClass(root_object_val) {
         return null;
     };
 
-    this.httpSwitchTableArray = function (index_val) {return this.theHttpSwitchTableArray[index_val];};
     this.defaultLinkUpdateInterval = function () {return FABRIC_PROTOCOL_DEFAULT_LINK_UPDATE_INTERNAL;};
     this.linkUpdateInterval = function () {return this.theLinkUpdateInterval;};
     this.setLinkUpdateInterval = function (val) {this.theLinkUpdateInterval = val;};
