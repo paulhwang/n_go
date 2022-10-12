@@ -65,14 +65,10 @@ function HttpInputClass(root_object_val) {
         var data = this.httpServiceObject().parseGetRequest(req.headers.phwangajaxrequest, command_index_val, res);
     };
 
-    this.sendHttpResponse = function (request_val, res, data_val) {
-        var json_str = JSON.stringify({
-                        command: request_val.command,
-                        data: data_val,
-                    });
-        //console.log("HttpInputClass.sendHttpResponse() json_str=" + json_str);
+    this.sendHttpResponse = function (res, data_val) {
+        //console.log("HttpInputClass.sendHttpResponse() data_val=" + data_val);
         res.type('application/json');
-        res.send(json_str);
+        res.send(data_val);
     };
 
     this.processNotFound = function (req, res) {

@@ -95,13 +95,11 @@ function FabricServiceClass (root_object_val) {
         }
 
         if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) === this.FABRIC_DEF().LOGIN_RESPONSE()) {
-            console.log("==FabricServiceClass.receiveDataFromFabric() data=" + data_val);
             data_val = data_val + this.timeStampString();
-            console.log("11FabricServiceClass.receiveDataFromFabric() data=" + data_val);
         }
 
         const ajax_id_val = data_val.slice(0, this.FABRIC_DEF().AJAX_ID_SIZE());
-        let rest_data_val = data_val.slice(1 + this.FABRIC_DEF().AJAX_ID_SIZE());
+        const real_data = data_val.slice(this.FABRIC_DEF().AJAX_ID_SIZE());
 
         const ajax_entry_object = this.getAjaxEntryObject(ajax_id_val);
         if (!ajax_entry_object) {
@@ -110,7 +108,8 @@ function FabricServiceClass (root_object_val) {
             return;
         }
 
-        ajax_entry_object.callbackFunction().bind(this.httpServiceObject())(this.httpServiceObject(), rest_data_val, ajax_entry_object);
+        //console.log("FabricServiceClass.receiveDataFromFabric() real_data=" + real_data);
+        this.httpInputObject().sendHttpResponse(ajax_entry_object.ajaxResponse(), real_data);
     };
 
     this.receiveCloseFromFabric = function () {
@@ -198,6 +197,7 @@ function FabricServiceClass (root_object_val) {
     this.FABRIC_DEF = () => this.rootObject().FABRIC_DEF();
     this.netSocketOjbect = () => this.netSocketObject_;
     this.httpServiceObject = () => this.rootObject().httpServiceObject();
+    this.httpInputObject = () => this.rootObject().httpInputObject();
     this.timeStampString = () => this.timeStampString_;
     this.setTimeStampString = (val) => {this.timeStampString_ = val;}
 
