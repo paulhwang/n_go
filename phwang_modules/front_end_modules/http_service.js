@@ -155,14 +155,14 @@ function HttpServiceClass(root_object_val) {
 
     this.putSessionData = function (go_request, res) {
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        console.log("HttpServiceClass.putSessionData() link_id=" + go_request.link_id + " session_id=" + go_request.session_id + " data=" + go_request.data);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "2P" + go_request.link_id + go_request.session_id + go_request.data);
+        console.log("HttpServiceClass.putSessionData() data=" + go_request.data);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
     };
 
     this.getSessionData = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        console.log("HttpServiceClass.getSessionData() link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "2G" + go_request.link_id + go_request.session_id);
+        console.log("HttpServiceClass.getSessionData() data=" + go_request.data);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
     };
 
     this.mmwReadDataRequest = function (go_request, res) {
