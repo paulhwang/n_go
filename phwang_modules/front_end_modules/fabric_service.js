@@ -15,17 +15,17 @@ module.exports = {
     },
 };
 
-function AjaxEntryClass (ajax_id_val, go_request_val, res_val) {
+function AjaxEntryClass (ajax_id_val, res_val) {
     "use strict";
 
-    this.init__ = function (ajax_id_val, go_request_val, res_val) {
+    this.init__ = function (ajax_id_val, res_val) {
         this.ajaxId_ = ajax_id_val;
         this.ajaxResponse_ = res_val;
     }
 
     this.ajaxId = () => this.ajaxId_;
     this.ajaxResponse = () => this.ajaxResponse_;
-    this.init__(ajax_id_val, go_request_val, res_val);
+    this.init__(ajax_id_val, res_val);
 }
 
 function FabricServiceClass (root_object_val) {
@@ -43,10 +43,10 @@ function FabricServiceClass (root_object_val) {
         console.log("FabricServiceClass.init__()");
     };
 
-    this.mallocAjaxEntryObject = function (go_request_val, res_val) {
+    this.mallocAjaxEntryObject = function (res_val) {
         this.incrementGlobalAjaxId();
         var ajax_id_str = this.encodeNumber(this.globalAjaxId(), this.FABRIC_DEF().AJAX_ID_SIZE());
-        var ajax_entry_object = new AjaxEntryClass(ajax_id_str, go_request_val, res_val);
+        var ajax_entry_object = new AjaxEntryClass(ajax_id_str, res_val);
         return ajax_entry_object;
     };
 

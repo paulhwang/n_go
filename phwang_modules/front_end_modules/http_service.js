@@ -49,7 +49,7 @@ function HttpServiceClass(root_object_val) {
             console.log("HttpServiceClass.parseGetRequest() data=" + data);
         }
 
-        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
+        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(res);
         this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + data);
     };
 
@@ -58,7 +58,7 @@ function HttpServiceClass(root_object_val) {
         var data = this.encodeObject().encodeString(go_request.data);
         this.debug(true, "mmwReadDataRequest", "act=" + act + " data=" + data);
 
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
+        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(res);
         var act_val;
         if (act === "14init") {
             act_val = "I";
