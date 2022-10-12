@@ -26,20 +26,20 @@ function HttpServiceClass(root_object_val) {
 
     this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
         const go_request = JSON.parse(go_request_json_val);
-        const data = go_request.data;
+        let data = go_request.data;
 
-        if ((go_request.command === "register") ||
-            (go_request.command === "login") ||
-            (go_request.command == "mmw_read_data")) {
-        }
-        else if (go_request.time_stamp !== this.fabricServiceObject().timeStampString()) {
-            console.log("HttpServiceClass.parseGetRequest() ***time_stamp not match: command=" + go_request.command + " time_stamp=" + go_request.time_stamp + " " + this.fabricServiceObject().timeStampString());
-            const output = JSON.stringify({
+        if (data.charAt(0) === '{') {
+            const time_stamp = data.slice(0, 14);
+            if (time_stamp !== this.fabricServiceObject().timeStampString()) {
+                console.log("HttpServiceClass.parseGetRequest() ***time_stamp not match: data=" + data + " time_stamp=" + time_stamp + " " + this.fabricServiceObject().timeStampString());
+                const output = JSON.stringify({
                             command: go_request.command,
                             result: "50",
                             });
-            this.httpInputObject().sendHttpResponse(go_request, res, output);
-            return null;
+                this.httpInputObject().sendHttpResponse(go_request, res, output);
+                return null;
+            }
+            data = data.slice(14);
         }
 
         const command = data.charAt(1);
