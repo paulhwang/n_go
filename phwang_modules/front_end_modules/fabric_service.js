@@ -20,12 +20,10 @@ function AjaxEntryClass (ajax_id_val, go_request_val, res_val) {
 
     this.init__ = function (ajax_id_val, go_request_val, res_val) {
         this.ajaxId_ = ajax_id_val;
-        this.ajaxRequest_ = go_request_val;
         this.ajaxResponse_ = res_val;
     }
 
     this.ajaxId = () => this.ajaxId_;
-    this.ajaxRequest = () => this.ajaxRequest_;
     this.ajaxResponse = () => this.ajaxResponse_;
     this.init__(ajax_id_val, go_request_val, res_val);
 }
