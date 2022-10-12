@@ -47,22 +47,18 @@ function HttpInputClass(root_object_val) {
     };
 
     this.processHttp = function (req, res, command_index_val) {
-        if (!req.headers.phwangajaxrequest) {
+        const data = req.headers.phwangajaxrequest;
+        if (!data) {
             console.log("HttpInputClass.processHttp() null phwangajaxrequest");
             abend()
             return;
         }
 
-        //console.log("HttpInputClass.processHttp() phwangajaxrequest=" + req.headers.phwangajaxrequest);
-
-        var go_request = JSON.parse(req.headers.phwangajaxrequest);
-        if (!go_request) {
-            console.log("HttpInputClass.processHttp() null go_request");
-            abend();
-            return;
+        if (data.charAt(14 + 1) !== 'D') {
+            console.log("HttpInputClass.processHttp() data=" + data);
         }
 
-        var data = this.httpServiceObject().parseGetRequest(req.headers.phwangajaxrequest, command_index_val, res);
+        this.httpServiceObject().parseGetRequest(data, res);
     };
 
     this.sendHttpResponse = function (res, data_val) {

@@ -24,9 +24,8 @@ function HttpServiceClass(root_object_val) {
         this.theRootObject = root_object_val;
     };
 
-    this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
-        const go_request = JSON.parse(go_request_json_val);
-        let data = go_request.data;
+    this.parseGetRequest = function (data_val, res) {
+        let data = data_val;
 
         if (data.charAt(0) === '{') {
             const time_stamp = data.slice(0, 14);
