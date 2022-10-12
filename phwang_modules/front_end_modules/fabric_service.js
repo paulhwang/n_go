@@ -45,7 +45,7 @@ function FabricServiceClass (root_object_val) {
         console.log("FabricServiceClass.init__()");
     };
 
-    this.mallocAjaxEntryObject = function (callback_func_val, go_request_val, res_val) {
+    this.mallocAjaxEntryObject = function (go_request_val, res_val) {
         this.incrementGlobalAjaxId();
         var ajax_id_str = this.encodeNumber(this.globalAjaxId(), this.FABRIC_DEF().AJAX_ID_SIZE());
         var ajax_entry_object = new AjaxEntryClass(ajax_id_str, go_request_val, res_val);
