@@ -161,9 +161,9 @@ function HttpServiceClass(root_object_val) {
     };
 
     this.logoutRequest = function (go_request, res) {
-        console.log("HttpServiceClass.logoutRequest() link_id=" + go_request.link_id + " name=" + go_request.my_name);
+        console.log("HttpServiceClass.logoutRequest() link_id=" + go_request.link_id);
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(this.logoutResponse, go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1O" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.my_name);
+        this.fabricServiceObject().transmitData(ajax_entry_object, "N1O" + ajax_entry_object.ajaxId() + go_request.link_id);
     };
 
     this.logoutResponse = function (this0, data_val, ajax_entry_object_val) {
