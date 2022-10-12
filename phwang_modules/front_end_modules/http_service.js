@@ -26,6 +26,7 @@ function HttpServiceClass(root_object_val) {
 
     this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
         const go_request = JSON.parse(go_request_json_val);
+        const data = go_request.data;
 
         if ((go_request.command === "register") ||
             (go_request.command === "login") ||
@@ -41,14 +42,15 @@ function HttpServiceClass(root_object_val) {
             return null;
         }
 
-        if (go_request.command === "get_link_data") {
-            //console.log("HttpServiceClass.parseGetRequest() go_request_json_val=" + go_request_json_val);
+        const command = data.charAt(1);
+        if (command === "D") {
+            //console.log("HttpServiceClass.parseGetRequest() data=" + data);
         } else {
-            console.log("HttpServiceClass.parseGetRequest() go_request_json_val=" + go_request_json_val);
+            console.log("HttpServiceClass.parseGetRequest() data=" + data);
         }
 
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + go_request.data);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + data);
     };
 
     this.mmwReadDataRequest = function (go_request, res) {
