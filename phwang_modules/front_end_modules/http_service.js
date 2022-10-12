@@ -100,25 +100,25 @@ function HttpServiceClass(root_object_val) {
         const email = this.encodeObject().encodeString(go_request.email);
         console.log("HttpServiceClass.registerRequest() name=" + my_name + "password=" + password + "email=" + email);
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(tgo_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N0R" + ajax_entry_object.ajaxId() + my_name + password + email);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "0R" + my_name + password + email);
     };
 
     this.logoutRequest = function (go_request, res) {
         console.log("HttpServiceClass.logoutRequest() link_id=" + go_request.link_id);
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1O" + ajax_entry_object.ajaxId() + go_request.link_id);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "1O" + go_request.link_id);
     };
 
     this.loginRequest = function (go_request, res) {
         const my_name = this.encodeObject().encodeString(go_request.my_name);
         const password = this.encodeObject().encodeString(go_request.password);
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N0I" + ajax_entry_object.ajaxId() + my_name + password);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "0I" + my_name + password);
     };
 
     this.getLinkData = function (go_request, res) {
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1D" + ajax_entry_object.ajaxId() + go_request.link_id);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "1D" + go_request.link_id);
     };
 
     this.putLinkData = function (go_request) {
@@ -128,13 +128,13 @@ function HttpServiceClass(root_object_val) {
     this.getNameList = function (go_request, res) {
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
         this.debug(false, "getNameList", "link_id=" + go_request.link_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1N" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.name_list_tag);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "1N" + go_request.link_id + go_request.name_list_tag);
     };
 
     this.setupSession = function (go_request, res) {
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
         console.log("HttpServiceClass.setupSession() link_id=" + go_request.link_id + " group_mode=" + go_request.group_mode + " theme_type=" + go_request.theme_type + " second_fiddle=" + go_request.second_fiddle);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N1S" + ajax_entry_object.ajaxId() + go_request.link_id
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "1S" + go_request.link_id
                                               + go_request.group_mode + go_request.theme_type
                                               + this.encodeObject().encodeString(go_request.theme_data)
                                               + this.encodeObject().encodeString(go_request.first_fiddle)
@@ -144,25 +144,25 @@ function HttpServiceClass(root_object_val) {
     this.setupSession2 = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
         this.debug(true, "setupSession2", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N2Y" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id + go_request.answer);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "2Y" + go_request.link_id + go_request.session_id + go_request.answer);
     };
 
     this.setupSession3 = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
         this.debug(true, "setupSession3", "link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N2Z" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "2Z" + go_request.link_id + go_request.session_id);
     };
 
     this.putSessionData = function (go_request, res) {
         const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
         console.log("HttpServiceClass.putSessionData() link_id=" + go_request.link_id + " session_id=" + go_request.session_id + " data=" + go_request.data);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N2P" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id + go_request.data);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "2P" + go_request.link_id + go_request.session_id + go_request.data);
     };
 
     this.getSessionData = function (go_request, res) {
         var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(go_request, res);
         console.log("HttpServiceClass.getSessionData() link_id=" + go_request.link_id + " session_id=" + go_request.session_id);
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N2G" + ajax_entry_object.ajaxId() + go_request.link_id + go_request.session_id);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "2G" + go_request.link_id + go_request.session_id);
     };
 
     this.mmwReadDataRequest = function (go_request, res) {
@@ -184,7 +184,7 @@ function HttpServiceClass(root_object_val) {
         else {
             this.abend("mmwReadDataRequest", "bad act=" + act);
         }
-        this.fabricServiceObject().transmitData(ajax_entry_object, "N0M" + ajax_entry_object.ajaxId() + act_val + data);
+        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "0M" + act_val + data);
     };
 
     this.mmwReadDataResponse = function (this0, data_val, ajax_entry_object_val) {
