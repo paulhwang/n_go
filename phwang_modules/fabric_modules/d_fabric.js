@@ -21,7 +21,7 @@ function DFabricClass(root_obj_val) {
     "use strict";
 
     this.init__ = function (root_obj_val) {
-        this.theRootObject = root_obj_val;
+        this.rootObj_ = root_obj_val;
     };
 
     this.parseGetRequest = function (data_val, res) {
@@ -117,12 +117,11 @@ function DFabricClass(root_obj_val) {
     this.linkUpdateInterval = function () {return this.theLinkUpdateInterval;};
     this.setLinkUpdateInterval = function (val) {this.theLinkUpdateInterval = val;};
 
-    this.objectName = () => "HttpServiceClass";
-    this.rootObject = () => this.theRootObject;
-    this.uFabricObj = () => this.rootObject().uFabricObj();
-    this.httpInputObject = () => this.rootObject().httpInputObject();
-    this.encodeObject = () => this.rootObject().encodeObject();
-    this.FABRIC_DEF = () => this.rootObject().FABRIC_DEF();
+    this.rootObj = () => this.rootObj_;
+    this.uFabricObj = () => this.rootObj().uFabricObj();
+    this.httpInputObject = () => this.rootObj().httpInputObject();
+    this.encodeObject = () => this.rootObj().encodeObject();
+    this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
 
     this.init__(root_obj_val);
 }

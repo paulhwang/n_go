@@ -1,41 +1,41 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: http_input.js
+ * File name: d_port.js
  */
 
-let the_http_input_object = null;
+let THE_D_PORT_OBJECT = null;
 
 module.exports = {
     malloc: function (root_obj_val) {
-        if (!the_http_input_object) {
-            the_http_input_object = new HttpInputClass(root_obj_val);
+        if (!THE_D_PORT_OBJECT) {
+            THE_D_PORT_OBJECT = new HttpInputClass(root_obj_val);
         }
-        return the_http_input_object;
+        return THE_D_PORT_OBJECT;
     },
 
     post: function (req, res) {
-        the_http_input_object.processHttp(req, res, 0);
+        THE_D_PORT_OBJECT.processHttp(req, res, 0);
     },
 
     get: function (req, res) {
-        the_http_input_object.processHttp(req, res, 1);
+        THE_D_PORT_OBJECT.processHttp(req, res, 1);
     },
 
     put: function (req, res) {
-        the_http_input_object.processHttp(req, res, 2);
+        THE_D_PORT_OBJECT.processHttp(req, res, 2);
     },
 
     delete: function (req, res) {
-        the_http_input_object.processHttp(req, res, 3);
+        THE_D_PORT_OBJECT.processHttp(req, res, 3);
     },
 
     not_found: function (req, res) {
-        the_http_input_object.processNotFound(req, res);
+        THE_D_PORT_OBJECT.processNotFound(req, res);
     },
 
     failure: function (req, res) {
-        the_http_input_object.processFailure(err, req, res, next);
+        THE_D_PORT_OBJECT.processFailure(err, req, res, next);
     },
 };
 
