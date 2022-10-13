@@ -21,7 +21,7 @@ function FabricRootClass () {
     this.init__ = function () {
         this.FABRIC_DEF_ = require("./fabric_def.js").malloc();
         this.encodeObject_ = require("../util_modules/encode.js").malloc();
-        this.fabricServiceObject_ = require("./fabric_service.js").malloc(this);
+        this.fabricServiceObject_ = require("./ufabric.js").malloc(this);
         this.httpInputObject_ = require("../http_input.js").malloc(this);
         this.httpServiceObject_ = require("./http_service.js").malloc(this);
         console.log("FrontEndRootClass.init__()");

@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: fabric_service.js
+ * File name: ufabric.js
  */
 
 var THE_UFABRIC_OJBECT = null;
