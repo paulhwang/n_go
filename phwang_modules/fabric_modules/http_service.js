@@ -29,8 +29,8 @@ function HttpServiceClass(root_object_val) {
 
         if (data.charAt(0) === '{') {
             const time_stamp = data.slice(0, 14);
-            if (time_stamp !== this.fabricServiceObject().timeStampString()) {
-                console.log("HttpServiceClass.parseGetRequest() ***time_stamp not match: data=" + data + " time_stamp=" + time_stamp + " " + this.fabricServiceObject().timeStampString());
+            if (time_stamp !== this.uFabricObj().timeStampString()) {
+                console.log("HttpServiceClass.parseGetRequest() ***time_stamp not match: data=" + data + " time_stamp=" + time_stamp + " " + this.uFabricObj().timeStampString());
                 const output = JSON.stringify({
                             command: go_request.command,
                             result: "50",
@@ -48,8 +48,8 @@ function HttpServiceClass(root_object_val) {
             console.log("HttpServiceClass.parseGetRequest() data=" + data);
         }
 
-        const ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(res);
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + data);
+        const ajax_entry_object = this.uFabricObj().mallocAjaxEntryObject(res);
+        this.uFabricObj().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + data);
     };
 
     this.mmwReadDataRequest = function (go_request, res) {
@@ -57,7 +57,7 @@ function HttpServiceClass(root_object_val) {
         var data = this.encodeObject().encodeString(go_request.data);
         this.debug(true, "mmwReadDataRequest", "act=" + act + " data=" + data);
 
-        var ajax_entry_object = this.fabricServiceObject().mallocAjaxEntryObject(res);
+        var ajax_entry_object = this.uFabricObj().mallocAjaxEntryObject(res);
         var act_val;
         if (act === "14init") {
             act_val = "I";
@@ -71,7 +71,7 @@ function HttpServiceClass(root_object_val) {
         else {
             this.abend("mmwReadDataRequest", "bad act=" + act);
         }
-        this.fabricServiceObject().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "0M" + act_val + data);
+        this.uFabricObj().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "0M" + act_val + data);
     };
 
     this.mmwReadDataResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -92,7 +92,7 @@ function HttpServiceClass(root_object_val) {
         var output = JSON.stringify({
                         result: result,
                         filename: ajax_entry_object_val.filename,
-                        time_stamp: this.fabricServiceObject().timeStampString(),
+                        time_stamp: this.uFabricObj().timeStampString(),
                         result: result,
                         data: data,
                         });
@@ -119,7 +119,7 @@ function HttpServiceClass(root_object_val) {
 
     this.objectName = () => "HttpServiceClass";
     this.rootObject = () => this.theRootObject;
-    this.fabricServiceObject = () => this.rootObject().fabricServiceObject();
+    this.uFabricObj = () => this.rootObject().uFabricObj();
     this.httpInputObject = () => this.rootObject().httpInputObject();
     this.encodeObject = () => this.rootObject().encodeObject();
     this.FABRIC_DEF = () => this.rootObject().FABRIC_DEF();
