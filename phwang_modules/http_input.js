@@ -7,9 +7,9 @@
 let the_http_input_object = null;
 
 module.exports = {
-    malloc: function (root_object_val) {
+    malloc: function (root_obj_val) {
         if (!the_http_input_object) {
-            the_http_input_object = new HttpInputClass(root_object_val);
+            the_http_input_object = new HttpInputClass(root_obj_val);
         }
         return the_http_input_object;
     },
@@ -39,10 +39,10 @@ module.exports = {
     },
 };
 
-function HttpInputClass(root_object_val) {
+function HttpInputClass(root_obj_val) {
     "use strict";
-    this.init__ = function (root_object_val) {
-        this.rootObject_ = root_object_val;
+    this.init__ = function (root_obj_val) {
+        this.rootObj_ = root_obj_val;
         console.log("HttpInputClass.init__()");
     };
 
@@ -58,7 +58,7 @@ function HttpInputClass(root_object_val) {
             console.log("HttpInputClass.processHttp() data=" + data);
         }
 
-        this.httpServiceObject().parseGetRequest(data, res);
+        this.dFabricObj().parseGetRequest(data, res);
     };
 
     this.sendHttpResponse = function (res, data_val) {
@@ -79,8 +79,8 @@ function HttpInputClass(root_object_val) {
         console.log("HttpInputClass.processFailure() state=" + state);
     };
 
-    this.rootObject = () => this.rootObject_;
-    this.httpServiceObject = () => this.rootObject().httpServiceObject();
+    this.rootObj = () => this.rootObj_;
+    this.dFabricObj = () => this.rootObj().dFabricObj();
 
-    this.init__(root_object_val);
+    this.init__(root_obj_val);
 }

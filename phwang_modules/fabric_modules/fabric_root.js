@@ -31,9 +31,7 @@ function FabricRootClass () {
     this.encodeObject = () => this.encodeObject_;
     this.uFabricObj = () => this.uFabricObj_;
     this.httpInputObject = () => this.httpInputObject_;
-    this.httpServiceObject = () => this.dFabricObj_;
+    this.dFabricObj = () => this.dFabricObj_;
 
-    this.LOG_IT = function(str1_val, str2_val) {require("../util_modules/logit.js").LOG_IT(str1_val, str2_val);};
-    this.ABEND = function(str1_val, str2_val) {require("../util_modules/logit.js").ABEND(str1_val, str2_val);};
     this.init__();
 };

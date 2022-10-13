@@ -19,7 +19,7 @@ function UFabricClass (root_obj_val) {
     "use strict";
 
     this.init__ = function (root_obj_val) {
-        this.rootObject_ = root_obj_val;
+        this.rootObj_ = root_obj_val;
         this.timeStampString_ = "";
         this.netSocketObject_ =  require("../util_modules/net_socket.js").malloc();
         this.setupConnectionToFabric();
@@ -176,11 +176,11 @@ function UFabricClass (root_obj_val) {
     this.setAjaxIdArrayElement = (index, val) => {this.theAjaxIdArray[index] = val;}
     this.clearAjaxIdArrayElement = (index) => {this.theAjaxIdArray[index] = 0;}
 
-    this.rootObject = () => this.rootObject_;
-    this.FABRIC_DEF = () => this.rootObject().FABRIC_DEF();
+    this.rootObj = () => this.rootObj_;
+    this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
     this.netSocketOjbect = () => this.netSocketObject_;
-    this.httpServiceObject = () => this.rootObject().httpServiceObject();
-    this.httpInputObject = () => this.rootObject().httpInputObject();
+    this.dFabricObj = () => this.rootObj().dFabricObj();
+    this.httpInputObject = () => this.rootObj().httpInputObject();
     this.timeStampString = () => this.timeStampString_;
     this.setTimeStampString = (val) => {this.timeStampString_ = val;}
 
