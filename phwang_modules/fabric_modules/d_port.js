@@ -55,6 +55,10 @@ function DPortClass(root_obj_val) {
         }
 
         if (data.charAt(0) === '{') {
+            if (data.slice(0, this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE()) !== this.timeStamp()) {
+                console.log("DPortClass.receiveData() bad time_stamp");
+                return;
+            }
             data = data.slice(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE());
         }
 
