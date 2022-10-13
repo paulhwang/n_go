@@ -21,11 +21,13 @@ function UFabricClass (root_obj_val) {
     this.init__ = function (root_obj_val) {
         this.rootObj_ = root_obj_val;
         this.timeStampString_ = "";
+
         this.netSocketObj_ =  require("../util_modules/net_socket.js").malloc();
         this.connectionFabric();
-        this.theGlobalAjaxId = 0;
-        this.theMaxAjaxIdIndex = 0;
-        this.theAjaxIdArray = [];
+
+        this.globalAjaxId_ = 0;
+        this.maxAjaxIdIndex_ = 0;
+        this.ajaxIdArray_ = [];
         this.setMaxGlobalAjaxId(this.FABRIC_DEF().AJAX_ID_SIZE());
     };
 
@@ -157,27 +159,27 @@ function UFabricClass (root_obj_val) {
     };
 
     this.incrementGlobalAjaxId = function () {
-        this.theGlobalAjaxId++;
-        if (this.theGlobalAjaxId > this.maxGolbalAjaxId()) {
-            this.theGlobalAjaxId = 1;
+        this.globalAjaxId_++;
+        if (this.globalAjaxId_ > this.maxGolbalAjaxId()) {
+            this.globalAjaxId_ = 1;
         }
     };
 
     this.setMaxGlobalAjaxId = function (ajax_id_size_val) {
-        this.theMaxGolbalAjaxId = 1;
+        this.maxGolbalAjaxId_ = 1;
         for (let i = 0; i < ajax_id_size_val; i++) {
-            this.theMaxGolbalAjaxId *= 10;
+            this.maxGolbalAjaxId_ *= 10;
         }
-        this.theMaxGolbalAjaxId -= 1;
+        this.maxGolbalAjaxId_ -= 1;
     };
 
-    this.maxAjaxIdIndex = () => this.theMaxAjaxIdIndex;
-    this.incrementMaxAjaxIdIndex = () => {this.theMaxAjaxIdIndex++;}
-    this.globalAjaxId = () => this.theGlobalAjaxId;
-    this.maxGolbalAjaxId = () => this.theMaxGolbalAjaxId;
-    this.ajaxIdArrayElement = (index) => this.theAjaxIdArray[index];
-    this.setAjaxIdArrayElement = (index, val) => {this.theAjaxIdArray[index] = val;}
-    this.clearAjaxIdArrayElement = (index) => {this.theAjaxIdArray[index] = 0;}
+    this.maxAjaxIdIndex = () => this.maxAjaxIdIndex_;
+    this.incrementMaxAjaxIdIndex = () => {this.maxAjaxIdIndex_++;}
+    this.globalAjaxId = () => this.globalAjaxId_;
+    this.maxGolbalAjaxId = () => this.maxGolbalAjaxId_;
+    this.ajaxIdArrayElement = (index) => this.ajaxIdArray_[index];
+    this.setAjaxIdArrayElement = (index, val) => {this.ajaxIdArray_[index] = val;}
+    this.clearAjaxIdArrayElement = (index) => {this.ajaxIdArray_[index] = 0;}
 
     this.rootObj = () => this.rootObj_;
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
