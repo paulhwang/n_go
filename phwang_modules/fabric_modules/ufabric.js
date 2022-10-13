@@ -4,7 +4,7 @@
  * File name: ufabric.js
  */
 
-var THE_UFABRIC_OJBECT = null;
+let THE_UFABRIC_OJBECT = null;
 
 module.exports = {
     malloc: function (root_obj_val) {

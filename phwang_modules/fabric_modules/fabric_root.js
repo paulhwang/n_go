@@ -4,7 +4,7 @@
  * File name: fabric_root.js
  */
 
-var THE_FABRIC_ROOT_OBJECT = null;
+let THE_FABRIC_ROOT_OBJECT = null;
 
 module.exports = {
     malloc: function () {

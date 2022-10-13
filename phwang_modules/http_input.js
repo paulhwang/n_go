@@ -4,7 +4,7 @@
  * File name: http_input.js
  */
 
-var the_http_input_object = null;
+let the_http_input_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {

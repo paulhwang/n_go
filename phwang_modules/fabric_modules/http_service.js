@@ -4,24 +4,24 @@
  * File name: http_service.js
  */
 
-var FABRIC_PROTOCOL_DEFAULT_LINK_UPDATE_INTERNAL = 3000;
+let FABRIC_PROTOCOL_DEFAULT_LINK_UPDATE_INTERNAL = 3000;
 
-var the_http_service_object = null;
+let THE_DFABRIC_OJBECT = null;
 
 module.exports = {
-    malloc: function (root_object_val) {
-        if (!the_http_service_object) {
-            the_http_service_object = new HttpServiceClass(root_object_val);
+    malloc: function (root_obj_val) {
+        if (!THE_DFABRIC_OJBECT) {
+            THE_DFABRIC_OJBECT = new DFabricClass(root_obj_val);
         }
-        return the_http_service_object;
+        return THE_DFABRIC_OJBECT;
     },
 };
 
-function HttpServiceClass(root_object_val) {
+function DFabricClass(root_obj_val) {
     "use strict";
 
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
+    this.init__ = function (root_obj_val) {
+        this.theRootObject = root_obj_val;
     };
 
     this.parseGetRequest = function (data_val, res) {
@@ -127,5 +127,5 @@ function HttpServiceClass(root_object_val) {
     this.debug = function (debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function (str1_val, str2_val) {this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function (str1_val, str2_val) {this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);};
-    this.init__(root_object_val);
+    this.init__(root_obj_val);
 }

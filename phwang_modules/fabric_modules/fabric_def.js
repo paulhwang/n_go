@@ -4,7 +4,7 @@
  * File name: fabric_def.js
  */
 
-var THE_FABRIC_DEF = null;
+let THE_FABRIC_DEF = null;
 
 module.exports = {
     malloc: function () {
