@@ -1,21 +1,21 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: front_end_root.js
+ * File name: fabric_root.js
  */
 
-var the_front_end_root_object = null;
+var THE_FABRIC_ROOT_OBJECT = null;
 
 module.exports = {
     malloc: function () {
-        if (!the_front_end_root_object) {
-            the_front_end_root_object = new FrontEndRootClass();
+        if (!THE_FABRIC_ROOT_OBJECT) {
+            THE_FABRIC_ROOT_OBJECT = new FabricRootClass();
         }
-        return the_front_end_root_object;
+        return THE_FABRIC_ROOT_OBJECT;
     },
 };
 
-function FrontEndRootClass () {
+function FabricRootClass () {
     "use strict";
 
     this.init__ = function () {
