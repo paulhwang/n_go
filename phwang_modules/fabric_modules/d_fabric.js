@@ -26,21 +26,6 @@ function DFabricClass(root_obj_val) {
 
     this.parseRequest = function (data_val, res) {
         let data = data_val;
-
-        if (data.charAt(0) === '{') {
-            const time_stamp = data.slice(0, this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE());
-            if (time_stamp !== this.uFabricObj().timeStampString()) {
-                console.log("DFabricClass.parseRequest() ***time_stamp not match: data=" + data + " time_stamp=" + time_stamp + " " + this.uFabricObj().timeStampString());
-                const output = JSON.stringify({
-                            command: go_request.command,
-                            result: "50",
-                            });
-                this.dPortObj().sendHttpResponse(go_request, res, output);
-                return null;
-            }
-            data = data.slice(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE());
-        }
-
         const command = data.charAt(1);
         if (command === "D") {
             //console.log("DFabricClass.parseRequest() data=" + data);
