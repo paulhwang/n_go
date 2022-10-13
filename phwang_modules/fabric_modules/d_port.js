@@ -43,6 +43,7 @@ function DPortClass(root_obj_val) {
     "use strict";
     this.init__ = function (root_obj_val) {
         this.rootObj_ = root_obj_val;
+        this.timeStamp_ = "";
     };
 
     this.receiveData = function (req, res, command_index_val) {
@@ -79,6 +80,8 @@ function DPortClass(root_obj_val) {
     };
 
     this.rootObj = () => this.rootObj_;
+    this.timeStamp = () => this.timeStamp_;
+    this.setTimeStamp = (time_stamp_val) => {this.timeStamp_ = time_stamp_val;}
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
 

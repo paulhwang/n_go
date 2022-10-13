@@ -46,6 +46,13 @@ function UPortClass (root_obj_val) {
         const raw_length = raw_data_val.length;
         let data_val;
 
+        if (this.dPortObj().timeStamp() === "") {
+            const index = 1 + this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE();
+            this.dPortObj().setTimeStamp(raw_data_val.slice(index, index + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE()));
+            console.log("UPortClass.receiveData() time_stamp=" + this.dPortObj().timeStamp());
+            return;
+        }
+
         if (raw_data_val.charAt(0) === '{') {
             data_val = raw_data_val.slice(1 + this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE(), raw_length - 1);
         }
