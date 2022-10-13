@@ -20,7 +20,6 @@ function UFabricClass (root_obj_val) {
 
     this.init__ = function (root_obj_val) {
         this.rootObj_ = root_obj_val;
-        this.timeStampString_ = "";
 
         this.netSocketObj_ =  require("../util_modules/net_socket.js").malloc();
         this.connectionFabric();
@@ -49,12 +48,6 @@ function UFabricClass (root_obj_val) {
     };
 
     this.receiveData = function (raw_data_val) {
-        if (this.timeStampString() === "") {
-            this.setTimeStampString(raw_data_val.slice(5, 5 + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE()));
-            console.log("UFabricClass.receiveData() timeStampString=" + this.timeStampString());
-            return;
-        }
-
         const raw_length = raw_data_val.length;
         let data_val;
 
@@ -182,8 +175,6 @@ function UFabricClass (root_obj_val) {
     this.netSocketObj = () => this.netSocketObj_;
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.dPortObj = () => this.rootObj().dPortObj();
-    this.timeStampString = () => this.timeStampString_;
-    this.setTimeStampString = (val) => {this.timeStampString_ = val;}
 
     this.init__(root_obj_val);
 }
