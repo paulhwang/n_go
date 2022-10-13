@@ -71,10 +71,6 @@ function UFabricClass (root_obj_val) {
             console.log("UFabricClass.receiveData() data=" + data_val);
         }
 
-        if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) === this.FABRIC_DEF().LOGIN_RESPONSE()) {
-            data_val = data_val + this.timeStampString();
-        }
-
         const ajax_id_val = data_val.slice(0, this.FABRIC_DEF().AJAX_ID_SIZE());
         const real_data = data_val.slice(this.FABRIC_DEF().AJAX_ID_SIZE());
 
