@@ -34,7 +34,7 @@ function DFabricClass(root_obj_val) {
         }
 
         const ajax_entry_object = this.uFabricObj().mallocAjaxEntryObject(res);
-        this.uFabricObj().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + data);
+        this.uPortObj().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + data);
     };
 
     this.mmwReadDataRequest = function (go_request, res) {
@@ -105,6 +105,7 @@ function DFabricClass(root_obj_val) {
     this.rootObj = () => this.rootObj_;
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.dPortObj = () => this.rootObj().dPortObj();
+    this.uPortObj = () => this.rootObj().uPortObj();
     this.encodeObject = () => this.rootObj().encodeObject();
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
 

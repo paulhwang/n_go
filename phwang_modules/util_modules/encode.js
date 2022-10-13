@@ -21,6 +21,16 @@ function EncodeClass() {
     this.init__ = function () {
     };
 
+    this.encodeNumber = function(number_val, size_val) {
+        const str = number_val.toString();
+        let buf = "";
+        for (let i = str.length; i < size_val; i++) {
+            buf = buf + "0";
+        }
+        buf = buf + str;
+        return buf;
+    };
+
     this.decodeNumber = function(input_val, size_val) {
         let output = 0;
         for (let index = 0; index < size_val; index++) {
