@@ -19,10 +19,11 @@ function FABRIC_DEF_CLASS () {
     this.LOGIN_RESPONSE         = () => 'i';
     this.GET_LINK_DATA_RESPONSE = () => 'd';
 
-    this.RESULT_SIZE     = () => 2;
-    this.LINK_ID_SIZE    = () => 8;
-    this.SESSION_ID_SIZE = () => 8;
-    this.AJAX_ID_SIZE    = () => 3;
+    this.FABRIC_TIME_STAMP_SIZE = () => 8;
+    this.RESULT_SIZE            = () => 2;
+    this.LINK_ID_SIZE           = () => 8;
+    this.SESSION_ID_SIZE        = () => 8;
+    this.AJAX_ID_SIZE           = () => 3;
 
     this.FABRIC_IP_ADDRESS = () => "127.0.0.1";
     this.FABRIC_TCP_PORT   = () => 8006;
