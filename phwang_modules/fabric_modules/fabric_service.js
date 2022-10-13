@@ -4,35 +4,22 @@
  * File name: fabric_service.js
  */
 
-var the_fabric_service_object = null;
+var THE_UFABRIC_OJBECT = null;
 
 module.exports = {
-    malloc: function (root_object_val) {
-        if (!the_fabric_service_object) {
-            the_fabric_service_object = new FabricServiceClass(root_object_val);
+    malloc: function (root_obj_val) {
+        if (!THE_UFABRIC_OJBECT) {
+            THE_UFABRIC_OJBECT = new UFabricClass(root_obj_val);
         }
-        return the_fabric_service_object;
+        return THE_UFABRIC_OJBECT;
     },
 };
 
-function AjaxEntryClass (ajax_id_val, res_val) {
+function UFabricClass (root_obj_val) {
     "use strict";
 
-    this.init__ = function (ajax_id_val, res_val) {
-        this.ajaxId_ = ajax_id_val;
-        this.ajaxResponse_ = res_val;
-    }
-
-    this.ajaxId = () => this.ajaxId_;
-    this.ajaxResponse = () => this.ajaxResponse_;
-    this.init__(ajax_id_val, res_val);
-}
-
-function FabricServiceClass (root_object_val) {
-    "use strict";
-
-    this.init__ = function (root_object_val) {
-        this.rootObject_ = root_object_val;
+    this.init__ = function (root_obj_val) {
+        this.rootObject_ = root_obj_val;
         this.timeStampString_ = "";
         this.netSocketObject_ =  require("../util_modules/net_socket.js").malloc();
         this.setupConnectionToFabric();
@@ -197,5 +184,18 @@ function FabricServiceClass (root_object_val) {
     this.timeStampString = () => this.timeStampString_;
     this.setTimeStampString = (val) => {this.timeStampString_ = val;}
 
-    this.init__(root_object_val);
+    this.init__(root_obj_val);
+}
+
+function AjaxEntryClass (ajax_id_val, res_val) {
+    "use strict";
+
+    this.init__ = function (ajax_id_val, res_val) {
+        this.ajaxId_ = ajax_id_val;
+        this.ajaxResponse_ = res_val;
+    }
+
+    this.ajaxId = () => this.ajaxId_;
+    this.ajaxResponse = () => this.ajaxResponse_;
+    this.init__(ajax_id_val, res_val);
 }
