@@ -62,6 +62,10 @@ function UPortClass (root_obj_val) {
             return;
         }
 
+        if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) === this.FABRIC_DEF().LOGIN_RESPONSE()) {
+            data_val = data_val + this.dPortObj().timeStamp();
+        }
+
         if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) != this.FABRIC_DEF().GET_LINK_DATA_RESPONSE()) {
             console.log("UPortClass.receiveData() data=" + data_val);
         }
