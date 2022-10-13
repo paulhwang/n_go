@@ -15,19 +15,19 @@ module.exports = {
     },
 
     post: function (req, res) {
-        THE_D_PORT_OBJECT.processHttp(req, res, 0);
+        THE_D_PORT_OBJECT.receive(req, res, 0);
     },
 
     get: function (req, res) {
-        THE_D_PORT_OBJECT.processHttp(req, res, 1);
+        THE_D_PORT_OBJECT.receive(req, res, 1);
     },
 
     put: function (req, res) {
-        THE_D_PORT_OBJECT.processHttp(req, res, 2);
+        THE_D_PORT_OBJECT.receive(req, res, 2);
     },
 
     delete: function (req, res) {
-        THE_D_PORT_OBJECT.processHttp(req, res, 3);
+        THE_D_PORT_OBJECT.receive(req, res, 3);
     },
 
     not_found: function (req, res) {
@@ -45,16 +45,16 @@ function DPortClass(root_obj_val) {
         this.rootObj_ = root_obj_val;
     };
 
-    this.processHttp = function (req, res, command_index_val) {
+    this.receive = function (req, res, command_index_val) {
         const data = req.headers.phwangajaxrequest;
         if (!data) {
-            console.log("DPortClass.processHttp() null phwangajaxrequest");
+            console.log("DPortClass.receive() null phwangajaxrequest");
             abend()
             return;
         }
 
         if (data.charAt(14 + 1) !== 'D') {
-            console.log("DPortClass.processHttp() data=" + data);
+            console.log("DPortClass.receive() data=" + data);
         }
 
         this.dFabricObj().parseRequest(data, res);
