@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: http_service.js
+ * File name: dfabric.js
  */
 
 let FABRIC_PROTOCOL_DEFAULT_LINK_UPDATE_INTERNAL = 3000;

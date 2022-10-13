@@ -23,7 +23,7 @@ function FabricRootClass () {
         this.encodeObject_ = require("../util_modules/encode.js").malloc();
         this.uFabricObj_ = require("./ufabric.js").malloc(this);
         this.httpInputObject_ = require("../http_input.js").malloc(this);
-        this.httpServiceObject_ = require("./http_service.js").malloc(this);
+        this.dFabricObj_ = require("./dfabric.js").malloc(this);
         console.log("FrontEndRootClass.init__()");
     };
 
@@ -31,7 +31,7 @@ function FabricRootClass () {
     this.encodeObject = () => this.encodeObject_;
     this.uFabricObj = () => this.uFabricObj_;
     this.httpInputObject = () => this.httpInputObject_;
-    this.httpServiceObject = () => this.httpServiceObject_;
+    this.httpServiceObject = () => this.dFabricObj_;
 
     this.LOG_IT = function(str1_val, str2_val) {require("../util_modules/logit.js").LOG_IT(str1_val, str2_val);};
     this.ABEND = function(str1_val, str2_val) {require("../util_modules/logit.js").ABEND(str1_val, str2_val);};
