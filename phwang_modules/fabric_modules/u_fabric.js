@@ -1,17 +1,17 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: ufabric.js
+ * File name: u_fabric.js
  */
 
-let THE_UFABRIC_OJBECT = null;
+let THE_U_FABRIC_OJBECT = null;
 
 module.exports = {
     malloc: function (root_obj_val) {
-        if (!THE_UFABRIC_OJBECT) {
-            THE_UFABRIC_OJBECT = new UFabricClass(root_obj_val);
+        if (!THE_U_FABRIC_OJBECT) {
+            THE_U_FABRIC_OJBECT = new UFabricClass(root_obj_val);
         }
-        return THE_UFABRIC_OJBECT;
+        return THE_U_FABRIC_OJBECT;
     },
 };
 

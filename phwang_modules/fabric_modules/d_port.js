@@ -9,7 +9,7 @@ let THE_D_PORT_OBJECT = null;
 module.exports = {
     malloc: function (root_obj_val) {
         if (!THE_D_PORT_OBJECT) {
-            THE_D_PORT_OBJECT = new HttpInputClass(root_obj_val);
+            THE_D_PORT_OBJECT = new DPortClass(root_obj_val);
         }
         return THE_D_PORT_OBJECT;
     },
@@ -39,11 +39,10 @@ module.exports = {
     },
 };
 
-function HttpInputClass(root_obj_val) {
+function DPortClass(root_obj_val) {
     "use strict";
     this.init__ = function (root_obj_val) {
         this.rootObj_ = root_obj_val;
-        console.log("HttpInputClass.init__()");
     };
 
     this.processHttp = function (req, res, command_index_val) {

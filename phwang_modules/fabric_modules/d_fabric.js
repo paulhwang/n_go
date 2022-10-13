@@ -1,19 +1,19 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: dfabric.js
+ * File name: d_fabric.js
  */
 
 let FABRIC_PROTOCOL_DEFAULT_LINK_UPDATE_INTERNAL = 3000;
 
-let THE_DFABRIC_OJBECT = null;
+let THE_D_FABRIC_OJBECT = null;
 
 module.exports = {
     malloc: function (root_obj_val) {
-        if (!THE_DFABRIC_OJBECT) {
-            THE_DFABRIC_OJBECT = new DFabricClass(root_obj_val);
+        if (!THE_D_FABRIC_OJBECT) {
+            THE_D_FABRIC_OJBECT = new DFabricClass(root_obj_val);
         }
-        return THE_DFABRIC_OJBECT;
+        return THE_D_FABRIC_OJBECT;
     },
 };
 
