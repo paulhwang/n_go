@@ -90,7 +90,6 @@ function UFabricClass (root_obj_val) {
     this.ajaxIdArrayElement = (index) => this.ajaxIdArray_[index];
     this.setAjaxIdArrayElement = (index, val) => {this.ajaxIdArray_[index] = val;}
     this.clearAjaxIdArrayElement = (index) => {this.ajaxIdArray_[index] = 0;}
-
     this.rootObj = () => this.rootObj_;
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
     this.dFabricObj = () => this.rootObj().dFabricObj();

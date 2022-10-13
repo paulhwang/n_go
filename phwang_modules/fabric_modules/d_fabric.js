@@ -96,10 +96,6 @@ function DFabricClass(root_obj_val) {
         return null;
     };
 
-    this.defaultLinkUpdateInterval = function () {return FABRIC_PROTOCOL_DEFAULT_LINK_UPDATE_INTERNAL;};
-    this.linkUpdateInterval = function () {return this.theLinkUpdateInterval;};
-    this.setLinkUpdateInterval = function (val) {this.theLinkUpdateInterval = val;};
-
     this.rootObj = () => this.rootObj_;
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.dPortObj = () => this.rootObj().dPortObj();
