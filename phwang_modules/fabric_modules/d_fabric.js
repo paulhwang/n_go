@@ -4,8 +4,6 @@
  * File name: d_fabric.js
  */
 
-let FABRIC_PROTOCOL_DEFAULT_LINK_UPDATE_INTERNAL = 3000;
-
 let THE_D_FABRIC_OJBECT = null;
 
 module.exports = {
