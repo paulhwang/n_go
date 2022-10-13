@@ -1,7 +1,7 @@
 var net = require("net");
 var express = require('express');
 var bodyParser = require('body-parser');
-require('./phwang_modules/fabric_modules/fabric_root.js').malloc();
+require('./phwang_modules/fabric_modules/node_root.js').malloc();
 var d_port_module = require('./phwang_modules/fabric_modules/d_port.js');
 var app = express();
 
