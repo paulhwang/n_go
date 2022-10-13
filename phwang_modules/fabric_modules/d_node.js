@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: d_fabric.js
+ * File name: d_node.js
  */
 
 let THE_D_NODE_OJBECT = null;
@@ -31,7 +31,7 @@ function DNodeClass(root_obj_val) {
             //console.log("DNodeClass.parseRequest() data=" + data);
         }
 
-        const ajax_entry = this.uFabricObj().mallocAjaxEntry(res);
+        const ajax_entry = this.uNodeObj().mallocAjaxEntry(res);
         this.uPortObj().transmitData(ajax_entry, ajax_entry.ajaxId() + data);
     };
 
@@ -40,7 +40,7 @@ function DNodeClass(root_obj_val) {
         var data = this.encodeObject().encodeString(go_request.data);
         this.debug(true, "mmwReadDataRequest", "act=" + act + " data=" + data);
 
-        var ajax_entry = this.uFabricObj().mallocAjaxEntryObject(res);
+        var ajax_entry = this.uNodeObj().mallocAjaxEntryObject(res);
         var act_val;
         if (act === "14init") {
             act_val = "I";
@@ -54,7 +54,7 @@ function DNodeClass(root_obj_val) {
         else {
             this.abend("mmwReadDataRequest", "bad act=" + act);
         }
-        this.uFabricObj().transmitData(ajax_entry, ajax_entry.ajaxId() + "0M" + act_val + data);
+        this.uNodeObj().transmitData(ajax_entry, ajax_entry.ajaxId() + "0M" + act_val + data);
     };
 
     this.mmwReadDataResponse = function (this0, data_val, ajax_entry_object_val) {
@@ -75,7 +75,7 @@ function DNodeClass(root_obj_val) {
         var output = JSON.stringify({
                         result: result,
                         filename: ajax_entry_object_val.filename,
-                        time_stamp: this.uFabricObj().timeStampString(),
+                        time_stamp: this.uNodeObj().timeStampString(),
                         result: result,
                         data: data,
                         });
@@ -97,7 +97,7 @@ function DNodeClass(root_obj_val) {
     };
 
     this.rootObj = () => this.rootObj_;
-    this.uFabricObj = () => this.rootObj().uFabricObj();
+    this.uNodeObj = () => this.rootObj().uNodeObj();
     this.dPortObj = () => this.rootObj().dPortObj();
     this.uPortObj = () => this.rootObj().uPortObj();
     this.encodeObj = () => this.rootObj().encodeObj();

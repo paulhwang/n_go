@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: u_fabric.js
+ * File name: u_node.js
  */
 
 let THE_U_NODE_OJBECT = null;
@@ -92,7 +92,7 @@ function UNodeClass (root_obj_val) {
     this.clearAjaxIdArrayElement = (index) => {this.ajaxIdArray_[index] = 0;}
     this.rootObj = () => this.rootObj_;
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
-    this.dFabricObj = () => this.rootObj().dFabricObj();
+    this.dNodeObj = () => this.rootObj().dNodeObj();
     this.dPortObj = () => this.rootObj().dPortObj();
     this.uPortObj = () => this.rootObj().uPortObj();
     this.encodeObj = () => this.rootObj().encodeObj();

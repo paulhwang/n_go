@@ -58,7 +58,7 @@ function DPortClass(root_obj_val) {
             console.log("DPortClass.receiveData() data=" + data);
         }
 
-        this.dFabricObj().parseRequest(data, res);
+        this.dNodeObj().parseRequest(data, res);
     };
 
     this.transmitData = function (res, data_val) {
@@ -82,7 +82,7 @@ function DPortClass(root_obj_val) {
     this.rootObj = () => this.rootObj_;
     this.timeStamp = () => this.timeStamp_;
     this.setTimeStamp = (time_stamp_val) => {this.timeStamp_ = time_stamp_val;}
-    this.dFabricObj = () => this.rootObj().dFabricObj();
+    this.dNodeObj = () => this.rootObj().dNodeObj();
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
 
     this.init__(root_obj_val);

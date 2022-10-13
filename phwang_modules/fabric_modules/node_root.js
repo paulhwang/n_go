@@ -22,17 +22,17 @@ function FabricRootClass () {
         this.FABRIC_DEF_ = require("./fabric_def.js").malloc();
         this.encodeObj_ = require("../util_modules/encode.js").malloc();
         this.uPortObj_ = require("./u_port.js").malloc(this);
-        this.uFabricObj_ = require("./u_node.js").malloc(this);
+        this.uNodeObj_ = require("./u_node.js").malloc(this);
         this.dPortObj_ = require("./d_port.js").malloc(this);
-        this.dFabricObj_ = require("./d_node.js").malloc(this);
+        this.dNodeObj_ = require("./d_node.js").malloc(this);
     };
 
     this.FABRIC_DEF = () => this.FABRIC_DEF_;
     this.encodeObj = () => this.encodeObj_;
     this.uPortObj = () => this.uPortObj_;
-    this.uFabricObj = () => this.uFabricObj_;
+    this.uNodeObj = () => this.uNodeObj_;
     this.dPortObj = () => this.dPortObj_;
-    this.dFabricObj = () => this.dFabricObj_;
+    this.dNodeObj = () => this.dNodeObj_;
 
     this.init__();
 };
