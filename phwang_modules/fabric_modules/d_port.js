@@ -47,11 +47,15 @@ function DPortClass(root_obj_val) {
     };
 
     this.receiveData = function (req, res, command_index_val) {
-        const data = req.headers.phwangajaxrequest;
+        let data = req.headers.phwangajaxrequest;
         if (!data) {
             console.log("DPortClass.receiveData() null phwangajaxrequest");
             abend()
             return;
+        }
+
+        if (data.charAt(0) === '{') {
+            data = data.slice(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE());
         }
 
         if (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== 'D') {
