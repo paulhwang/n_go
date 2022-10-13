@@ -50,7 +50,7 @@ function UFabricClass (root_obj_val) {
 
     this.receiveData = function (raw_data_val) {
         if (this.timeStampString() === "") {
-            this.setTimeStampString(raw_data_val);
+            this.setTimeStampString(raw_data_val.slice(5, 5 + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE()));
             console.log("UFabricClass.receiveData() timeStampString=" + this.timeStampString());
             return;
         }

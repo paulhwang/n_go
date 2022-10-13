@@ -19,7 +19,7 @@ function FABRIC_DEF_CLASS () {
     this.LOGIN_RESPONSE         = () => 'i';
     this.GET_LINK_DATA_RESPONSE = () => 'd';
 
-    this.FABRIC_TIME_STAMP_SIZE = () => 8;
+    this.FABRIC_TIME_STAMP_SIZE = () => 10;
     this.RESULT_SIZE            = () => 2;
     this.LINK_ID_SIZE           = () => 8;
     this.SESSION_ID_SIZE        = () => 8;

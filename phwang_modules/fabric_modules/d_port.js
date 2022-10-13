@@ -53,7 +53,7 @@ function DPortClass(root_obj_val) {
             return;
         }
 
-        if (data.charAt(14 + 1) !== 'D') {
+        if (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== 'D') {
             console.log("DPortClass.receiveData() data=" + data);
         }
 
@@ -80,6 +80,7 @@ function DPortClass(root_obj_val) {
 
     this.rootObj = () => this.rootObj_;
     this.dFabricObj = () => this.rootObj().dFabricObj();
+    this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
 
     this.init__(root_obj_val);
 }
