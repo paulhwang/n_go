@@ -21,34 +21,27 @@ function UFabricClass (root_obj_val) {
     this.init__ = function (root_obj_val) {
         this.rootObj_ = root_obj_val;
         this.timeStampString_ = "";
-        this.netSocketObject_ =  require("../util_modules/net_socket.js").malloc();
-        this.setupConnectionToFabric();
+        this.netSocketObj_ =  require("../util_modules/net_socket.js").malloc();
+        this.connectionFabric();
         this.theGlobalAjaxId = 0;
         this.theMaxAjaxIdIndex = 0;
         this.theAjaxIdArray = [];
         this.setMaxGlobalAjaxId(this.FABRIC_DEF().AJAX_ID_SIZE());
     };
 
-    this.mallocAjaxEntryObject = function (res_val) {
-        this.incrementGlobalAjaxId();
-        var ajax_id_str = this.encodeNumber(this.globalAjaxId(), this.FABRIC_DEF().AJAX_ID_SIZE());
-        var ajax_entry_object = new AjaxEntryClass(ajax_id_str, res_val);
-        return ajax_entry_object;
-    };
-
-    this.setupConnectionToFabric = function () {
+    this.connectionFabric = function () {
         var this0 = this;
-        this.netSocketOjbect().connect(this.FABRIC_DEF().FABRIC_TCP_PORT(), this.FABRIC_DEF().FABRIC_IP_ADDRESS(), function () {
-            console.log("UFabricClass.setupConnectionToFabric() fabric is connected");
+        this.netSocketObj().connect(this.FABRIC_DEF().FABRIC_TCP_PORT(), this.FABRIC_DEF().FABRIC_IP_ADDRESS(), function () {
+            console.log("UFabricClass.connectionFabric() connected!");
         });
 
-        this.netSocketOjbect().write(this.FABRIC_DEF().PHWANG_LOGO());
+        this.netSocketObj().write(this.FABRIC_DEF().PHWANG_LOGO());
 
-        this.netSocketOjbect().onData(function (data_val) {
+        this.netSocketObj().onData(function (data_val) {
             this0.receiveData(data_val);
         });
 
-        this.netSocketOjbect().onClose(function () {
+        this.netSocketObj().onClose(function () {
             this0.receiveClose();
         });
     };
@@ -109,7 +102,7 @@ function UFabricClass (root_obj_val) {
             console.log("UFabricClass.transmitData() data=" + data);
         }
 
-        this.netSocketOjbect().write(data);
+        this.netSocketObj().write(data);
     };
 
     this.encodeNumber = function(number_val, size_val) {
@@ -120,6 +113,13 @@ function UFabricClass (root_obj_val) {
         }
         buf = buf + str;
         return buf;
+    };
+
+    this.mallocAjaxEntryObject = function (res_val) {
+        this.incrementGlobalAjaxId();
+        var ajax_id_str = this.encodeNumber(this.globalAjaxId(), this.FABRIC_DEF().AJAX_ID_SIZE());
+        var ajax_entry_object = new AjaxEntryClass(ajax_id_str, res_val);
+        return ajax_entry_object;
     };
 
     this.getAjaxEntryObject = function (ajax_id_val) {
@@ -181,7 +181,7 @@ function UFabricClass (root_obj_val) {
 
     this.rootObj = () => this.rootObj_;
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
-    this.netSocketOjbect = () => this.netSocketObject_;
+    this.netSocketObj = () => this.netSocketObj_;
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.dPortObj = () => this.rootObj().dPortObj();
     this.timeStampString = () => this.timeStampString_;

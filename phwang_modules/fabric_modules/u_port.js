@@ -24,7 +24,7 @@ function UPortClass (root_obj_val) {
 
     this.rootObj = () => this.rootObj_;
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
-    this.netSocketOjbect = () => this.netSocketObject_;
+    this.netSocketObj = () => this.netSocketObj_;
     this.dFabricObj = () => this.rootObj().dFabricObj();
     this.dPortObj = () => this.rootObj().dPortObj();
 
