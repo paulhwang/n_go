@@ -26,11 +26,11 @@ function DFabricClass(root_obj_val) {
 
     this.parseRequest = function (data_val, res) {
         let data = data_val;
-        const command = data.charAt(1);
-        if (command === "D") {
-            //console.log("DFabricClass.parseRequest() data=" + data);
-        } else {
+
+        if ((data.charAt(0) !== '{') || (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== 'D')) {
             console.log("DFabricClass.parseRequest() data=" + data);
+        } else {
+            //console.log("DFabricClass.parseRequest() data=" + data);
         }
 
         const ajax_entry_object = this.uFabricObj().mallocAjaxEntryObject(res);

@@ -96,7 +96,7 @@ function UFabricClass (root_obj_val) {
             data = "{" + this.encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
         }
 
-        if (data.charAt(this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE() + this.FABRIC_DEF().AJAX_ID_SIZE() + 2) !== 'D') {
+        if (data.charAt(this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE() + this.FABRIC_DEF().AJAX_ID_SIZE() + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 2) !== 'D') {
             console.log("UFabricClass.transmitData() data=" + data);
         }
 
