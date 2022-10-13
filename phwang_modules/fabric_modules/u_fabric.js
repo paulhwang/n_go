@@ -45,18 +45,18 @@ function UFabricClass (root_obj_val) {
         this.netSocketOjbect().write(this.FABRIC_DEF().PHWANG_LOGO());
 
         this.netSocketOjbect().onData(function (data_val) {
-            this0.receiveDataFromFabric(data_val);
+            this0.receiveData(data_val);
         });
 
         this.netSocketOjbect().onClose(function () {
-            this0.receiveCloseFromFabric();
+            this0.receiveClose();
         });
     };
 
-    this.receiveDataFromFabric = function (raw_data_val) {
+    this.receiveData = function (raw_data_val) {
         if (this.timeStampString() === "") {
             this.setTimeStampString(raw_data_val);
-            console.log("UFabricClass.receiveDataFromFabric() timeStampString=" + this.timeStampString());
+            console.log("UFabricClass.receiveData() timeStampString=" + this.timeStampString());
             return;
         }
 
@@ -67,13 +67,13 @@ function UFabricClass (root_obj_val) {
             data_val = raw_data_val.slice(1 + this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE(), raw_length - 1);
         }
         else {
-            console.log("UFabricClass.receiveDataFromFabric() wrong header=" + raw_data_val);
+            console.log("UFabricClass.receiveData() wrong header=" + raw_data_val);
             abend();
             return;
         }
 
         if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) != this.FABRIC_DEF().GET_LINK_DATA_RESPONSE()) {
-            console.log("UFabricClass.receiveDataFromFabric() data=" + data_val);
+            console.log("UFabricClass.receiveData() data=" + data_val);
         }
 
         if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) === this.FABRIC_DEF().LOGIN_RESPONSE()) {
@@ -85,17 +85,31 @@ function UFabricClass (root_obj_val) {
 
         const ajax_entry_object = this.getAjaxEntryObject(ajax_id_val);
         if (!ajax_entry_object) {
-            console.log("UFabricClass.receiveDataFromFabric() null ajax_entry_object");
+            console.log("UFabricClass.receiveData() null ajax_entry_object");
             abend();
             return;
         }
 
-        //console.log("UFabricClass.receiveDataFromFabric() real_data=" + real_data);
+        //console.log("UFabricClass.receiveData() real_data=" + real_data);
         this.dPortObj().sendHttpResponse(ajax_entry_object.ajaxResponse(), real_data);
     };
 
-    this.receiveCloseFromFabric = function () {
-        console.log("UFabricClass.receiveCloseFromFabric()");
+    this.receiveClose = function () {
+        console.log("UFabricClass.receiveClose()");
+    };
+
+    this.transmitData = function (ajax_entry_object_val, data_val) {
+        this.putAjaxEntryObject(ajax_entry_object_val);
+        let data;
+        if (data_val.length < 1000) {
+            data = "{" + this.encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
+        }
+
+        if (data.charAt(this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE() + this.FABRIC_DEF().AJAX_ID_SIZE() + 2) !== 'D') {
+            console.log("UFabricClass.transmitData() data=" + data);
+        }
+
+        this.netSocketOjbect().write(data);
     };
 
     this.encodeNumber = function(number_val, size_val) {
@@ -106,16 +120,6 @@ function UFabricClass (root_obj_val) {
         }
         buf = buf + str;
         return buf;
-    };
-
-    this.transmitData = function (ajax_entry_object_val, data_val) {
-        this.putAjaxEntryObject(ajax_entry_object_val);
-        let data;
-        if (data_val.length < 1000) {
-            data = "{" + this.encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
-        }
-        //console.log("UFabricClass.transmitData() data=" + data);
-        this.netSocketOjbect().write(data);
     };
 
     this.getAjaxEntryObject = function (ajax_id_val) {
