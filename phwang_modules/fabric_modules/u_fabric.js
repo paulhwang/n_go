@@ -27,7 +27,6 @@ function UFabricClass (root_obj_val) {
         this.theMaxAjaxIdIndex = 0;
         this.theAjaxIdArray = [];
         this.setMaxGlobalAjaxId(this.FABRIC_DEF().AJAX_ID_SIZE());
-        console.log("UFabricClass.init__()");
     };
 
     this.mallocAjaxEntryObject = function (res_val) {

@@ -24,7 +24,6 @@ function FabricRootClass () {
         this.uFabricObj_ = require("./u_fabric.js").malloc(this);
         this.dPortObj_ = require("./d_port.js").malloc(this);
         this.dFabricObj_ = require("./d_fabric.js").malloc(this);
-        console.log("FrontEndRootClass.init__()");
     };
 
     this.FABRIC_DEF = () => this.FABRIC_DEF_;

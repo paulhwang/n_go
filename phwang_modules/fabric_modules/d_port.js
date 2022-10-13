@@ -57,7 +57,7 @@ function DPortClass(root_obj_val) {
             console.log("DPortClass.processHttp() data=" + data);
         }
 
-        this.dFabricObj().parseGetRequest(data, res);
+        this.dFabricObj().parseRequest(data, res);
     };
 
     this.sendHttpResponse = function (res, data_val) {
