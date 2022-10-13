@@ -35,7 +35,7 @@ function DFabricClass(root_obj_val) {
                             command: go_request.command,
                             result: "50",
                             });
-                this.httpInputObject().sendHttpResponse(go_request, res, output);
+                this.dPortObj().sendHttpResponse(go_request, res, output);
                 return null;
             }
             data = data.slice(14);
@@ -97,7 +97,7 @@ function DFabricClass(root_obj_val) {
                         data: data,
                         });
         this0.debug(true, "mmwReadDataResponse", "output=" + output);
-        this0.httpInputObject().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
+        this0.dPortObj().sendHttpResponse(ajax_entry_object_val.ajaxRequest(), ajax_entry_object_val.ajaxResponse(), output);
     };
 
     this.keepAlive = function (go_request, res) {
@@ -119,7 +119,7 @@ function DFabricClass(root_obj_val) {
 
     this.rootObj = () => this.rootObj_;
     this.uFabricObj = () => this.rootObj().uFabricObj();
-    this.httpInputObject = () => this.rootObj().httpInputObject();
+    this.dPortObj = () => this.rootObj().dPortObj();
     this.encodeObject = () => this.rootObj().encodeObject();
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
 

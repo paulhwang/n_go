@@ -30,7 +30,7 @@ function FabricRootClass () {
     this.FABRIC_DEF = () => this.FABRIC_DEF_;
     this.encodeObject = () => this.encodeObject_;
     this.uFabricObj = () => this.uFabricObj_;
-    this.httpInputObject = () => this.dPortObj_;
+    this.dPortObj = () => this.dPortObj_;
     this.dFabricObj = () => this.dFabricObj_;
 
     this.init__();

@@ -92,7 +92,7 @@ function UFabricClass (root_obj_val) {
         }
 
         //console.log("FabricServiceClass.receiveDataFromFabric() real_data=" + real_data);
-        this.httpInputObject().sendHttpResponse(ajax_entry_object.ajaxResponse(), real_data);
+        this.dPortObj().sendHttpResponse(ajax_entry_object.ajaxResponse(), real_data);
     };
 
     this.receiveCloseFromFabric = function () {
@@ -180,7 +180,7 @@ function UFabricClass (root_obj_val) {
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
     this.netSocketOjbect = () => this.netSocketObject_;
     this.dFabricObj = () => this.rootObj().dFabricObj();
-    this.httpInputObject = () => this.rootObj().httpInputObject();
+    this.dPortObj = () => this.rootObj().dPortObj();
     this.timeStampString = () => this.timeStampString_;
     this.setTimeStampString = (val) => {this.timeStampString_ = val;}
 
