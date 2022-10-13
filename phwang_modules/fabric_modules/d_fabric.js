@@ -106,7 +106,7 @@ function DFabricClass(root_obj_val) {
     this.uFabricObj = () => this.rootObj().uFabricObj();
     this.dPortObj = () => this.rootObj().dPortObj();
     this.uPortObj = () => this.rootObj().uPortObj();
-    this.encodeObject = () => this.rootObj().encodeObject();
+    this.encodeObj = () => this.rootObj().encodeObj();
     this.FABRIC_DEF = () => this.rootObj().FABRIC_DEF();
 
     this.init__(root_obj_val);
