@@ -4,18 +4,18 @@
  * File name: u_fabric.js
  */
 
-let THE_U_FABRIC_OJBECT = null;
+let THE_U_NODE_OJBECT = null;
 
 module.exports = {
     malloc: function (root_obj_val) {
-        if (!THE_U_FABRIC_OJBECT) {
-            THE_U_FABRIC_OJBECT = new UFabricClass(root_obj_val);
+        if (!THE_U_NODE_OJBECT) {
+            THE_U_NODE_OJBECT = new UNodeClass(root_obj_val);
         }
-        return THE_U_FABRIC_OJBECT;
+        return THE_U_NODE_OJBECT;
     },
 };
 
-function UFabricClass (root_obj_val) {
+function UNodeClass (root_obj_val) {
     "use strict";
 
     this.init__ = function (root_obj_val) {
@@ -47,7 +47,7 @@ function UFabricClass (root_obj_val) {
         }
 
         if (!found) {
-            console.log("UFabricClass.getAjaxEntry() not_found! ajax_id_val=" + ajax_id_val);
+            console.log("UNodeClass.getAjaxEntry() not_found! ajax_id_val=" + ajax_id_val);
             abend();
             return;
         }

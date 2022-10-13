@@ -4,18 +4,18 @@
  * File name: d_fabric.js
  */
 
-let THE_D_FABRIC_OJBECT = null;
+let THE_D_NODE_OJBECT = null;
 
 module.exports = {
     malloc: function (root_obj_val) {
-        if (!THE_D_FABRIC_OJBECT) {
-            THE_D_FABRIC_OJBECT = new DFabricClass(root_obj_val);
+        if (!THE_D_NODE_OJBECT) {
+            THE_D_NODE_OJBECT = new DNodeClass(root_obj_val);
         }
-        return THE_D_FABRIC_OJBECT;
+        return THE_D_NODE_OJBECT;
     },
 };
 
-function DFabricClass(root_obj_val) {
+function DNodeClass(root_obj_val) {
     "use strict";
 
     this.init__ = function (root_obj_val) {
@@ -26,9 +26,9 @@ function DFabricClass(root_obj_val) {
         let data = data_val;
 
         if ((data.charAt(0) !== '{') || (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== 'D')) {
-            console.log("DFabricClass.parseRequest() data=" + data);
+            console.log("DNodeClass.parseRequest() data=" + data);
         } else {
-            //console.log("DFabricClass.parseRequest() data=" + data);
+            //console.log("DNodeClass.parseRequest() data=" + data);
         }
 
         const ajax_entry = this.uFabricObj().mallocAjaxEntry(res);
