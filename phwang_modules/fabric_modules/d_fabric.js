@@ -33,8 +33,8 @@ function DFabricClass(root_obj_val) {
             //console.log("DFabricClass.parseRequest() data=" + data);
         }
 
-        const ajax_entry_object = this.uFabricObj().mallocAjaxEntryObject(res);
-        this.uPortObj().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + data);
+        const ajax_entry = this.uFabricObj().mallocAjaxEntry(res);
+        this.uPortObj().transmitData(ajax_entry, ajax_entry.ajaxId() + data);
     };
 
     this.mmwReadDataRequest = function (go_request, res) {
@@ -42,7 +42,7 @@ function DFabricClass(root_obj_val) {
         var data = this.encodeObject().encodeString(go_request.data);
         this.debug(true, "mmwReadDataRequest", "act=" + act + " data=" + data);
 
-        var ajax_entry_object = this.uFabricObj().mallocAjaxEntryObject(res);
+        var ajax_entry = this.uFabricObj().mallocAjaxEntryObject(res);
         var act_val;
         if (act === "14init") {
             act_val = "I";
@@ -56,7 +56,7 @@ function DFabricClass(root_obj_val) {
         else {
             this.abend("mmwReadDataRequest", "bad act=" + act);
         }
-        this.uFabricObj().transmitData(ajax_entry_object, ajax_entry_object.ajaxId() + "0M" + act_val + data);
+        this.uFabricObj().transmitData(ajax_entry, ajax_entry.ajaxId() + "0M" + act_val + data);
     };
 
     this.mmwReadDataResponse = function (this0, data_val, ajax_entry_object_val) {

@@ -27,14 +27,14 @@ function UFabricClass (root_obj_val) {
         this.setMaxGlobalAjaxId(this.FABRIC_DEF().AJAX_ID_SIZE());
     };
 
-    this.mallocAjaxEntryObject = function (res_val) {
+    this.mallocAjaxEntry = function (res_val) {
         this.incrementGlobalAjaxId();
         var ajax_id_str = this.encodeObj().encodeNumber(this.globalAjaxId(), this.FABRIC_DEF().AJAX_ID_SIZE());
         var ajax_entry_object = new AjaxEntryClass(ajax_id_str, res_val);
         return ajax_entry_object;
     };
 
-    this.getAjaxEntryObject = function (ajax_id_val) {
+    this.getAjaxEntry = function (ajax_id_val) {
         let found = false;
         let index = 0;
         for (; index < this.maxAjaxIdIndex(); index++) {
@@ -47,7 +47,7 @@ function UFabricClass (root_obj_val) {
         }
 
         if (!found) {
-            console.log("UFabricClass.getAjaxEntryObject() not_found! ajax_id_val=" + ajax_id_val);
+            console.log("UFabricClass.getAjaxEntry() not_found! ajax_id_val=" + ajax_id_val);
             abend();
             return;
         }
@@ -57,7 +57,7 @@ function UFabricClass (root_obj_val) {
         return element;
     };
 
-    this.putAjaxEntryObject = function (val) {
+    this.putAjaxEntry = function (val) {
         for (let i = 0; i < this.maxAjaxIdIndex(); i++) {
             if (!this.ajaxIdArrayElement(i)) {
                 this.setAjaxIdArrayElement(i, val);

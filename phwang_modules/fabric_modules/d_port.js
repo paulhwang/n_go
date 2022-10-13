@@ -60,8 +60,8 @@ function DPortClass(root_obj_val) {
         this.dFabricObj().parseRequest(data, res);
     };
 
-    this.sendHttpResponse = function (res, data_val) {
-        //console.log("DPortClass.sendHttpResponse() data_val=" + data_val);
+    this.transmitData = function (res, data_val) {
+        //console.log("DPortClass.transmitData() data_val=" + data_val);
         res.type('application/json');
         res.send(data_val);
     };

@@ -62,7 +62,7 @@ function UPortClass (root_obj_val) {
         const ajax_id_val = data_val.slice(0, this.FABRIC_DEF().AJAX_ID_SIZE());
         const real_data = data_val.slice(this.FABRIC_DEF().AJAX_ID_SIZE());
 
-        const ajax_entry_object = this.uFabricObj().getAjaxEntryObject(ajax_id_val);
+        const ajax_entry_object = this.uFabricObj().getAjaxEntry(ajax_id_val);
         if (!ajax_entry_object) {
             console.log("UFabricClass.receiveData() null ajax_entry_object");
             abend();
@@ -70,7 +70,7 @@ function UPortClass (root_obj_val) {
         }
 
         //console.log("UFabricClass.receiveData() real_data=" + real_data);
-        this.dPortObj().sendHttpResponse(ajax_entry_object.ajaxResponse(), real_data);
+        this.dPortObj().transmitData(ajax_entry_object.ajaxResponse(), real_data);
     };
 
     this.receiveClose = function () {
@@ -78,7 +78,7 @@ function UPortClass (root_obj_val) {
     };
 
     this.transmitData = function (ajax_entry_object_val, data_val) {
-        this.uFabricObj().putAjaxEntryObject(ajax_entry_object_val);
+        this.uFabricObj().putAjaxEntry(ajax_entry_object_val);
         let data;
         if (data_val.length < 1000) {
             data = "{" + this.encodeObj().encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
