@@ -30,7 +30,7 @@ function DFabricClass(root_obj_val) {
         if (data.charAt(0) === '{') {
             const time_stamp = data.slice(0, 14);
             if (time_stamp !== this.uFabricObj().timeStampString()) {
-                console.log("HttpServiceClass.parseGetRequest() ***time_stamp not match: data=" + data + " time_stamp=" + time_stamp + " " + this.uFabricObj().timeStampString());
+                console.log("DFabricClass.parseGetRequest() ***time_stamp not match: data=" + data + " time_stamp=" + time_stamp + " " + this.uFabricObj().timeStampString());
                 const output = JSON.stringify({
                             command: go_request.command,
                             result: "50",
@@ -43,9 +43,9 @@ function DFabricClass(root_obj_val) {
 
         const command = data.charAt(1);
         if (command === "D") {
-            //console.log("HttpServiceClass.parseGetRequest() data=" + data);
+            //console.log("DFabricClass.parseGetRequest() data=" + data);
         } else {
-            console.log("HttpServiceClass.parseGetRequest() data=" + data);
+            console.log("DFabricClass.parseGetRequest() data=" + data);
         }
 
         const ajax_entry_object = this.uFabricObj().mallocAjaxEntryObject(res);

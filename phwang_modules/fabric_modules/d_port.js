@@ -48,34 +48,34 @@ function DPortClass(root_obj_val) {
     this.processHttp = function (req, res, command_index_val) {
         const data = req.headers.phwangajaxrequest;
         if (!data) {
-            console.log("HttpInputClass.processHttp() null phwangajaxrequest");
+            console.log("DPortClass.processHttp() null phwangajaxrequest");
             abend()
             return;
         }
 
         if (data.charAt(14 + 1) !== 'D') {
-            console.log("HttpInputClass.processHttp() data=" + data);
+            console.log("DPortClass.processHttp() data=" + data);
         }
 
         this.dFabricObj().parseGetRequest(data, res);
     };
 
     this.sendHttpResponse = function (res, data_val) {
-        //console.log("HttpInputClass.sendHttpResponse() data_val=" + data_val);
+        //console.log("DPortClass.sendHttpResponse() data_val=" + data_val);
         res.type('application/json');
         res.send(data_val);
     };
 
     this.processNotFound = function (req, res) {
-        console.log("HttpInputClass.processNotFound() req.headers=" + req.headers);
-        console.log("HttpInputClass.processNotFound() *****");
+        console.log("DPortClass.processNotFound() req.headers=" + req.headers);
+        console.log("DPortClass.processNotFound() *****");
         res.type('text/plain');
         res.status(404);
         res.send('Not Found');
     };
 
     this.processFailure = function (err, req, res, next) {
-        console.log("HttpInputClass.processFailure() state=" + state);
+        console.log("DPortClass.processFailure() state=" + state);
     };
 
     this.rootObj = () => this.rootObj_;

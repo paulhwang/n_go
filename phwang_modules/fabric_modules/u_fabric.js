@@ -27,7 +27,7 @@ function UFabricClass (root_obj_val) {
         this.theMaxAjaxIdIndex = 0;
         this.theAjaxIdArray = [];
         this.setMaxGlobalAjaxId(this.FABRIC_DEF().AJAX_ID_SIZE());
-        console.log("FabricServiceClass.init__()");
+        console.log("UFabricClass.init__()");
     };
 
     this.mallocAjaxEntryObject = function (res_val) {
@@ -40,7 +40,7 @@ function UFabricClass (root_obj_val) {
     this.setupConnectionToFabric = function () {
         var this0 = this;
         this.netSocketOjbect().connect(this.FABRIC_DEF().FABRIC_TCP_PORT(), this.FABRIC_DEF().FABRIC_IP_ADDRESS(), function () {
-            console.log("FabricServiceClass.setupConnectionToFabric() fabric is connected");
+            console.log("UFabricClass.setupConnectionToFabric() fabric is connected");
         });
 
         this.netSocketOjbect().write(this.FABRIC_DEF().PHWANG_LOGO());
@@ -57,7 +57,7 @@ function UFabricClass (root_obj_val) {
     this.receiveDataFromFabric = function (raw_data_val) {
         if (this.timeStampString() === "") {
             this.setTimeStampString(raw_data_val);
-            console.log("FabricServiceClass.receiveDataFromFabric() timeStampString=" + this.timeStampString());
+            console.log("UFabricClass.receiveDataFromFabric() timeStampString=" + this.timeStampString());
             return;
         }
 
@@ -68,13 +68,13 @@ function UFabricClass (root_obj_val) {
             data_val = raw_data_val.slice(1 + this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE(), raw_length - 1);
         }
         else {
-            console.log("FabricServiceClass.receiveDataFromFabric() wrong header=" + raw_data_val);
+            console.log("UFabricClass.receiveDataFromFabric() wrong header=" + raw_data_val);
             abend();
             return;
         }
 
         if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) != this.FABRIC_DEF().GET_LINK_DATA_RESPONSE()) {
-            console.log("FabricServiceClass.receiveDataFromFabric() data=" + data_val);
+            console.log("UFabricClass.receiveDataFromFabric() data=" + data_val);
         }
 
         if (data_val.charAt(this.FABRIC_DEF().AJAX_ID_SIZE()) === this.FABRIC_DEF().LOGIN_RESPONSE()) {
@@ -86,17 +86,17 @@ function UFabricClass (root_obj_val) {
 
         const ajax_entry_object = this.getAjaxEntryObject(ajax_id_val);
         if (!ajax_entry_object) {
-            console.log("FabricServiceClass.receiveDataFromFabric() null ajax_entry_object");
+            console.log("UFabricClass.receiveDataFromFabric() null ajax_entry_object");
             abend();
             return;
         }
 
-        //console.log("FabricServiceClass.receiveDataFromFabric() real_data=" + real_data);
+        //console.log("UFabricClass.receiveDataFromFabric() real_data=" + real_data);
         this.dPortObj().sendHttpResponse(ajax_entry_object.ajaxResponse(), real_data);
     };
 
     this.receiveCloseFromFabric = function () {
-        console.log("FabricServiceClass.receiveCloseFromFabric()");
+        console.log("UFabricClass.receiveCloseFromFabric()");
     };
 
     this.encodeNumber = function(number_val, size_val) {
@@ -115,7 +115,7 @@ function UFabricClass (root_obj_val) {
         if (data_val.length < 1000) {
             data = "{" + this.encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
         }
-        //console.log("FabricServiceClass.transmitData() data=" + data);
+        //console.log("UFabricClass.transmitData() data=" + data);
         this.netSocketOjbect().write(data);
     };
 
@@ -132,7 +132,7 @@ function UFabricClass (root_obj_val) {
         }
 
         if (!found) {
-            console.log("FabricServiceClass.getAjaxEntryObject() not_found! ajax_id_val=" + ajax_id_val);
+            console.log("UFabricClass.getAjaxEntryObject() not_found! ajax_id_val=" + ajax_id_val);
             abend();
             return;
         }
