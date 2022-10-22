@@ -47,14 +47,14 @@ function UPortClass (root_obj_val) {
         let data_val;
 
         if (this.dPortObj().timeStamp() === "") {
-            const index = 1 + this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE();
+            const index = 1 + this.FABRIC_DEF().MAX_TCP_DATA_LEN_SIZE();
             this.dPortObj().setTimeStamp(raw_data_val.slice(index, index + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE()));
             console.log("UPortClass.receiveData() time_stamp=" + this.dPortObj().timeStamp());
             return;
         }
 
         if (raw_data_val.charAt(0) === '{') {
-            data_val = raw_data_val.slice(1 + this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE(), raw_length - 1);
+            data_val = raw_data_val.slice(1 + this.FABRIC_DEF().MAX_TCP_DATA_LEN_SIZE(), raw_length - 1);
         }
         else {
             console.log("UPortClass.receiveData() wrong header=" + raw_data_val);
@@ -92,15 +92,15 @@ function UPortClass (root_obj_val) {
         this.uNodeObj().putAjaxEntry(ajax_entry_object_val);
         let data;
 
-        if (data_val.length < 1500) {
-            data = "{" + this.encodeObj().encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
+        if (data_val.length < this.FABRIC_DEF().MAX_TCP_DATA_SIZE()) {
+            data = "{" + this.encodeObj().encodeNumber(data_val.length, this.FABRIC_DEF().MAX_TCP_DATA_LEN_SIZE()) + data_val + "}";
         }
         else {
             console.log("UPortClass.transmitData() data_val.length=" + data_val.length);
             abend();
         }
 
-        if (data.charAt(this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE() + this.FABRIC_DEF().AJAX_ID_SIZE() + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 2) !== 'D') {
+        if (data.charAt(this.FABRIC_DEF().MAX_TCP_DATA_LEN_SIZE() + this.FABRIC_DEF().AJAX_ID_SIZE() + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 2) !== 'D') {
             console.log("UPortClass.transmitData() data=" + data);
         }
 

@@ -27,7 +27,16 @@ function FABRIC_DEF_CLASS () {
 
     this.FABRIC_IP_ADDRESS = () => "127.0.0.1";
     this.FABRIC_TCP_PORT   = () => 8006;
-    this.FABRIC_TCP_DATA_SIZE = () => 4;
+
+    this.ETHERNET_MTU_SIZE = () => 1500;
+    this.TCP_HEADER_SIZE     = () => 20;
+    this.MAX_TCP_HEADER_SIZE = () => 60;
+    this.IP_HEADER_SIZE     = () => 20;
+    this.MAX_IP_HEADER_SIZE = () => 24;
+    this.TCP_IP_HEADER_SIZE     = () => this.    TCP_HEADER_SIZE() + this.    IP_HEADER_SIZE();
+    this.MAX_TCP_IP_HEADER_SIZE = () => this.MAX_TCP_HEADER_SIZE() + this.MAX_IP_HEADER_SIZE();
+    this.MAX_TCP_DATA_SIZE = () => this.ETHERNET_MTU_SIZE() - this.MAX_TCP_IP_HEADER_SIZE();
+    this.MAX_TCP_DATA_LEN_SIZE = () => 4;
 
     this.NAME_LIST_TAG_SIZE = () => 3;
     this.GET_LINK_DATA_LENGTH_SIZE = () => 2;
