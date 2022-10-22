@@ -25,7 +25,7 @@ function DNodeClass(root_obj_val) {
     this.parseRequest = function (data_val, res) {
         let data = data_val;
 
-        if ((data.charAt(0) !== '{') || (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== 'D')) {
+        if ((data.charAt(0) !== '{') || (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== this.FABRIC_DEF().GET_LINK_DATA_COMMAND())) {
             console.log("DNodeClass.parseRequest() data=" + data);
         } else {
             //console.log("DNodeClass.parseRequest() data=" + data);

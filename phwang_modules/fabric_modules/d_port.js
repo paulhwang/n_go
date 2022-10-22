@@ -62,7 +62,7 @@ function DPortClass(root_obj_val) {
             data = data.slice(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE());
         }
 
-        if (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== 'D') {
+        if (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== this.FABRIC_DEF().GET_LINK_DATA_COMMAND()) {
             console.log("DPortClass.receiveData() data=" + data);
         }
 
