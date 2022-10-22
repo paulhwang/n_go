@@ -17,6 +17,7 @@ module.exports = {
 
 function FABRIC_DEF_CLASS () {
     this.LOGIN_RESPONSE         = () => 'i';
+    this.GET_LINK_DATA_COMMAND  = () => 'D';
     this.GET_LINK_DATA_RESPONSE = () => 'd';
 
     this.FABRIC_TIME_STAMP_SIZE = () => 10;

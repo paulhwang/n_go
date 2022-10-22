@@ -100,7 +100,7 @@ function UPortClass (root_obj_val) {
             abend();
         }
 
-        if (data.charAt(this.FABRIC_DEF().MAX_TCP_DATA_LEN_SIZE() + this.FABRIC_DEF().AJAX_ID_SIZE() + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 2) !== 'D') {
+        if (data.charAt(this.FABRIC_DEF().MAX_TCP_DATA_LEN_SIZE() + this.FABRIC_DEF().AJAX_ID_SIZE() + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 2) !== this.FABRIC_DEF().GET_LINK_DATA_COMMAND()) {
             console.log("UPortClass.transmitData() data=" + data);
         }
 
