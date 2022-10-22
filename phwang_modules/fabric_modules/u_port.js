@@ -91,8 +91,13 @@ function UPortClass (root_obj_val) {
     this.transmitData = function (ajax_entry_object_val, data_val) {
         this.uNodeObj().putAjaxEntry(ajax_entry_object_val);
         let data;
-        if (data_val.length < 1000) {
+
+        if (data_val.length < 1500) {
             data = "{" + this.encodeObj().encodeNumber(data_val.length, this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE()) + data_val + "}";
+        }
+        else {
+            console.log("UPortClass.transmitData() data_val.length=" + data_val.length);
+            abend();
         }
 
         if (data.charAt(this.FABRIC_DEF().FABRIC_TCP_DATA_SIZE() + this.FABRIC_DEF().AJAX_ID_SIZE() + this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 2) !== 'D') {
