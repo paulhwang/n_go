@@ -66,7 +66,7 @@ function DPortClass(root_obj_val) {
             console.log("DPortClass.rcvData() " + data.slice(0, 50));
         }
 
-        this.dNodeObj().parseRequest(data, res);
+        this.dNodeObj().parseReq(data, res);
     };
 
     this.xmtData = function (res, data_val) {
