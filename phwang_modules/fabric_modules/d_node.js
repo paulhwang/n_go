@@ -26,13 +26,13 @@ function DNodeClass(root_obj_val) {
         let data = data_val;
 
         if ((data.charAt(0) !== '{') || (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== this.FABRIC_DEF().GET_LINK_DATA_COMMAND())) {
-            console.log("DNodeClass.parseRequest() data=" + data);
+            console.log("DNodeClass.parseRequest() " + data.slice(0, 50));
         } else {
-            //console.log("DNodeClass.parseRequest() data=" + data);
+            //console.log("DNodeClass.parseRequest() " + data.slice(0, 50));
         }
 
         const ajax_entry = this.uNodeObj().mallocAjaxEntry(res);
-        this.uPortObj().transmitData(ajax_entry, ajax_entry.ajaxId() + data);
+        this.uPortObj().xmtData(ajax_entry, ajax_entry.ajaxId() + data);
     };
 
     this.mmwReadDataRequest = function (go_request, res) {

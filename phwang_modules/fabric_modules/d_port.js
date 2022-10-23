@@ -15,19 +15,19 @@ module.exports = {
     },
 
     post: function (req, res) {
-        THE_D_PORT_OBJECT.receiveData(req, res, 0);
+        THE_D_PORT_OBJECT.rcvData(req, res, 0);
     },
 
     get: function (req, res) {
-        THE_D_PORT_OBJECT.receiveData(req, res, 1);
+        THE_D_PORT_OBJECT.rcvData(req, res, 1);
     },
 
     put: function (req, res) {
-        THE_D_PORT_OBJECT.receiveData(req, res, 2);
+        THE_D_PORT_OBJECT.rcvData(req, res, 2);
     },
 
     delete: function (req, res) {
-        THE_D_PORT_OBJECT.receiveData(req, res, 3);
+        THE_D_PORT_OBJECT.rcvData(req, res, 3);
     },
 
     not_found: function (req, res) {
@@ -46,31 +46,31 @@ function DPortClass(root_obj_val) {
         this.timeStamp_ = "";
     };
 
-    this.receiveData = function (req, res, command_index_val) {
+    this.rcvData = function (req, res, command_index_val) {
         let data = req.headers.phwangajaxrequest;
         if (!data) {
-            console.log("DPortClass.receiveData() null phwangajaxrequest");
+            console.log("DPortClass.rcvData() null phwangajaxrequest");
             abend()
             return;
         }
 
         if (data.charAt(0) === '{') {
             if (data.slice(0, this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE()) !== this.timeStamp()) {
-                console.log("DPortClass.receiveData() bad time_stamp");
+                console.log("DPortClass.rcvData() bad time_stamp");
                 return;
             }
             data = data.slice(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE());
         }
 
         if (data.charAt(this.FABRIC_DEF().FABRIC_TIME_STAMP_SIZE() + 1) !== this.FABRIC_DEF().GET_LINK_DATA_COMMAND()) {
-            console.log("DPortClass.receiveData() data=" + data);
+            console.log("DPortClass.rcvData() " + data.slice(0, 50));
         }
 
         this.dNodeObj().parseRequest(data, res);
     };
 
-    this.transmitData = function (res, data_val) {
-        //console.log("DPortClass.transmitData() data_val=" + data_val);
+    this.xmtData = function (res, data_val) {
+        //console.log("DPortClass.xmtData() " + data_val);
         res.type('application/json');
         res.send(data_val);
     };
